@@ -1,0 +1,7 @@
+gunicorn==19.9.0
+Django==2.2.6
+psycopg2-binary==2.8.3
+djangorestframework==3.10.3
+requests==2.22.0
+django-jet2==1.0.10
+drf-yasg==1.17.0

@@ -1,0 +1,6 @@
+.vagrant
+*.log
+Vagrantfile
+__pycache__
+.idea
+*.mo
