@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = 'wh4!s5*a_z*(l!*i*w6pf3*ko3&k251+6&3a)6#t@+f#y=jby6'
+SECRET_KEY = os.environ.get('APP_SECRET_KEY', '')
 
 DEBUG = os.environ.get('APP_DEBUG', True)
 
