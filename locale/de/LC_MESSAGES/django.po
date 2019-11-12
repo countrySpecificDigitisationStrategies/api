@@ -1,0 +1,141 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-11-12 22:04+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: api/models/abstract_model.py:7
+msgid "updated"
+msgstr "Geändert"
+
+#: api/models/abstract_model.py:8
+msgid "created"
+msgstr "Erstellt"
+
+#: api/models/building_block.py:9 api/models/measure.py:9
+msgid "title"
+msgstr "Titel"
+
+#: api/models/building_block.py:10 api/models/measure.py:10
+msgid "description"
+msgstr "Beschreibung"
+
+#: api/models/building_block.py:16
+msgid "building_block"
+msgstr "Grund Baustein"
+
+#: api/models/building_block.py:17 core/settings.py:135
+msgid "building_blocks"
+msgstr "Grund Bausteine"
+
+#: api/models/email_confirmation.py:13 api/models/password_reset.py:9
+#: api/models/token.py:9 api/models/user.py:41
+msgid "user"
+msgstr "Benutzer"
+
+#: api/models/email_confirmation.py:15 api/models/password_reset.py:11
+#: api/models/token.py:11
+msgid "identifier"
+msgstr "Kennung"
+
+#: api/models/email_confirmation.py:21
+msgid "email_confirmation"
+msgstr "Emailbestätigung"
+
+#: api/models/email_confirmation.py:22 core/settings.py:128
+msgid "email_confirmations"
+msgstr "Emailbestätigungen"
+
+#: api/models/measure.py:16
+msgid "measure"
+msgstr "Maßnahme"
+
+#: api/models/measure.py:17 core/settings.py:136
+msgid "measures"
+msgstr "Maßnahmen"
+
+#: api/models/password_reset.py:17
+msgid "password_reset"
+msgstr "Passwort Reset"
+
+#: api/models/password_reset.py:18 core/settings.py:129
+msgid "password_resets"
+msgstr "Passwort Resets"
+
+#: api/models/token.py:17
+msgid "token"
+msgstr "Token"
+
+#: api/models/token.py:18 core/settings.py:127
+msgid "tokens"
+msgstr "Token"
+
+#: api/models/user.py:16
+msgid "country"
+msgstr "Land"
+
+#: api/models/user.py:18
+msgid "email"
+msgstr "Email"
+
+#: api/models/user.py:19
+msgid "firstname"
+msgstr "Vorname"
+
+#: api/models/user.py:20
+msgid "lastname"
+msgstr "Nachname"
+
+#: api/models/user.py:22
+msgid "is_representative"
+msgstr "Ist Repräsentant"
+
+#: api/models/user.py:23
+msgid "is_moderator"
+msgstr "Ist Moderator"
+
+#: api/models/user.py:24
+msgid "is_regular"
+msgstr "Ist regulär"
+
+#: api/models/user.py:27
+msgid "is_active"
+msgstr "Ist aktiv"
+
+#: api/models/user.py:28
+msgid "is_staff"
+msgstr "Ist Staff"
+
+#: api/models/user.py:29
+msgid "is_superuser"
+msgstr "Ist Superuser"
+
+#: api/models/user.py:42 core/settings.py:126
+msgid "users"
+msgstr "Benutzer"
+
+#: api/utils/enum.py:4
+msgid "AFGHANISTAN"
+msgstr "Afghanistan"
+
+#: core/settings.py:124
+msgid "system"
+msgstr "System"
+
+#: core/settings.py:133
+msgid "application"
+msgstr "Applikation"
