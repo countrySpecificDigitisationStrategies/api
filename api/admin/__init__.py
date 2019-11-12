@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from api.admin.building_block import BuildingBlockAdmin
 from api.admin.measure import MeasureAdmin
-from api.admin.user import UserAdmin
+from api.admin.user import *
 
 admin.site.site_header = 'SysDev'
 admin.site.site_title = 'SysDev'

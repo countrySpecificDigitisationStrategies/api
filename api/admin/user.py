@@ -8,23 +8,22 @@ from api.models import User, Token, EmailConfirmation, PasswordReset
 class User(UserAdmin):
     model = User
 
-    list_display = ['email', 'firstname', 'lastname', 'is_active', 'created', 'updated']
-    search_fields = ['email', 'firstname', 'lastname', 'created', 'updated']
+    list_display = ['country', 'email', 'firstname', 'lastname', 'is_active', 'created', 'updated']
+    search_fields = ['country', 'email', 'firstname', 'lastname', 'created', 'updated']
     ordering = []
 
     fieldsets = (
         (None, {
-            'fields': ('email', 'firstname', 'lastname', 'is_active', 'groups', 'last_login', 'password')
+            'fields': ('country', 'email', 'firstname', 'lastname', 'is_active', 'last_login', 'password')
         }),
     )
     add_fieldsets = (
         (None, {
-            'fields': ('email', 'firstname', 'lastname', 'is_active', 'password1', 'password2')}
+            'fields': ('country', 'email', 'firstname', 'lastname', 'is_active', 'password1', 'password2')}
          ),
     )
 
 
-"""
 @admin.register(Token)
 class TokenAdmin(admin.ModelAdmin):
     list_display = ['user', 'identifier', 'created', 'updated']
@@ -44,4 +43,3 @@ class PasswordResetAdmin(admin.ModelAdmin):
     list_display = ['user', 'identifier', 'created', 'updated']
     #search_fields = ['user__email', 'identifier', 'created', 'updated']
     #list_filter = ['user', 'created', 'updated']
-"""
