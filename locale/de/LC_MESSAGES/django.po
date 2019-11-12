@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 22:04+0000\n"
+"POT-Creation-Date: 2019-11-12 22:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,24 +26,38 @@ msgstr "Geändert"
 msgid "created"
 msgstr "Erstellt"
 
-#: api/models/building_block.py:9 api/models/measure.py:9
+#: api/models/building_block.py:9 api/models/comment.py:11
+#: api/models/measure.py:11 api/models/strategy.py:11
 msgid "title"
 msgstr "Titel"
 
-#: api/models/building_block.py:10 api/models/measure.py:10
+#: api/models/building_block.py:10 api/models/comment.py:12
+#: api/models/measure.py:12 api/models/strategy.py:12
 msgid "description"
 msgstr "Beschreibung"
 
-#: api/models/building_block.py:16
+#: api/models/building_block.py:16 api/models/measure.py:9
 msgid "building_block"
 msgstr "Grund Baustein"
 
-#: api/models/building_block.py:17 core/settings.py:135
+#: api/models/building_block.py:17 core/settings.py:136
 msgid "building_blocks"
 msgstr "Grund Bausteine"
 
+#: api/models/comment.py:9 api/models/measure.py:18
+msgid "measure"
+msgstr "Maßnahme"
+
+#: api/models/comment.py:18
+msgid "comment"
+msgstr "Kommentar"
+
+#: api/models/comment.py:19 core/settings.py:138
+msgid "comments"
+msgstr "Kommentare"
+
 #: api/models/email_confirmation.py:13 api/models/password_reset.py:9
-#: api/models/token.py:9 api/models/user.py:41
+#: api/models/strategy.py:9 api/models/token.py:9 api/models/user.py:41
 msgid "user"
 msgstr "Benutzer"
 
@@ -60,11 +74,7 @@ msgstr "Emailbestätigung"
 msgid "email_confirmations"
 msgstr "Emailbestätigungen"
 
-#: api/models/measure.py:16
-msgid "measure"
-msgstr "Maßnahme"
-
-#: api/models/measure.py:17 core/settings.py:136
+#: api/models/measure.py:19 core/settings.py:137
 msgid "measures"
 msgstr "Maßnahmen"
 
@@ -75,6 +85,18 @@ msgstr "Passwort Reset"
 #: api/models/password_reset.py:18 core/settings.py:129
 msgid "password_resets"
 msgstr "Passwort Resets"
+
+#: api/models/strategy.py:14
+msgid "is_published"
+msgstr "Ist veröffentlicht"
+
+#: api/models/strategy.py:20
+msgid "strategy"
+msgstr "Strategy"
+
+#: api/models/strategy.py:21 core/settings.py:135
+msgid "strategies"
+msgstr "Strategien"
 
 #: api/models/token.py:17
 msgid "token"
