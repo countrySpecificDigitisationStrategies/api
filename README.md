@@ -10,4 +10,4 @@ Python(Django) api providing authentication and REST API
 
 ## Documentation - Redoc
 
-http://192.168.178.170:8000/redoc/
+http://206.189.251.20:8000/redoc/
