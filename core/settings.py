@@ -83,7 +83,7 @@ AUTH_PASSWORD_VALIDATORS = [
     }
 ]
 
-LANGUAGE_CODE = 'en-US'
+LANGUAGE_CODE = 'de-DE'
 
 TIME_ZONE = 'UTC'
 
@@ -132,8 +132,10 @@ JET_SIDE_MENU_ITEMS = [
     {
         'label': _('application'),
         'items': [
+            {'name': 'api.strategy', 'label': _('strategies')},
             {'name': 'api.buildingblock', 'label': _('building_blocks')},
-            {'name': 'api.measure', 'label': _('measures')}
+            {'name': 'api.measure', 'label': _('measures')},
+            {'name': 'api.comment', 'label': _('comments')}
         ]
     }
 ]
