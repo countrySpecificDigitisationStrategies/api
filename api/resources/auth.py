@@ -1,10 +1,13 @@
-from django.utils import timezone
 from uuid import uuid4
 
+from django.utils import timezone
+from django.utils.decorators import method_decorator
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import ParseError
 from rest_framework.response import Response
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
 from api.exceptions import AppException
 from api.models import User, Token, EmailConfirmation
@@ -22,6 +25,25 @@ class AuthViewSet(viewsets.ViewSet):
             identifier=str(uuid4()),
         )
 
+    @method_decorator(
+        name='register',
+        decorator=swagger_auto_schema(
+            operation_description='Register user',
+            operation_id='register',
+            operation_summary='Register',
+            request_body=openapi.Schema(
+                type=openapi.TYPE_OBJECT,
+                properties={
+                    'email': openapi.Schema(title='email', type=openapi.TYPE_STRING),
+                    'password': openapi.Schema(title='password', type=openapi.TYPE_STRING),
+                }, required=['email', 'password']
+            ),
+            responses={
+                '200': 'OK',
+                '400': 'Bad Request'
+            }
+        )
+    )
     @action(detail=False, methods=['post'])
     def register(self, request, *args, **kwargs):
         json = request.data
@@ -46,7 +68,7 @@ class AuthViewSet(viewsets.ViewSet):
 
         return Response(status=status.HTTP_200_OK)
 
-    """@action(detail=False, methods=['post'])
+    '''@action(detail=False, methods=['post'])
     def activate(self, request, *args, **kwargs):
         json = request.data
 
@@ -66,8 +88,27 @@ class AuthViewSet(viewsets.ViewSet):
 
                 return Response(status=status.HTTP_200_OK)
         else:
-            raise AppException(APP_ERROR_ACTIVATE_INVALID_IDENTIFIER)"""
+            raise AppException(APP_ERROR_ACTIVATE_INVALID_IDENTIFIER)'''
 
+    @method_decorator(
+        name='login',
+        decorator=swagger_auto_schema(
+            operation_description='Login user',
+            operation_id='login',
+            operation_summary='Login',
+            request_body=openapi.Schema(
+                type=openapi.TYPE_OBJECT,
+                properties={
+                    'email': openapi.Schema(title='email', type=openapi.TYPE_STRING),
+                    'password': openapi.Schema(title='password', type=openapi.TYPE_STRING),
+                }, required=['email', 'password']
+            ),
+            responses={
+                '200': 'OK',
+                '400': 'Bad Request'
+            }
+        )
+    )
     @action(detail=False, methods=['post'])
     def login(self, request, *args, **kwargs):
         json = request.data

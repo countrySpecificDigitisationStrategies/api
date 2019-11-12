@@ -4,6 +4,9 @@ from api.tests import AbstractTestCase
 
 class AuthTestCase(AbstractTestCase):
 
+    def setUp(self):
+        super().setUp()
+
     def test_register(self):
         response = self.client.post(
             '/api/v1/auth/register',
@@ -15,7 +18,8 @@ class AuthTestCase(AbstractTestCase):
 
         self.assertEqual(response.status_code, 200)
 
-    """def test_activate(self):
+    """
+    def test_activate(self):
         self.test_register()
 
         response = self.client.post(
@@ -25,7 +29,8 @@ class AuthTestCase(AbstractTestCase):
             }
         )
 
-        self.assertEqual(response.status_code, 200)"""
+        self.assertEqual(response.status_code, 200)
+    """
 
     def test_login(self):
         self.test_register()
