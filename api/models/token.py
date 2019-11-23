@@ -8,10 +8,10 @@ class Token(AbstractModel):
 
     user = models.ForeignKey('User', related_name='tokens', on_delete=models.CASCADE, verbose_name=_('user'))
 
-    identifier = models.CharField(_('identifier'), max_length=50, unique=True)
+    code = models.CharField(_('code'), max_length=50, unique=True)
 
     def __str__(self):
-        return '{} {}'.format(self.user.email, self.identifier)
+        return '{} {}'.format(self.user.email, self.code)
 
     class Meta:
         verbose_name = _('token')

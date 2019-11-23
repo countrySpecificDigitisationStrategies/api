@@ -23,7 +23,7 @@ class StrategyTestCase(AbstractTestCase):
         self.assertEqual(response.status_code, 201)
 
     def test_create_second_strategy(self):
-        user = Token.objects.get(identifier=self.header['HTTP_AUTHORIZATION']).user
+        user = Token.objects.get(code=self.header['HTTP_AUTHORIZATION']).user
 
         Strategy.objects.create(user=user, title='title', description='description')
 
@@ -47,7 +47,7 @@ class StrategyTestCase(AbstractTestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_retrieve(self):
-        user = Token.objects.get(identifier=self.header['HTTP_AUTHORIZATION']).user
+        user = Token.objects.get(code=self.header['HTTP_AUTHORIZATION']).user
 
         strategy = Strategy.objects.create(user=user, title='title', description='description')
 
@@ -58,7 +58,7 @@ class StrategyTestCase(AbstractTestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_patch(self):
-        user = Token.objects.get(identifier=self.header['HTTP_AUTHORIZATION']).user
+        user = Token.objects.get(code=self.header['HTTP_AUTHORIZATION']).user
 
         strategy = Strategy.objects.create(user=user, title='title', description='description')
 
@@ -75,7 +75,7 @@ class StrategyTestCase(AbstractTestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_destroy(self):
-        user = Token.objects.get(identifier=self.header['HTTP_AUTHORIZATION']).user
+        user = Token.objects.get(code=self.header['HTTP_AUTHORIZATION']).user
 
         strategy = Strategy.objects.create(user=user, title='title', description='description')
 
@@ -88,7 +88,7 @@ class StrategyTestCase(AbstractTestCase):
         self.assertEqual(response.status_code, 204)
 
     def test_destroy_not_mine(self):
-        user = Token.objects.get(identifier=self.header['HTTP_AUTHORIZATION']).user
+        user = Token.objects.get(code=self.header['HTTP_AUTHORIZATION']).user
 
         strategy = Strategy.objects.create(user=user, title='title', description='description')
 
