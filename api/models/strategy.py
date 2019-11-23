@@ -10,7 +10,7 @@ class Strategy(AbstractModel):
 
     title = models.CharField(_('title'), max_length=50)
     description = models.TextField(_('description'), blank=True, null=True)
-    measures = models.ManyToManyField('Measure', blank=True, verbose_name=_('measures'))
+    measures = models.ManyToManyField('Measure', blank=True, through='StrategyMeasureInformation', verbose_name=_('measures'))
     is_published = models.BooleanField(_('is_published'), default=False)
 
     def __str__(self):
@@ -19,3 +19,10 @@ class Strategy(AbstractModel):
     class Meta:
         verbose_name = _('strategy')
         verbose_name_plural = _('strategies')
+
+class StrategyMeasureInformation(AbstractModel):
+
+    measure = models.ForeignKey('Measure', on_delete=models.CASCADE)
+    strategy = models.ForeignKey('Strategy', on_delete=models.CASCADE)
+
+    description = models.TextField(_('description'), blank=True, null=True)

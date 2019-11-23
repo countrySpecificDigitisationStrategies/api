@@ -1,5 +1,5 @@
 from api.tests import AbstractTestCase
-from api.models import Strategy, Token
+from api.models import Strategy, StrategyMeasureInformation, Pillar, BuildingBlock, Measure, Token
 
 
 class StrategyTestCase(AbstractTestCase):
@@ -62,11 +62,17 @@ class StrategyTestCase(AbstractTestCase):
 
         strategy = Strategy.objects.create(user=user, title='title')
 
+        pillar = Pillar.objects.create(title='pillar-a')
+        building_block = BuildingBlock.objects.create(pillar=pillar, title='building-block')
+        measure = Measure.objects.create(building_block=building_block, title='measure')
+        smi = StrategyMeasureInformation.objects.create(measure=measure, strategy=strategy)
+
         response = self.client.patch(
             '/api/v1/strategies/{}'.format(strategy.id),
             {
                 'title': 'title',
-                'description': 'description'
+                'description': 'description',
+                'measures': [smi.id]
             },
             content_type='application/json',
             **self.header
