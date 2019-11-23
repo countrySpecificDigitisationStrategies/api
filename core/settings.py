@@ -142,7 +142,7 @@ JET_SIDE_MENU_ITEMS = [
             {'name': 'api.pillar', 'label': _('pillars')},
             {'name': 'api.buildingblock', 'label': _('building_blocks')},
             {'name': 'api.measure', 'label': _('measures')},
-            #{'name': 'api.comment', 'label': _('comments')},
+            {'name': 'api.comment', 'label': _('comments')},
             {'name': 'api.strategy', 'label': _('strategies')}
         ]
     }
