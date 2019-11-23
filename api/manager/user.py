@@ -11,8 +11,6 @@ class UserManager(BaseUserManager):
         from api.models import User
 
         user = User.objects.create(
-            country=AFGHANISTAN,
-
             email=email,
 
             is_active=True,
@@ -21,4 +19,5 @@ class UserManager(BaseUserManager):
         )
         user.set_password(password)
         user.save()
+        
         return user

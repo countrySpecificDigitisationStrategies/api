@@ -22,7 +22,7 @@ class AuthViewSet(viewsets.ViewSet):
     def generate_token(self, user):
         return Token.objects.create(
             user=user,
-            identifier=str(uuid4()),
+            code=str(uuid4()),
         )
 
     @method_decorator(
@@ -123,7 +123,7 @@ class AuthViewSet(viewsets.ViewSet):
 
             if user.check_password(json['password']):
                 token = self.generate_token(user)
-                json = {'token': token.identifier}
+                json = {'token': token.code}
 
                 user.last_login = timezone.now()
                 user.save()

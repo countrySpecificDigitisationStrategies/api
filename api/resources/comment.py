@@ -7,7 +7,7 @@ from api.utils import *
 
 fields = AppList(
     'id',
-    'parent', 'measure', 'description',
+    'measure', 'parent', 'description',
     'created', 'updated'
 )
 
@@ -29,3 +29,4 @@ class CommentViewSet(
     serializer_class = CommentSerializer
     authentication_classes = []
     permission_classes = []
+    filterset_fields = ['measure']

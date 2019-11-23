@@ -6,16 +6,16 @@ from api.models import Token
 class TokenAuthentication(BaseAuthentication):
 
     def authenticate(self, request):
-        identifier = request.META.get('HTTP_AUTHORIZATION')
+        code = request.META.get('HTTP_AUTHORIZATION')
 
-        if not identifier:
+        if not code:
             return None
 
-        if len(identifier) != 36:
+        if len(code) != 36:
             return None
 
         try:
-            token = Token.objects.get(identifier=identifier)
+            token = Token.objects.get(code=code)
         except:
             return None
 

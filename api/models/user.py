@@ -13,15 +13,14 @@ from api.utils import *
 
 class User(AbstractModel, AbstractBaseUser, PermissionsMixin):
 
-    country = models.CharField(_('country'), max_length=50, choices=COUNTRY_CHOICES)
-
-    email = models.CharField(_('email'), max_length=50, unique=True)
+    email = models.EmailField(_('email'), max_length=50, unique=True)
+    country = models.CharField(_('country'), max_length=50, choices=COUNTRY_CHOICES, blank=True, null=True)
     firstname = models.CharField(_('firstname'), max_length=50, blank=True, null=True)
     lastname = models.CharField(_('lastname'), max_length=50, blank=True, null=True)
 
+    is_admin = models.BooleanField(_('is_admin'), default=False)
     is_representative = models.BooleanField(_('is_representative'), default=False)
     is_moderator = models.BooleanField(_('is_moderator'), default=False)
-    is_regular = models.BooleanField(_('is_regular'), default=False)
 
     # internal purpose
     is_active = models.BooleanField(_('is_active'), default=False)
@@ -45,4 +44,4 @@ class User(AbstractModel, AbstractBaseUser, PermissionsMixin):
 @receiver(post_save, sender=User)
 def post_save_user(sender, instance, created, **kwargs):
     if created:
-        EmailConfirmation.objects.create(user=instance, identifier=str(uuid4()))
+        EmailConfirmation.objects.create(user=instance, code=str(uuid4()))

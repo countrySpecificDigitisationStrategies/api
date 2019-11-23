@@ -2,6 +2,7 @@ gunicorn==19.9.0
 Django==2.2.6
 psycopg2-binary==2.8.3
 djangorestframework==3.10.3
+django-cors-headers==3.2.0
 pillow==6.2.1
 django-filter==2.2.0
 requests==2.22.0
