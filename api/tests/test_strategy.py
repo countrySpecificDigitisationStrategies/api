@@ -25,7 +25,7 @@ class StrategyTestCase(AbstractTestCase):
     def test_create_second_strategy(self):
         user = Token.objects.get(code=self.header['HTTP_AUTHORIZATION']).user
 
-        Strategy.objects.create(user=user, title='title', description='description')
+        Strategy.objects.create(user=user, title='title')
 
         response = self.client.post(
             '/api/v1/strategies',
@@ -49,7 +49,7 @@ class StrategyTestCase(AbstractTestCase):
     def test_retrieve(self):
         user = Token.objects.get(code=self.header['HTTP_AUTHORIZATION']).user
 
-        strategy = Strategy.objects.create(user=user, title='title', description='description')
+        strategy = Strategy.objects.create(user=user, title='title')
 
         response = self.client.get(
             '/api/v1/strategies/{}'.format(strategy.id)
@@ -60,7 +60,7 @@ class StrategyTestCase(AbstractTestCase):
     def test_patch(self):
         user = Token.objects.get(code=self.header['HTTP_AUTHORIZATION']).user
 
-        strategy = Strategy.objects.create(user=user, title='title', description='description')
+        strategy = Strategy.objects.create(user=user, title='title')
 
         response = self.client.patch(
             '/api/v1/strategies/{}'.format(strategy.id),
@@ -77,7 +77,7 @@ class StrategyTestCase(AbstractTestCase):
     def test_destroy(self):
         user = Token.objects.get(code=self.header['HTTP_AUTHORIZATION']).user
 
-        strategy = Strategy.objects.create(user=user, title='title', description='description')
+        strategy = Strategy.objects.create(user=user, title='title')
 
         response = self.client.delete(
             '/api/v1/strategies/{}'.format(strategy.id),
@@ -90,7 +90,7 @@ class StrategyTestCase(AbstractTestCase):
     def test_destroy_not_mine(self):
         user = Token.objects.get(code=self.header['HTTP_AUTHORIZATION']).user
 
-        strategy = Strategy.objects.create(user=user, title='title', description='description')
+        strategy = Strategy.objects.create(user=user, title='title')
 
         response = self.client.delete(
             '/api/v1/strategies/{}'.format(strategy.id),
