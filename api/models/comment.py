@@ -7,7 +7,8 @@ from api.models import AbstractModel
 class Comment(AbstractModel):
 
     measure = models.ForeignKey('Measure', related_name='comments', on_delete=models.CASCADE, verbose_name=_('measure'))
-    parent = models.ForeignKey('Comment', blank=True, null=True, related_name='comments', on_delete=models.CASCADE, verbose_name=_('parent'))
+    parent = models.ForeignKey('Comment', related_name='comments', on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('parent'))
+
     description = models.TextField(_('description'), blank=True, null=True)
 
     def __str__(self):

@@ -52,7 +52,7 @@ class UserViewSet(
     )
     @action(detail=False)
     def me(self, request, *args, **kwargs):
-        token = get_object_or_404(Token, identifier=request.META.get('HTTP_AUTHORIZATION'))
+        token = get_object_or_404(Token, code=request.META.get('HTTP_AUTHORIZATION'))
         json = UserSerializer(token.user, many=False, context={'request': request}).data
         return Response(json, status.HTTP_200_OK)
 
@@ -69,6 +69,6 @@ class UserViewSet(
     )
     @action(detail=False)
     def logout(self, request, *args, **kwargs):
-        token = get_object_or_404(Token, identifier=request.META.get('HTTP_AUTHORIZATION'))
+        token = get_object_or_404(Token, code=request.META.get('HTTP_AUTHORIZATION'))
         token.delete()
         return Response(status.HTTP_200_OK)

@@ -63,7 +63,7 @@ msgstr "Benutzer"
 
 #: api/models/email_confirmation.py:15 api/models/password_reset.py:11
 #: api/models/token.py:11
-msgid "identifier"
+msgid "code"
 msgstr "Kennung"
 
 #: api/models/email_confirmation.py:21

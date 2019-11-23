@@ -1,5 +1,5 @@
 from api.tests import AbstractTestCase
-from api.models import Strategy, Token
+from api.models import Strategy, StrategyMeasureInformation, Pillar, BuildingBlock, Measure, Token
 
 
 class StrategyTestCase(AbstractTestCase):
@@ -23,9 +23,9 @@ class StrategyTestCase(AbstractTestCase):
         self.assertEqual(response.status_code, 201)
 
     def test_create_second_strategy(self):
-        user = Token.objects.get(identifier=self.header['HTTP_AUTHORIZATION']).user
+        user = Token.objects.get(code=self.header['HTTP_AUTHORIZATION']).user
 
-        Strategy.objects.create(user=user, title='title', description='description')
+        Strategy.objects.create(user=user, title='title')
 
         response = self.client.post(
             '/api/v1/strategies',
@@ -47,9 +47,9 @@ class StrategyTestCase(AbstractTestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_retrieve(self):
-        user = Token.objects.get(identifier=self.header['HTTP_AUTHORIZATION']).user
+        user = Token.objects.get(code=self.header['HTTP_AUTHORIZATION']).user
 
-        strategy = Strategy.objects.create(user=user, title='title', description='description')
+        strategy = Strategy.objects.create(user=user, title='title')
 
         response = self.client.get(
             '/api/v1/strategies/{}'.format(strategy.id)
@@ -58,15 +58,21 @@ class StrategyTestCase(AbstractTestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_patch(self):
-        user = Token.objects.get(identifier=self.header['HTTP_AUTHORIZATION']).user
+        user = Token.objects.get(code=self.header['HTTP_AUTHORIZATION']).user
 
-        strategy = Strategy.objects.create(user=user, title='title', description='description')
+        strategy = Strategy.objects.create(user=user, title='title')
+
+        pillar = Pillar.objects.create(title='pillar-a')
+        building_block = BuildingBlock.objects.create(pillar=pillar, title='building-block')
+        measure = Measure.objects.create(building_block=building_block, title='measure')
+        smi = StrategyMeasureInformation.objects.create(measure=measure, strategy=strategy)
 
         response = self.client.patch(
             '/api/v1/strategies/{}'.format(strategy.id),
             {
                 'title': 'title',
-                'description': 'description'
+                'description': 'description',
+                'measures': [smi.id]
             },
             content_type='application/json',
             **self.header
@@ -75,9 +81,9 @@ class StrategyTestCase(AbstractTestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_destroy(self):
-        user = Token.objects.get(identifier=self.header['HTTP_AUTHORIZATION']).user
+        user = Token.objects.get(code=self.header['HTTP_AUTHORIZATION']).user
 
-        strategy = Strategy.objects.create(user=user, title='title', description='description')
+        strategy = Strategy.objects.create(user=user, title='title')
 
         response = self.client.delete(
             '/api/v1/strategies/{}'.format(strategy.id),
@@ -88,9 +94,9 @@ class StrategyTestCase(AbstractTestCase):
         self.assertEqual(response.status_code, 204)
 
     def test_destroy_not_mine(self):
-        user = Token.objects.get(identifier=self.header['HTTP_AUTHORIZATION']).user
+        user = Token.objects.get(code=self.header['HTTP_AUTHORIZATION']).user
 
-        strategy = Strategy.objects.create(user=user, title='title', description='description')
+        strategy = Strategy.objects.create(user=user, title='title')
 
         response = self.client.delete(
             '/api/v1/strategies/{}'.format(strategy.id),

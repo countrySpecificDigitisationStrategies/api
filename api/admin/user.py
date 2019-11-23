@@ -8,38 +8,50 @@ from api.models import User, Token, EmailConfirmation, PasswordReset
 class User(UserAdmin):
     model = User
 
-    list_display = ['country', 'email', 'firstname', 'lastname', 'is_active', 'created', 'updated']
-    search_fields = ['country', 'email', 'firstname', 'lastname', 'created', 'updated']
+    list_display = ['email', 'country', 'firstname', 'lastname', 'is_active', 'created', 'updated']
+    search_fields = ['email', 'country', 'firstname', 'lastname', 'created', 'updated']
     ordering = []
 
     fieldsets = (
         (None, {
-            'fields': ('country', 'email', 'firstname', 'lastname', 'is_active', 'last_login', 'password')
+            'fields': [
+                'email' 'country', 'firstname', 'lastname',
+                'is_admin', 'is_representative', 'is_moderator',
+                'is_active', 'is_staff', 'is_superuser',
+                'last_login', 'password',
+                'created', 'updated'
+            ]
         }),
     )
+
     add_fieldsets = (
         (None, {
-            'fields': ('country', 'email', 'firstname', 'lastname', 'is_active', 'password1', 'password2')}
-         ),
+            'fields': [
+                'email' 'country', 'firstname', 'lastname',
+                'is_admin', 'is_representative', 'is_moderator',
+                'is_active',
+                'password1', 'password2'
+            ]
+        }),
     )
 
 
 @admin.register(Token)
 class TokenAdmin(admin.ModelAdmin):
-    list_display = ['user', 'identifier', 'created', 'updated']
-    #search_fields = ['user__email', 'identifier', 'created', 'updated']
+    list_display = ['user', 'code', 'created', 'updated']
+    #search_fields = ['user__email', 'code', 'created', 'updated']
     #list_filter = ['user', 'created', 'updated']
 
 
 @admin.register(EmailConfirmation)
 class EmailConfirmationAdmin(admin.ModelAdmin):
-    list_display = ['user', 'identifier', 'created', 'updated']
-    #search_fields = ['user__email', 'identifier', 'created', 'updated']
+    list_display = ['user', 'code', 'created', 'updated']
+    #search_fields = ['user__email', 'code', 'created', 'updated']
     #list_filter = ['user', 'created', 'updated']
 
 
 @admin.register(PasswordReset)
 class PasswordResetAdmin(admin.ModelAdmin):
-    list_display = ['user', 'identifier', 'created', 'updated']
-    #search_fields = ['user__email', 'identifier', 'created', 'updated']
+    list_display = ['user', 'code', 'created', 'updated']
+    #search_fields = ['user__email', 'code', 'created', 'updated']
     #list_filter = ['user', 'created', 'updated']
