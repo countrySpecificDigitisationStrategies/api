@@ -10,7 +10,7 @@ class Strategy(AbstractModel):
 
     title = models.CharField(_('title'), max_length=50)
     description = models.TextField(_('description'), blank=True, null=True)
-    measures = models.ManyToManyField('Measure')
+    measures = models.ManyToManyField('Measure', blank=True, verbose_name=_('measures'))
     is_published = models.BooleanField(_('is_published'), default=False)
 
     def __str__(self):

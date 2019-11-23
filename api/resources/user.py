@@ -9,7 +9,7 @@ from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 
 from api.models import User, Token
-from api.permissions import UserIsUserPermission
+from api.permissions import UserIsObjectOwnerPermission
 from api.utils import *
 
 
@@ -40,7 +40,7 @@ class UserViewSet(
 
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated, UserIsUserPermission]
+    permission_classes = [IsAuthenticated, UserIsObjectOwnerPermission]
 
     @method_decorator(
         name='me',

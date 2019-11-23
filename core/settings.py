@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_filters',
     'api',
     'drf_yasg'
 ]
@@ -102,12 +103,18 @@ LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
 
+MEDIA_URL =  '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'api.authentication.token_authentication.TokenAuthentication'
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated'
+    ],
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'
     ],
     'COERCE_DECIMAL_TO_STRING': False,
     'DATETIME_FORMAT': "%Y-%m-%d %H:%M:%S"
@@ -132,10 +139,11 @@ JET_SIDE_MENU_ITEMS = [
     {
         'label': _('application'),
         'items': [
-            {'name': 'api.strategy', 'label': _('strategies')},
+            {'name': 'api.pillar', 'label': _('pillars')},
             {'name': 'api.buildingblock', 'label': _('building_blocks')},
             {'name': 'api.measure', 'label': _('measures')},
-            {'name': 'api.comment', 'label': _('comments')}
+            {'name': 'api.comment', 'label': _('comments')},
+            {'name': 'api.strategy', 'label': _('strategies')}
         ]
     }
 ]

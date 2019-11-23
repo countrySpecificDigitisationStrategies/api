@@ -1,22 +1,22 @@
 from django.contrib import admin
 
-from api.models import BuildingBlock
+from api.models import Pillar
 
 
-@admin.register(BuildingBlock)
-class BuildingBlockAdmin(admin.ModelAdmin):
+@admin.register(Pillar)
+class PillarAdmin(admin.ModelAdmin):
 
     list_display = ['title', 'created', 'updated']
     search_fields = ['title', 'description', 'created', 'updated']
-    list_filter = ['pillar']
+    list_filter = []
 
     fieldsets = [
         [None, {
             'fields': [
                 'id',
-                'pillar',
                 'title',
                 'description',
+                'image',
                 'created',
                 'updated'
             ]

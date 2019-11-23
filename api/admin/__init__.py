@@ -3,6 +3,7 @@ from django.contrib import admin
 from api.admin.building_block import BuildingBlockAdmin
 from api.admin.comment import CommentAdmin
 from api.admin.measure import MeasureAdmin
+from api.admin.pillar import PillarAdmin
 from api.admin.strategy import StrategyAdmin
 from api.admin.user import *
 

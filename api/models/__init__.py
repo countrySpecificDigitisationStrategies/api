@@ -5,6 +5,7 @@ from api.models.comment import Comment
 from api.models.email_confirmation import EmailConfirmation
 from api.models.measure import Measure
 from api.models.password_reset import PasswordReset
+from api.models.pillar import Pillar
 from api.models.strategy import Strategy
 from api.models.token import Token
 from api.models.user import User
