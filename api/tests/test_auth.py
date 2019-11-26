@@ -18,19 +18,27 @@ class AuthTestCase(AbstractTestCase):
 
         self.assertEqual(response.status_code, 200)
 
-    """
-    def test_activate(self):
-        self.test_register()
-
+    def test_register_can_not_with_invalid_email(self):
         response = self.client.post(
-            '/api/v1/auth/activate',
+            '/api/v1/auth/register',
             {
-                'identifier': EmailConfirmation.objects.first().identifier
+                'email': 'a',
+                'password': 'password'
             }
         )
 
-        self.assertEqual(response.status_code, 200)
-    """
+        self.assertEqual(response.status_code, 400)
+
+    def test_register_can_not_with_invalid_password(self):
+        response = self.client.post(
+            '/api/v1/auth/register',
+            {
+                'email': 'a@b.com',
+                'password': 'p'
+            }
+        )
+
+        self.assertEqual(response.status_code, 400)
 
     def test_login(self):
         self.test_register()
