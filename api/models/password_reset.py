@@ -1,3 +1,5 @@
+from uuid import uuid4
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -8,7 +10,7 @@ class PasswordReset(AbstractModel):
 
     user = models.ForeignKey('User', related_name='password_resets', on_delete=models.CASCADE, verbose_name=_('user'))
 
-    code = models.CharField(_('code'), max_length=50, unique=True)
+    code = models.UUIDField(_('code'), default=uuid4, unique=True)
 
     def __str__(self):
         return '{} {}'.format(self.user.email, self.code)

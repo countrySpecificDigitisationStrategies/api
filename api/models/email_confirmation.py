@@ -1,3 +1,5 @@
+from uuid import uuid4
+
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -12,7 +14,7 @@ class EmailConfirmation(AbstractModel):
 
     user = models.ForeignKey('User', related_name='email_confirmations', on_delete=models.CASCADE, verbose_name=_('user'))
 
-    code = models.CharField(_('code'), max_length=50, unique=True)
+    code = models.UUIDField(_('code'), default=uuid4, unique=True)
 
     def __str__(self):
         return '{} {}'.format(self.user.email, self.code)

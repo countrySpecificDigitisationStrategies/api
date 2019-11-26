@@ -12,6 +12,7 @@ class UserTestCase(AbstractTestCase):
     def test_me(self):
         response = self.client.get(
             '/api/v1/users/me',
+            content_type='application/json',
             **self.header
         )
 
@@ -20,6 +21,7 @@ class UserTestCase(AbstractTestCase):
     def test_logout(self):
         response = self.client.get(
             '/api/v1/users/logout',
+            content_type='application/json',
             **self.header
         )
 
