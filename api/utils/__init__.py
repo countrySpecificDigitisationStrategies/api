@@ -1,6 +1,5 @@
 from api.utils.enum import *
 from api.utils.error_code import *
-from api.utils.validator import *
 
 
 class AppList(list):

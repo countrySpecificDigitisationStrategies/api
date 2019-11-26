@@ -23,6 +23,6 @@ class Strategy(AbstractModel):
 class StrategyMeasureInformation(AbstractModel):
 
     measure = models.ForeignKey('Measure', on_delete=models.CASCADE)
-    strategy = models.ForeignKey('Strategy', on_delete=models.CASCADE)
+    strategy = models.ForeignKey('Strategy', related_name='strategy_measure_information', on_delete=models.CASCADE)
 
     description = models.TextField(_('description'), blank=True, null=True)

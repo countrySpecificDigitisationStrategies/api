@@ -1,9 +1,7 @@
 from django.utils.translation import gettext_lazy as _
 from rest_framework import mixins, serializers, viewsets
-from rest_framework.decorators import action, authentication_classes, permission_classes
 
 from api.models import Pillar
-from api.permissions import UserIsObjectOwnerPermission
 from api.utils import *
 
 

@@ -1,5 +1,3 @@
-from uuid import uuid4
-
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 from django.db.models.signals import post_save
@@ -23,7 +21,7 @@ class User(AbstractModel, AbstractBaseUser, PermissionsMixin):
     is_moderator = models.BooleanField(_('is_moderator'), default=False)
 
     # internal purpose
-    is_active = models.BooleanField(_('is_active'), default=False)
+    is_active = models.BooleanField(_('is_active'), default=True)
     is_staff = models.BooleanField(_('is_staff'), default=False)
     is_superuser = models.BooleanField(_('is_superuser'), default=False)
 
@@ -44,4 +42,4 @@ class User(AbstractModel, AbstractBaseUser, PermissionsMixin):
 @receiver(post_save, sender=User)
 def post_save_user(sender, instance, created, **kwargs):
     if created:
-        EmailConfirmation.objects.create(user=instance, code=str(uuid4()))
+        EmailConfirmation.objects.create(user=instance)

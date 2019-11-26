@@ -132,10 +132,7 @@ JET_SIDE_MENU_ITEMS = [
     {
         'label': _('system'),
         'items': [
-            {'name': 'api.user', 'label': _('users')},
-            {'name': 'api.token', 'label': _('tokens')},
-            {'name': 'api.emailconfirmation', 'label': _('email_confirmations')},
-            {'name': 'api.passwordreset', 'label': _('password_resets')}
+            {'name': 'api.user', 'label': _('users')}
         ]
     },
     {

@@ -1,23 +1,35 @@
-from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
-from rest_framework import mixins, serializers, viewsets, status
-from rest_framework.decorators import action, authentication_classes, permission_classes
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
+from rest_framework import mixins, serializers, viewsets
 
 from api.exceptions import AppException
-from api.models import Strategy
+from api.models import Strategy, StrategyMeasureInformation
 from api.permissions import UserIsObjectOwnerPermission
 from api.utils import *
 
-from rest_framework.permissions import IsAuthenticated, AllowAny
 
+fields = AppList(
+    'id',
+    'measure', 'strategy', 'description',
+    'created', 'updated'
+)
+
+patch_fields = AppList(
+    'measure', 'strategy', 'description',
+)
+
+class StrategyMeasureInformationSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = StrategyMeasureInformation
+        fields = fields
+        read_only_fields = fields - patch_fields
 
 
 fields = AppList(
     'id',
     'user',
-    'title', 'description', 'measures', 'is_published',
+    'title', 'description', 'is_published',
+    'strategy_measure_information',
     'created', 'updated'
 )
 
@@ -28,10 +40,13 @@ patch_fields = AppList(
 
 class StrategySerializer(serializers.ModelSerializer):
 
+    strategy_measure_information = StrategyMeasureInformationSerializer(many=True, read_only=True)
+
     class Meta:
         model = Strategy
         fields = fields
         read_only_fields = fields - patch_fields
+        #depth = 1
 
     def create(self, validated_data):
         validated_data['user'] = self.context['request'].user
