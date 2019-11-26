@@ -49,6 +49,6 @@ class AuthViewSet(viewsets.GenericViewSet):
 
                 return Response(json, status=status.HTTP_200_OK)
             else:
-                return generate_error_response(APP_ERROR_LOGIN_WRONG_PASSWORD)
+                raise AppException(APP_ERROR_LOGIN_WRONG_PASSWORD)
         else:
-            return generate_error_response(APP_ERROR_LOGIN_DOES_NOT_EXIST)
+            raise AppException(APP_ERROR_LOGIN_DOES_NOT_EXIST)

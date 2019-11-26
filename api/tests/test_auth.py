@@ -52,3 +52,29 @@ class AuthTestCase(AbstractTestCase):
         )
 
         self.assertEqual(response.status_code, 200)
+
+    def test_login_email_does_not_exist(self):
+        self.test_register()
+
+        response = self.client.post(
+            '/api/v1/auth/login',
+            {
+                'email': 'a@c.com',
+                'password': 'password'
+            }
+        )
+
+        self.assertEqual(response.status_code, 400)
+
+    def test_login_password_invalid(self):
+        self.test_register()
+
+        response = self.client.post(
+            '/api/v1/auth/login',
+            {
+                'email': 'a@b.com',
+                'password': 'password_'
+            }
+        )
+
+        self.assertEqual(response.status_code, 400)
