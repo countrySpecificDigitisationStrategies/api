@@ -46,49 +46,49 @@ class Command(BaseCommand):
 
 
         goal_a, created = Goal.objects.get_or_create(
-            building_block=situation_a,
+            situation=situation_a,
             title='Goal A',
             description='Goal A description'
         )
 
         goal_b, created = Goal.objects.get_or_create(
-            building_block=situation_a,
+            situation=situation_a,
             title='Goal B',
             description='Goal B description'
         )
 
         goal_c, created = Goal.objects.get_or_create(
-            building_block=situation_b,
+            situation=situation_b,
             title='Goal C',
             description='Goal C description'
         )
 
         goal_d, created = Goal.objects.get_or_create(
-            building_block=situation_b,
+            situation=situation_b,
             title='Goal D',
             description='Goal D description'
         )
 
         goal_e, created = Goal.objects.get_or_create(
-            building_block=situation_c,
+            situation=situation_c,
             title='Goal E',
             description='Goal E description'
         )
 
         goal_f, created = Goal.objects.get_or_create(
-            building_block=situation_c,
+            situation=situation_c,
             title='Goal F',
             description='Goal F description'
         )
 
         goal_g, created = Goal.objects.get_or_create(
-            building_block=situation_d,
+            situation=situation_d,
             title='Goal G',
             description='Goal G description'
         )
 
         goal_h, created = Goal.objects.get_or_create(
-            building_block=situation_d,
+            situation=situation_d,
             title='Goal H',
             description='Goal H description'
         )
