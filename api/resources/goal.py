@@ -1,31 +1,33 @@
 from django.utils.translation import gettext_lazy as _
 from rest_framework import mixins, serializers, viewsets
 
-from api.models import BuildingBlock
+from api.models import Goal
 from api.utils import *
 
 
 fields = AppList(
     'id',
-    'title', 'description', 'image',
+    'situation',
+    'title', 'description',
     'created', 'updated'
 )
 
-class BuildingBlockSerializer(serializers.ModelSerializer):
+class GoalSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = BuildingBlock
+        model = Goal
         fields = fields
         read_only_fields = fields
 
 
-class BuildingBlockViewSet(
+class GoalViewSet(
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,
     viewsets.GenericViewSet
 ):
 
-    queryset = BuildingBlock.objects.all()
-    serializer_class = BuildingBlockSerializer
+    queryset = Goal.objects.all()
+    serializer_class = GoalSerializer
     authentication_classes = []
     permission_classes = []
+    filterset_fields = ['situation']

@@ -1,22 +1,22 @@
 from django.contrib import admin
 
-from api.models import Pillar
+from api.models import Goal
 
 
-@admin.register(Pillar)
-class PillarAdmin(admin.ModelAdmin):
+@admin.register(Goal)
+class GoalAdmin(admin.ModelAdmin):
 
     list_display = ['title', 'created', 'updated']
     search_fields = ['title', 'description', 'created', 'updated']
-    list_filter = []
+    list_filter = ['situation']
 
     fieldsets = [
         [None, {
             'fields': [
                 'id',
+                'situation',
                 'title',
                 'description',
-                'image',
                 'created',
                 'updated'
             ]

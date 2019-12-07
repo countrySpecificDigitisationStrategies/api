@@ -6,7 +6,7 @@ from api.models import AbstractModel
 
 class Measure(AbstractModel):
 
-    building_block = models.ForeignKey('BuildingBlock', related_name='measures', on_delete=models.CASCADE, verbose_name=_('building_block'))
+    goal = models.ForeignKey('Goal', related_name='measures', on_delete=models.CASCADE, verbose_name=_('goal'))
 
     title = models.CharField(_('title'), max_length=50)
     description = models.TextField(_('description'), blank=True, null=True)

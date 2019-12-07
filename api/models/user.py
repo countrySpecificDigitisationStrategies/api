@@ -15,6 +15,7 @@ class User(AbstractModel, AbstractBaseUser, PermissionsMixin):
     country = models.CharField(_('country'), max_length=50, choices=COUNTRY_CHOICES, blank=True, null=True)
     firstname = models.CharField(_('firstname'), max_length=50, blank=True, null=True)
     lastname = models.CharField(_('lastname'), max_length=50, blank=True, null=True)
+    current_country = models.CharField(_('current_country'), max_length=50, choices=COUNTRY_CHOICES, blank=True, null=True)
 
     is_admin = models.BooleanField(_('is_admin'), default=False)
     is_representative = models.BooleanField(_('is_representative'), default=False)
