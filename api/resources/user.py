@@ -6,18 +6,18 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from api.models import User, Token
-from api.permissions import UserIsObjectOwnerPermission
+from api.permissions import UserIsUserOwnerPermission
 from api.utils import *
 
 
 fields = AppList(
     'id',
-    'country', 'email', 'firstname', 'lastname', 'current_country',
+    'email', 'country', 'firstname', 'lastname', 'current_country',
     'created', 'updated'
 )
 
 patch_fields = AppList(
-    'email', 'firstname', 'lastname', 'current_country'
+    'email', 'country', 'firstname', 'lastname', 'current_country',
 )
 
 
@@ -37,7 +37,7 @@ class UserViewSet(
 
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated, UserIsObjectOwnerPermission]
+    permission_classes = [IsAuthenticated, UserIsUserOwnerPermission]
 
     @action(detail=False)
     def me(self, request, *args, **kwargs):

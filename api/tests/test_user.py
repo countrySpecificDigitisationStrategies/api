@@ -1,5 +1,5 @@
 from api.tests import AbstractTestCase
-from api.models import User, Token
+from api.models import User, Token, Country
 from api.utils import *
 
 
@@ -22,15 +22,16 @@ class UserTestCase(AbstractTestCase):
     def test_patch(self):
         user = Token.objects.get(code=self.header['HTTP_AUTHORIZATION']).user
 
+        country = Country.objects.create(name='Germany')
+
         response = self.client.patch(
             '/api/v1/users/{}'.format(user.id),
             {
-                'current_country': AFGHANISTAN
+                'current_country': country.id
             },
             content_type='application/json',
             **self.header
         )
-        #print(response.json())
 
         self.assertEqual(response.status_code, 200)
 
