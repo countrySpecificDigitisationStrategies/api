@@ -6,15 +6,15 @@ from api.models import Measure
 @admin.register(Measure)
 class MeasureAdmin(admin.ModelAdmin):
 
-    list_display = ['building_block', 'title', 'created', 'updated']
+    list_display = ['goal', 'title', 'created', 'updated']
     search_fields = ['title', 'description', 'created', 'updated']
-    list_filter = ['building_block']
+    list_filter = ['goal']
 
     fieldsets = [
         [None, {
             'fields': [
                 'id',
-                'building_block',
+                'goal',
                 'title',
                 'description',
                 'created',

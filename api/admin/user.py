@@ -29,8 +29,8 @@ class TokenAdminInline(admin.TabularInline):
 class User(UserAdmin):
     model = User
 
-    list_display = ['email', 'country', 'firstname', 'lastname', 'is_active', 'created', 'updated']
-    search_fields = ['email', 'country', 'firstname', 'lastname', 'created', 'updated']
+    list_display = ['email', 'country', 'firstname', 'lastname', 'current_country', 'is_active', 'created', 'updated']
+    search_fields = ['email', 'country', 'firstname', 'lastname', 'current_country', 'created', 'updated']
     list_filter = []
     ordering = []
 
@@ -38,7 +38,7 @@ class User(UserAdmin):
         [None, {
             'fields': [
                 'id',
-                'email', 'country', 'firstname', 'lastname',
+                'email', 'country', 'firstname', 'lastname', 'current_country',
                 'is_admin', 'is_representative', 'is_moderator',
                 'last_login', 'password',
                 'created', 'updated'
@@ -49,7 +49,7 @@ class User(UserAdmin):
     add_fieldsets = (
         (None, {
             'fields': [
-                'email', 'country', 'firstname', 'lastname',
+                'email', 'country', 'firstname', 'lastname', 'current_country',
                 'is_admin', 'is_representative', 'is_moderator',
                 'password1', 'password2'
             ]

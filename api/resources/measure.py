@@ -7,7 +7,7 @@ from api.utils import *
 
 fields = AppList(
     'id',
-    'building_block', 'title', 'description',
+    'goal', 'title', 'description',
     'created', 'updated'
 )
 
@@ -29,4 +29,4 @@ class MeasureViewSet(
     serializer_class = MeasureSerializer
     authentication_classes = []
     permission_classes = []
-    filterset_fields = ['building_block']
+    filterset_fields = ['goal']
