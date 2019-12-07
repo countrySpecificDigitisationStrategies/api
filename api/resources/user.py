@@ -12,12 +12,12 @@ from api.utils import *
 
 fields = AppList(
     'id',
-    'country', 'email', 'firstname', 'lastname',
+    'country', 'email', 'firstname', 'lastname', 'current_country',
     'created', 'updated'
 )
 
 patch_fields = AppList(
-    'email', 'firstname', 'lastname',
+    'email', 'firstname', 'lastname', 'current_country'
 )
 
 

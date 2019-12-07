@@ -138,11 +138,12 @@ JET_SIDE_MENU_ITEMS = [
     {
         'label': _('application'),
         'items': [
-            {'name': 'api.pillar', 'label': _('pillars')},
             {'name': 'api.buildingblock', 'label': _('building_blocks')},
+            {'name': 'api.situation', 'label': _('situations')},
+            {'name': 'api.goal', 'label': _('goals')},
             {'name': 'api.measure', 'label': _('measures')},
-            {'name': 'api.comment', 'label': _('comments')},
-            {'name': 'api.strategy', 'label': _('strategies')}
+            {'name': 'api.strategy', 'label': _('strategies')},
+            {'name': 'api.comment', 'label': _('comments')}
         ]
     }
 ]

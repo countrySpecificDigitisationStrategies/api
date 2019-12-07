@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from api.models import Pillar, BuildingBlock, Measure, Strategy, StrategyMeasureInformation, Comment, User
+from api.models import BuildingBlock, Situation, Goal, Measure, Strategy, StrategyMeasureInformation, Comment, User
 
 
 class Command(BaseCommand):
@@ -7,40 +7,40 @@ class Command(BaseCommand):
     help = 'Import demo data'
 
     def handle(self, *args, **options):
-        pillar_a, created = Pillar.objects.get_or_create(
-            title='Pillar A',
-            description='Pillar A description'
-        )
-
-        pillar_b, created = Pillar.objects.get_or_create(
-            title='Pillar B',
-            description='Pillar B description'
-        )
-
-
-
         building_block_a, created = BuildingBlock.objects.get_or_create(
-            pillar=pillar_a,
             title='BuildingBlock A',
             description='BuildingBlock A description'
         )
 
         building_block_b, created = BuildingBlock.objects.get_or_create(
-            pillar=pillar_a,
             title='BuildingBlock B',
             description='BuildingBlock B description'
         )
 
-        building_block_c, created = BuildingBlock.objects.get_or_create(
-            pillar=pillar_b,
-            title='BuildingBlock C',
-            description='BuildingBlock C description'
+
+
+        situation_a, created = Situation.objects.get_or_create(
+            building_block=building_block_a,
+            title='Situation A',
+            description='Situation A description'
         )
 
-        building_block_d, created = BuildingBlock.objects.get_or_create(
-            pillar=pillar_b,
-            title='BuildingBlock D',
-            description='BuildingBlock D description'
+        situation_b, created = Situation.objects.get_or_create(
+            building_block=building_block_a,
+            title='Situation B',
+            description='Situation B description'
+        )
+
+        situation_c, created = Situation.objects.get_or_create(
+            building_block=building_block_b,
+            title='Situation C',
+            description='Situation C description'
+        )
+
+        situation_d, created = Situation.objects.get_or_create(
+            building_block=building_block_b,
+            title='Situation D',
+            description='Situation D description'
         )
 
 

@@ -1,5 +1,6 @@
 from api.tests import AbstractTestCase
 from api.models import User, Token
+from api.utils import *
 
 
 class UserTestCase(AbstractTestCase):
@@ -15,6 +16,21 @@ class UserTestCase(AbstractTestCase):
             content_type='application/json',
             **self.header
         )
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_patch(self):
+        user = Token.objects.get(code=self.header['HTTP_AUTHORIZATION']).user
+
+        response = self.client.patch(
+            '/api/v1/users/{}'.format(user.id),
+            {
+                'current_country': AFGHANISTAN
+            },
+            content_type='application/json',
+            **self.header
+        )
+        #print(response.json())
 
         self.assertEqual(response.status_code, 200)
 
