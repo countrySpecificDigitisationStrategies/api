@@ -1,8 +1,8 @@
 from api.tests import AbstractTestCase
-from api.models import BuildingBlock, Situation, Goal, Measure
+from api.models import BuildingBlock, Situation, Goal
 
 
-class MeasureTestCase(AbstractTestCase):
+class GoalTestCase(AbstractTestCase):
 
     def setUp(self):
         super().setUp()
@@ -14,21 +14,18 @@ class MeasureTestCase(AbstractTestCase):
         situation_a = Situation.objects.create(building_block=building_block_a, title='situation_a')
         situation_b = Situation.objects.create(building_block=building_block_b, title='situation_b')
 
-        goal_a = Goal.objects.create(situation=situation_a, title='goal_a')
-        goal_b = Goal.objects.create(situation=situation_b, title='goal_b')
-
-        Measure.objects.create(goal=goal_a, title='measure_a')
-        Measure.objects.create(goal=goal_b, title='measure_b')
+        Goal.objects.create(situation=situation_a, title='goal_a')
+        Goal.objects.create(situation=situation_b, title='goal_b')
 
         response = self.client.get(
-            '/api/v1/measures'
+            '/api/v1/goals'
         )
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.json()), 2)
 
         response = self.client.get(
-            '/api/v1/measures?goal={}'.format(goal_a.id)
+            '/api/v1/goals?situation={}'.format(situation_a.id)
         )
 
         self.assertEqual(response.status_code, 200)
@@ -41,10 +38,8 @@ class MeasureTestCase(AbstractTestCase):
 
         goal_a = Goal.objects.create(situation=situation_a, title='goal_a')
 
-        measure_a = Measure.objects.create(goal=goal_a, title='measure_a')
-
         response = self.client.get(
-            '/api/v1/measures/{}'.format(measure_a.id)
+            '/api/v1/goals/{}'.format(goal_a.id)
         )
 
         self.assertEqual(response.status_code, 200)

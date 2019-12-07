@@ -45,61 +45,61 @@ class Command(BaseCommand):
 
 
 
-        measure_a, created = Measure.objects.get_or_create(
-            building_block=building_block_a,
-            title='Measure A',
-            description='Measure A description'
+        goal_a, created = Goal.objects.get_or_create(
+            situation=situation_a,
+            title='Goal A',
+            description='Goal A description'
         )
 
-        measure_b, created = Measure.objects.get_or_create(
-            building_block=building_block_a,
-            title='Measure B',
-            description='Measure B description'
+        goal_b, created = Goal.objects.get_or_create(
+            situation=situation_a,
+            title='Goal B',
+            description='Goal B description'
         )
 
-        measure_c, created = Measure.objects.get_or_create(
-            building_block=building_block_b,
-            title='Measure C',
-            description='Measure C description'
+        goal_c, created = Goal.objects.get_or_create(
+            situation=situation_b,
+            title='Goal C',
+            description='Goal C description'
         )
 
-        measure_d, created = Measure.objects.get_or_create(
-            building_block=building_block_b,
-            title='Measure D',
-            description='Measure D description'
+        goal_d, created = Goal.objects.get_or_create(
+            situation=situation_b,
+            title='Goal D',
+            description='Goal D description'
         )
 
-        measure_e, created = Measure.objects.get_or_create(
-            building_block=building_block_c,
-            title='Measure E',
-            description='Measure E description'
+        goal_e, created = Goal.objects.get_or_create(
+            situation=situation_c,
+            title='Goal E',
+            description='Goal E description'
         )
 
-        measure_f, created = Measure.objects.get_or_create(
-            building_block=building_block_c,
-            title='Measure F',
-            description='Measure F description'
+        goal_f, created = Goal.objects.get_or_create(
+            situation=situation_c,
+            title='Goal F',
+            description='Goal F description'
         )
 
-        measure_g, created = Measure.objects.get_or_create(
-            building_block=building_block_d,
-            title='Measure G',
-            description='Measure G description'
+        goal_g, created = Goal.objects.get_or_create(
+            situation=situation_d,
+            title='Goal G',
+            description='Goal G description'
         )
 
-        measure_h, created = Measure.objects.get_or_create(
-            building_block=building_block_d,
-            title='Measure H',
-            description='Measure H description'
+        goal_h, created = Goal.objects.get_or_create(
+            situation=situation_d,
+            title='Goal H',
+            description='Goal H description'
         )
 
 
 
-        user = User.objects.get(email='admin@sysdev.com')
+        #user = User.objects.get(email='admin@sysdev.com')
 
 
 
-        strategy_a, created = Strategy.objects.get_or_create(
+        """strategy_a, created = Strategy.objects.get_or_create(
             user=user,
             title='Strategy A',
             description='Strategy A description'
@@ -115,4 +115,4 @@ class Command(BaseCommand):
             measure=measure_b,
             strategy=strategy_a,
             description='Comment on Measure B in Strategy A'
-        )
+        )"""

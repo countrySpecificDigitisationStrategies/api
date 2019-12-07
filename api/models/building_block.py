@@ -8,7 +8,7 @@ class BuildingBlock(AbstractModel):
 
     title = models.CharField(_('title'), max_length=50)
     description = models.TextField(_('description'), blank=True, null=True)
-    image = models.ImageField(upload_to = 'situations/', blank=True, null=True)
+    image = models.ImageField(upload_to = 'building_blocks/', blank=True, null=True)
 
     def __str__(self):
         return '{}'.format(self.title)
