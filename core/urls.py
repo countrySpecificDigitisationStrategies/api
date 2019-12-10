@@ -12,9 +12,10 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
     openapi.Info(
-        title='Sysdev API',
-        default_version='v1',
-        description='Sysdev API description'
+        title='Digitisation Strategies',
+        default_version='1.0.0',
+        description='This API allows you to create country specific digitisation strategies. ',
+
     ),
     public=True,
     permission_classes=[],
