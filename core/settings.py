@@ -23,7 +23,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'api',
-    'drf_yasg'
+    'drf_yasg',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -121,6 +122,13 @@ REST_FRAMEWORK = {
     'COERCE_DECIMAL_TO_STRING': False,
     'DATETIME_FORMAT': "%Y-%m-%d %H:%M:%S"
 }
+
+AWS_DEFAULT_ACL = None
+AWS_ACCESS_KEY_ID = 'AKIAW6TAEATH62YP362D'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'sysdev-bucket'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_QUERYSTRING_AUTH = False
 
 JET_DEFAULT_THEME = 'light-gray'
 
