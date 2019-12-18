@@ -5,7 +5,7 @@ from api.utils import *
 
 class UserTestCase(AbstractTestCase):
 
-    fixtures = ['user', 'token']
+    fixtures = ['country', 'user', 'token']
 
     def setUp(self):
         super().setUp()
@@ -17,7 +17,11 @@ class UserTestCase(AbstractTestCase):
             **self.header
         )
 
+        json = response.json()
+
         self.assertEqual(response.status_code, 200)
+        self.assertIsInstance(json['country']['id'], int)
+        self.assertIsInstance(json['current_country']['id'], int)
 
     def test_patch(self):
         user = Token.objects.get(code=self.header['HTTP_AUTHORIZATION']).user
@@ -27,13 +31,18 @@ class UserTestCase(AbstractTestCase):
         response = self.client.patch(
             '/api/v1/users/{}'.format(user.id),
             {
+                'country': country.id,
                 'current_country': country.id
             },
             content_type='application/json',
             **self.header
         )
 
+        json = response.json()
+
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(json['country']['id'], country.id)
+        self.assertEqual(json['current_country']['id'], country.id)
 
     def test_logout(self):
         response = self.client.get(

@@ -1,24 +1,18 @@
 [
   {
-    "model": "api.user",
+    "model": "api.country",
     "pk": 1,
     "fields": {
-      "email": "user1@mail.com",
-      "country": 1,
-      "current_country": 1,
-      "is_active": true,
+      "name": "Afghanistan",
       "created": "2019-01-01T12:00:00+03:00",
       "updated": "2019-01-01T12:00:00+03:00"
     }
   },
   {
-    "model": "api.user",
+    "model": "api.country",
     "pk": 2,
     "fields": {
-      "email": "user2@mail.com",
-      "country": 2,
-      "current_country": 2,
-      "is_active": true,
+      "name": "Ghana",
       "created": "2019-01-01T12:00:00+03:00",
       "updated": "2019-01-01T12:00:00+03:00"
     }

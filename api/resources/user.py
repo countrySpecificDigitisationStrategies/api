@@ -5,8 +5,9 @@ from rest_framework.decorators import action, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from api.models import User, Token
+from api.models import User, Token, Country
 from api.permissions import UserIsUserOwnerPermission
+from api.resources.country import CountrySerializer
 from api.utils import *
 
 
@@ -27,6 +28,21 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = fields
         read_only_fields = fields - patch_fields
+
+    def to_representation(self, value):
+        representation = super().to_representation(value)
+
+        country_id = representation.get('country')
+        if country_id:
+            country = Country.objects.get(id=country_id)
+            representation['country'] = CountrySerializer(country).data
+
+        current_country_id = representation.get('current_country')
+        if current_country_id:
+            country = Country.objects.get(id=current_country_id)
+            representation['current_country'] = CountrySerializer(country).data
+
+        return representation
 
 
 class UserViewSet(
