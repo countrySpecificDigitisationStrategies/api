@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>API Doc | {% block title %}{{ title }}{% endblock %}</title>
+
+    {% block extra_head %}
+        {# -- Add any extra HTML heads tags here - except scripts and styles -- #}
+    {% endblock %}
+
+    {% block favicon %}
+        {# -- Maybe replace the favicon -- #}
+{#        <link rel="icon" type="image/png" href="{% static 'drf-yasg/redoc/redoc-logo.png' %}"/>#}
+    {% endblock %}
+
+    {% block main_styles %}
+        <link rel="stylesheet" type="text/css" href="{% static 'drf-yasg/style.css' %}"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    {% endblock %}
+    {% block extra_styles %}
+        {# -- Add any additional CSS scripts here -- #}
+    {% endblock %}
+</head>
+<body>
+
+<redoc spec-url='http://127.0.0.1:8000/redoc/?format=openapi' sortPropsAlphabetically FETCH_SCHEMA_WITH_QUERY PATH_IN_MIDDLE></redoc>
+<script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"></script>
+
+ <style>
+            {# TODO: add to redoc css #}
+             .api-info {
+                 padding-bottom: 5%;
+                 border-bottom: dashed 1px #546e7a;
+             }
+            {# main header text color #}
+            .dTJWQH {
+                color: #546e7a;
+                text-transform: uppercase;
+                font-weight: bold;
+            }
+            {# sub header text color #}
+            .WxWXp {
+                color: #546e7a;
+                text-transform: capitalize;
+            }
+            {# sub-sub header text color #}
+            .ioYTqA  {
+                color: #bd6d6b;
+                font-style: italic;
+            }
+            {# middle-bar background color #}
+            body{
+                background-color: #fafafa;
+            }
+            {# left sidebar background color #}
+            .menu-content{
+                padding-top: 1%;
+                background-color: #546e7a;
+                box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
+            }
+            {# left side bar text color #}
+            .sc-eTuwsz {
+                color: #fafafa;
+                text-transform: capitalize;
+            }
+            {# side bar search-text color #}
+            .sc-cmthru .search-input{
+                color: snow;
+            }
+            {# left side bar hover color #}
+             .gSKHto {
+                 background-color: #495e69;
+             }
+             .gcUzvG {
+                 background-color: #495e69;
+             }
+            {# Search-Field Style #}
+            input::-webkit-input-placeholder {
+                color: #fafafa !important;
+            }
+            input:-moz-placeholder { /* Firefox 18- */
+                color: #fafafa !important;
+            }
+            input::-moz-placeholder {  /* Firefox 19+ */
+                color: #fafafa !important;
+            }
+            input:-ms-input-placeholder {
+                color: #fafafa !important;
+            }
+
+ </style>
+
+{% block extra_body %}
+    {# -- Add any header/body markup here (rendered BEFORE the swagger-ui/redoc element) -- #}
+{% endblock %}
+
+<div id="redoc-placeholder"> </div>
+
+{% block footer %}
+    {# -- Add any footer markup here (rendered AFTER the swagger-ui/redoc element) -- #}
+{% endblock %}
+
+<script id="redoc-settings" type="application/json">{{ redoc_settings | safe }}</script>
+
+{% block main_scripts %}
+    <script src="{% static 'drf-yasg/insQ.min.js' %}"></script>
+    <script src="{% static 'drf-yasg/url-polyfill.min.js' %}"></script>
+    <script src="{% static 'drf-yasg/redoc-init.js' %}"></script>
+    <script src="{% static 'drf-yasg/redoc/redoc.min.js' %}"></script>
+{% endblock %}
+{% block extra_scripts %}
+    {# -- Add any additional scripts here -- #}
+{% endblock %}
+</body>
+</html>
