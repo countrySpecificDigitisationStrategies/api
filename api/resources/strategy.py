@@ -1,11 +1,13 @@
 from django.utils.translation import gettext_lazy as _
+from django.utils.decorators import method_decorator
+
 from rest_framework import mixins, serializers, viewsets
+from drf_yasg.utils import swagger_auto_schema
 
 from api.exceptions import AppException
 from api.models import Strategy, StrategyMeasureInformation
 from api.permissions import UserIsObjectOwnerPermission
 from api.utils import *
-
 
 fields = AppList(
     'id',
@@ -17,8 +19,8 @@ patch_fields = AppList(
     'measure', 'strategy', 'description',
 )
 
-class StrategyMeasureInformationSerializer(serializers.ModelSerializer):
 
+class StrategyMeasureInformationSerializer(serializers.ModelSerializer):
     class Meta:
         model = StrategyMeasureInformation
         fields = fields
@@ -39,20 +41,46 @@ patch_fields = AppList(
 
 
 class StrategySerializer(serializers.ModelSerializer):
-
     strategy_measure_information = StrategyMeasureInformationSerializer(many=True, read_only=True)
 
     class Meta:
         model = Strategy
         fields = fields
         read_only_fields = fields - patch_fields
-        #depth = 1
+        # depth = 1
 
     def create(self, validated_data):
         validated_data['user'] = self.context['request'].user
         return super().create(validated_data)
 
 
+@method_decorator(name='list',
+                  decorator=swagger_auto_schema(operation_id="Get List of all Strategies",
+                                                operation_description='some description coming soon',
+                                                responses={'200': StrategySerializer(many=True), '400': "Bad Request"}
+                                                ))
+@method_decorator(name='retrieve',
+                  decorator=swagger_auto_schema(operation_id="Get Strategie by ID",
+                                                operation_description='some description coming soon.',
+                                                responses={'200': StrategySerializer(many=False),
+                                                           '404': "Strategy Not Found"}
+                                                ))
+@method_decorator(name='create',
+                  decorator=swagger_auto_schema(operation_id="Create new Strategy",
+                                                operation_description='some description coming soon',
+                                                responses={'201': StrategySerializer(many=False), '400': "Bad Request"}
+                                                ))
+@method_decorator(name='update',
+                  decorator=swagger_auto_schema(operation_id="Edit specific Strategy",
+                                                operation_description='some description coming soon',
+                                                responses={'200': StrategySerializer(many=False), '400': "Bad Request"}
+                                                ))
+@method_decorator(name='destroy',
+                  decorator=swagger_auto_schema(operation_id="Delete specific Strategy",
+                                                operation_description='some description coming soon',
+                                                responses={'204': StrategySerializer(many=False),
+                                                           '404': "Strategy Not Found"}
+                                                ))
 class StrategyViewSet(
     mixins.CreateModelMixin,
     mixins.ListModelMixin,
@@ -61,7 +89,6 @@ class StrategyViewSet(
     mixins.DestroyModelMixin,
     viewsets.GenericViewSet
 ):
-
     queryset = Strategy.objects.all()
     serializer_class = StrategySerializer
 

@@ -1,7 +1,9 @@
 from django.utils.translation import gettext_lazy as _
+from django.utils.decorators import method_decorator
+
 from rest_framework import mixins, serializers, viewsets, status
 from rest_framework.decorators import api_view, action
-from django.utils.decorators import method_decorator
+
 from drf_yasg.utils import swagger_auto_schema
 
 from api.models import BuildingBlock
@@ -30,7 +32,7 @@ class BuildingBlockSerializer(serializers.ModelSerializer):
 @method_decorator(name='retrieve',
                   decorator=swagger_auto_schema(operation_id="Get Building Block by ID",
                                                 operation_description='Providing you the Building Block you are looking for.',
-                                                responses={'200': BuildingBlockSerializer(many=False), '400': "Bad Request", '404': "Building Block not found"}))
+                                                responses={'200': BuildingBlockSerializer(many=False), '404': "Building Block Not Found"}))
 class BuildingBlockViewSet(
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,
