@@ -25,14 +25,6 @@ class BuildingBlockSerializer(serializers.ModelSerializer):
         read_only_fields = fields
 
 
-@method_decorator(name='list',
-                  decorator=swagger_auto_schema(operation_id="Get List of all Building Blocks",
-                                                operation_description='some description coming soon',
-                                                 responses={'200': BuildingBlockSerializer(many=True), '400': "Bad Request"}))
-@method_decorator(name='retrieve',
-                  decorator=swagger_auto_schema(operation_id="Get Building Block by ID",
-                                                operation_description='Providing you the Building Block you are looking for.',
-                                                responses={'200': BuildingBlockSerializer(many=False), '404': "Building Block Not Found"}))
 class BuildingBlockViewSet(
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,

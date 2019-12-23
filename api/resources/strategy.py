@@ -54,33 +54,6 @@ class StrategySerializer(serializers.ModelSerializer):
         return super().create(validated_data)
 
 
-@method_decorator(name='list',
-                  decorator=swagger_auto_schema(operation_id="Get List of all Strategies",
-                                                operation_description='some description coming soon',
-                                                responses={'200': StrategySerializer(many=True), '400': "Bad Request"}
-                                                ))
-@method_decorator(name='retrieve',
-                  decorator=swagger_auto_schema(operation_id="Get Strategie by ID",
-                                                operation_description='some description coming soon.',
-                                                responses={'200': StrategySerializer(many=False),
-                                                           '404': "Strategy Not Found"}
-                                                ))
-@method_decorator(name='create',
-                  decorator=swagger_auto_schema(operation_id="Create new Strategy",
-                                                operation_description='some description coming soon',
-                                                responses={'201': StrategySerializer(many=False), '400': "Bad Request"}
-                                                ))
-@method_decorator(name='update',
-                  decorator=swagger_auto_schema(operation_id="Edit specific Strategy",
-                                                operation_description='some description coming soon',
-                                                responses={'200': StrategySerializer(many=False), '400': "Bad Request"}
-                                                ))
-@method_decorator(name='destroy',
-                  decorator=swagger_auto_schema(operation_id="Delete specific Strategy",
-                                                operation_description='some description coming soon',
-                                                responses={'204': StrategySerializer(many=False),
-                                                           '404': "Strategy Not Found"}
-                                                ))
 class StrategyViewSet(
     mixins.CreateModelMixin,
     mixins.ListModelMixin,

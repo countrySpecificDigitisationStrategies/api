@@ -23,17 +23,6 @@ class SituationSerializer(serializers.ModelSerializer):
         read_only_fields = fields
 
 
-@method_decorator(name='list',
-                  decorator=swagger_auto_schema(operation_id="Get List of all Situations",
-                                                operation_description='some description coming soon',
-                                                responses={'200': SituationSerializer(many=True), '400': "Bad Request"}
-                                                ))
-@method_decorator(name='retrieve',
-                  decorator=swagger_auto_schema(operation_id="Get Situation by ID",
-                                                operation_description='some description coming soon.',
-                                                responses={'200': SituationSerializer(many=False),
-                                                           '404': "Situation Not Found"}
-                                                ))
 class SituationViewSet(
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,

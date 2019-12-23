@@ -33,16 +33,6 @@ class UserSerializer(serializers.ModelSerializer):
         read_only_fields = fields - patch_fields
 
 
-@method_decorator(name='update',
-                  decorator=swagger_auto_schema(operation_id="Edit specific User",
-                                                operation_description='some description coming soon',
-                                                responses={'200': UserSerializer(many=False), '400': "Bad Request"}
-                                                ))
-@method_decorator(name='destroy',
-                  decorator=swagger_auto_schema(operation_id="Delete specific User",
-                                                operation_description='some description coming soon',
-                                                responses={'204': UserSerializer(many=False), '404': "User Not Found"}
-                                                ))
 class UserViewSet(
     mixins.UpdateModelMixin,
     mixins.DestroyModelMixin,

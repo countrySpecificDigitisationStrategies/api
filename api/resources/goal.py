@@ -23,17 +23,6 @@ class GoalSerializer(serializers.ModelSerializer):
         read_only_fields = fields
 
 
-@method_decorator(name='list',
-                  decorator=swagger_auto_schema(operation_id="Get List of all Goals",
-                                                operation_description='some description coming soon',
-                                                responses={'200': GoalSerializer(many=True), '400': "Bad Request"}
-                                                ))
-@method_decorator(name='retrieve',
-                  decorator=swagger_auto_schema(operation_id="Get Goal by ID",
-                                                operation_description='some description coming soon.',
-                                                responses={'200': GoalSerializer(many=False),
-                                                           '404': "Goal Not Found"}
-                                                ))
 class GoalViewSet(
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,

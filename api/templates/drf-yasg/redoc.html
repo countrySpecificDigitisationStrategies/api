@@ -26,11 +26,13 @@
 </head>
 <body>
 
-<redoc spec-url='http://127.0.0.1:8000/redoc/?format=openapi' sortPropsAlphabetically FETCH_SCHEMA_WITH_QUERY PATH_IN_MIDDLE></redoc>
+{% comment %}<redoc spec-url='http://127.0.0.1:8000/redoc/?format=openapi' sortPropsAlphabetically FETCH_SCHEMA_WITH_QUERY PATH_IN_MIDDLE></redoc>{% endcomment %}
 <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"></script>
+<redoc spec-url='http://127.0.0.1:8000/static/openapi.json' sortPropsAlphabetically FETCH_SCHEMA_WITH_QUERY PATH_IN_MIDDLE></redoc>
 
  <style>
             {# TODO: add to redoc css #}
+
              .api-info {
                  padding-bottom: 5%;
                  border-bottom: dashed 1px #546e7a;
@@ -40,6 +42,13 @@
                 color: #546e7a;
                 text-transform: uppercase;
                 font-weight: bold;
+            }
+            {# Download Button #}
+            .jIdpVJ {
+                background-color: #fafafa;
+                border: solid 1px #bd6d6b;
+                border-radius: 3px;
+                color: #546e7a;
             }
             {# sub header text color #}
             .WxWXp {
@@ -55,6 +64,16 @@
             body{
                 background-color: #fafafa;
             }
+            {# left sidebar tag-groups #}
+            .bxcHYI  {
+
+
+            }
+            {# left sidebar logo #}
+            div .sc-feJyhm{
+                background-color: #bd6d6b !important;
+                color: #fafafa;
+            }
             {# left sidebar background color #}
             .menu-content{
                 padding-top: 1%;
@@ -64,11 +83,19 @@
             {# left side bar text color #}
             .sc-eTuwsz {
                 color: #fafafa;
+                text-transform: lowercase;
+            }
+            .fyUykq {
+                color: #fafafa;
                 text-transform: capitalize;
             }
             {# side bar search-text color #}
             .sc-cmthru .search-input{
                 color: snow;
+            }
+            {# side bar search-result background color #}
+            .sc-cLQEGU {
+                background-color: #bd6d6b;
             }
             {# left side bar hover color #}
              .gSKHto {

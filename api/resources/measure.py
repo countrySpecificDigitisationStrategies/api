@@ -22,17 +22,6 @@ class MeasureSerializer(serializers.ModelSerializer):
         read_only_fields = fields
 
 
-@method_decorator(name='list',
-                  decorator=swagger_auto_schema(operation_id="Get List of all Measures",
-                                                operation_description='some description coming soon',
-                                                responses={'200': MeasureSerializer(many=True), '400': "Bad Request"}
-                                                ))
-@method_decorator(name='retrieve',
-                  decorator=swagger_auto_schema(operation_id="Get Measure by ID",
-                                                operation_description='some description coming soon.',
-                                                responses={'200': MeasureSerializer(many=False),
-                                                           '404': "Measure Not Found"}
-                                                ))
 class MeasureViewSet(
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,
