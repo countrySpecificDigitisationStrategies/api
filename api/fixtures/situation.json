@@ -1,0 +1,22 @@
+[
+  {
+    "model": "api.situation",
+    "pk": 1,
+    "fields": {
+      "building_block": 1,
+      "title": "S1",
+      "created": "2019-01-01T12:00:00+03:00",
+      "updated": "2019-01-01T12:00:00+03:00"
+    }
+  },
+  {
+    "model": "api.situation",
+    "pk": 2,
+    "fields": {
+      "building_block": 2,
+      "title": "S2",
+      "created": "2019-01-01T12:00:00+03:00",
+      "updated": "2019-01-01T12:00:00+03:00"
+    }
+  }
+]

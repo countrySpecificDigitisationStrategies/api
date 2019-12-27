@@ -1,0 +1,652 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Digitisation Strategies x",
+    "description": " #Introductin This API allows you to create country specific digitisation strategies. ",
+    "version": "1.0.0",
+    "x-logo": {
+      "url": "https://github.com/countrySpecificDigitisationStrategies/webapp/blob/develop/src/assets/ziik.jpg",
+      "backgroundColor": "#0033A0",
+      "altText": "Ziik Logo"
+    }
+  },
+  "host": "127.0.0.1:8000",
+  "schemes": ["http"],
+  "basePath": "/api/v1",
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "securityDefinitions": {
+    "Basic": {
+      "type": "basic"
+    }
+  },
+  "x-tagGroups": [
+    {
+      "name": "General",
+      "tags": ["users"]
+    },
+    {
+      "name": "Strategy Plan",
+      "tags": ["building-blocks", "comments","countries","goals","measures","situations", "strategies"]
+    }
+    ],
+   "tags": [
+     {
+      "name": "users",
+      "description": " description about user ",
+      "x-displayName": "User"
+    },
+     {
+      "name": "building-blocks",
+      "description": " description about building block ",
+      "x-displayName": "Building Blocks"
+     },
+     {
+      "name": "comments",
+      "description": " description about comment ",
+      "x-displayName": "Comment"
+    },
+     {
+      "name": "countries",
+      "description": " description about country  ",
+      "x-displayName": "Country"
+    },
+     {
+      "name": "goals",
+      "description": " description about goal ",
+      "x-displayName": "Goal"
+    },
+     {
+      "name": "measures",
+      "description": " description about measure ",
+      "x-displayName": "Measure"
+    },
+      {
+      "name": "situations",
+      "description": " description about situation ",
+      "x-displayName": "Situation"
+    },
+      {
+      "name": "strategies",
+      "description": " description about strategy ",
+      "x-displayName": "Strategy"
+    }
+   ],
+
+  "security": [{"Basic": []}],
+  "paths": {
+    "/building-blocks": {
+      "get": {
+        "operationId": "Get List of all Building Blocks",
+        "description": "some description coming soon",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "A list of all Building Bloccks was retrieved successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BuildingBlock"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "tags": ["building-blocks"]
+      },
+      "parameters": []
+    },
+    "/building-blocks/{id}": {
+      "get": {
+        "operationId": "Get Building Block by ID",
+        "description": "Providing you the Building Block you are looking for.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The requested Building Block was retrieved successfully",
+            "schema": {"$ref": "#/definitions/BuildingBlock"}
+          },
+          "404": {
+            "description": "Building Block Not Found"
+          }
+        },
+        "tags": ["building-blocks"]},
+      "parameters": [{
+                       "name": "id",
+                       "in": "path",
+                       "description": "A unique integer value identifying this Grundbaustein.",
+                       "required": true,
+                       "type": "integer"
+                     }]
+    },
+    "/comments": {
+      "get": {
+        "operationId": "Get List of all Comments",
+        "description": "some description coming soon",
+        "parameters": [{
+                         "name": "measure",
+                         "in": "query",
+                         "description": "",
+                         "required": false,
+                         "type": "string"
+                       }],
+        "responses": {
+          "200": {
+            "description": "A list of all Comments was retrieved successfully",
+            "schema": {
+              "type": "array",
+              "items": {"$ref": "#/definitions/Comment"}
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "tags": ["comments"]},
+      "parameters": []
+    },
+    "/comments/{id}": {
+      "get": {
+        "operationId": "Get Comment by ID",
+        "description": "some description coming soon.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The requested Comment was retrieved successfully",
+            "schema": {"$ref": "#/definitions/Comment"}
+          },
+          "404": {
+            "description": "Comment Not Found"
+          }
+        },
+        "tags": ["comments"]},
+      "parameters": [{
+        "name": "id",
+        "in": "path",
+        "description": "A unique integer value identifying this Kommentar.",
+        "required": true,
+        "type": "integer"
+      }]
+    },
+    "/countries": {
+      "get": {
+        "operationId": "Get List of all Countries",
+        "description": "some description coming soon",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "A list of all Countries was retrieved successfully",
+            "schema": {
+              "type": "array",
+              "items": {"$ref": "#/definitions/Country"}
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "tags": ["countries"]},
+      "parameters": []
+    },
+    "/countries/{id}": {
+      "get": {
+        "operationId": "Get Country by ID",
+        "description": "some description coming soon.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The requested Country was retrieved successfully",
+            "schema": {"$ref": "#/definitions/Country"}},
+          "404": {
+            "description": "Country Not Found"}},
+        "tags": ["countries"]},
+      "parameters": [{
+        "name": "id",
+        "in": "path",
+        "description": "A unique integer value identifying this Land.",
+        "required": true,
+        "type": "integer"
+      }]
+    },
+    "/goals": {
+      "get": {
+        "operationId": "Get List of all Goals",
+        "description": "some description coming soon",
+        "parameters": [{
+          "name": "situation",
+          "in": "query",
+          "description": "",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "A list of all Goals was retrieved successfully",
+            "schema": {
+              "type": "array",
+              "items": {"$ref": "#/definitions/Goal"}
+            }
+          },
+          "400": {
+            "description": "Bad Request"}
+        },
+        "tags": ["goals"]},
+      "parameters": []
+    },
+    "/goals/{id}": {
+      "get": {
+        "operationId": "Get Goal by ID",
+        "description": "some description coming soon.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The requested Goal was retrieved successfully",
+            "schema": {"$ref": "#/definitions/Goal"}
+          },
+          "404": {
+            "description": "Goal Not Found"
+          }
+        },
+        "tags": ["goals"]},
+      "parameters": [{
+        "name": "id",
+        "in": "path",
+        "description": "A unique integer value identifying this Ziel.",
+        "required": true,
+        "type": "integer"
+      }]
+    },
+    "/measures": {
+      "get": {
+        "operationId": "Get List of all Measures",
+        "description": "some description coming soon",
+        "parameters": [{
+          "name": "goal",
+          "in": "query",
+          "description": "",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "A list of all Measures was retrieved successfully",
+            "schema": {
+              "type": "array",
+              "items": {"$ref": "#/definitions/Measure"}
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "tags": ["measures"]},
+      "parameters": []
+    },
+    "/measures/{id}": {
+      "get": {
+        "operationId": "Get Measure by ID",
+        "description": "some description coming soon.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The requested Measure was retrieved successfully",
+            "schema": {
+              "$ref": "#/definitions/Measure"
+            }
+          },
+          "404": {
+            "description": "Measure Not Found"
+          }
+        },
+        "tags": ["measures"]},
+      "parameters": [{
+        "name": "id",
+        "in": "path",
+        "description": "A unique integer value identifying this Ma\u00dfnahme.",
+        "required": true,
+        "type": "integer"
+      }]
+    },
+    "/situations": {
+      "get": {
+        "operationId": "Get List of all Situations",
+        "description": "some description coming soon",
+        "parameters": [{
+          "name": "building_block",
+          "in": "query",
+          "description": "",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "A list of all Situations was retrieved successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Situation"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "tags": ["situations"]
+      },
+      "parameters": []
+    },
+    "/situations/{id}": {
+      "get": {
+        "operationId": "Get Situation by ID",
+        "description": "some description coming soon.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The requested Situation was retrieved successfully",
+            "schema": {
+              "$ref": "#/definitions/Situation"
+            }
+          },
+          "404": {
+            "description": "Situation Not Found"
+          }
+        },
+        "tags": ["situations"]
+      },
+      "parameters": [{
+        "name": "id",
+        "in": "path",
+        "description": "A unique integer value identifying this Situation.",
+        "required": true,
+        "type": "integer"
+      }]
+    },
+    "/strategies": {
+      "get": {
+        "operationId": "Get List of all Strategies",
+        "description": "some description coming soon",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "A list of all Strategies was retrieved successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Strategy"}
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "tags": ["strategies"]},
+      "post": {
+        "operationId": "Create new Strategy",
+        "description": "some description coming soon",
+        "parameters": [{
+          "name": "data",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Strategy"
+          }
+        }],
+        "responses": {
+          "201": {
+            "description": "Strategy entry was created",
+            "schema": {
+              "$ref": "#/definitions/Strategy"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "tags": ["strategies"]
+      },
+      "parameters": []
+    },
+    "/strategies/{id}": {
+      "get": {
+        "operationId": "Get Strategie by ID",
+        "description": "some description coming soon.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The requested Strategy was retrieved successfully",
+            "schema": {
+              "$ref": "#/definitions/Strategy"
+            }
+          },
+          "404": {
+            "description": "Strategy Not Found"
+          }
+        },
+        "tags": ["strategies"]
+      },
+      "put": {
+        "operationId": "Edit specific Strategy",
+        "description": "some description coming soon",
+        "parameters": [{
+          "name": "data",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Strategy"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Strategy entry was updated.",
+            "schema": {
+              "$ref": "#/definitions/Strategy"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "tags": ["strategies"]
+      },
+      "patch": {
+        "operationId": "strategies_partial_update",
+        "description": "",
+        "parameters": [{
+          "name": "data",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Strategy"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Strategy"
+            }
+          }
+        },
+        "tags": ["strategies"]},
+      "delete": {
+        "operationId": "Delete specific Strategy",
+        "description": "some description coming soon",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Strategy was deleted.",
+            "schema": {
+              "$ref": "#/definitions/Strategy"
+            }
+          },
+          "404": {
+            "description": "Strategy Not Found"
+          }
+        },
+        "tags": ["strategies"]},
+      "parameters": [{
+        "name": "id",
+        "in": "path",
+        "description": "A unique integer value identifying this Strategy.",
+        "required": true,
+        "type": "integer"
+      }]
+    },
+    "/users/logout": {
+      "get": {
+        "operationId": "users_logout",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        },
+        "tags": ["users"]
+      },
+      "parameters": []
+    },
+    "/users/me": {
+      "get": {
+        "operationId": "users_me",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        },
+        "tags": ["users"]
+      },
+      "parameters": []
+    },
+    "/users/{id}": {
+      "put": {
+        "operationId": "Edit specific User",
+        "description": "some description coming soon",
+        "parameters": [{
+          "name": "data",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/User"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "User was updated.",
+            "schema": {
+              "$ref": "#/definitions/User"}
+          },
+          "400": {
+            "description": "Bad Request"}
+        },
+        "tags": ["users"]
+      },
+      "patch": {
+        "operationId": "users_partial_update",
+        "description": "",
+        "parameters": [{
+          "name": "data",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/User"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        },
+        "tags": ["users"]
+      },
+      "delete": {
+        "operationId": "Delete specific User",
+        "description": "some description coming soon",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "User entitý was deleted.",
+            "schema": {
+              "$ref": "#/definitions/User"}
+          },
+          "404": {
+            "description": "User Not Found"
+          }
+        },
+        "tags": ["users"]
+      },
+      "parameters": [{
+        "name": "id",
+        "in": "path",
+        "description": "A unique integer value identifying this Benutzer.",
+        "required": true,
+        "type": "integer"}]
+    }
+  },
+  "definitions": {
+    "BuildingBlock": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "title": {
+          "title": "Titel",
+          "type": "string",
+          "readOnly": true,
+          "minLength": 1
+        },
+        "description": {
+          "title": "Beschreibung",
+          "type": "string",
+          "readOnly": true,
+          "minLength": 1
+        },
+        "image": {
+          "title": "Image",
+          "type": "string",
+          "readOnly": true,
+          "format": "uri"
+        },
+        "created": {
+          "title": "Erstellt",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated": {
+          "title": "Ge\u00e4ndert",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "Comment": {
+      "required": ["measure", "parent"],
+      "type": "object",
+      "properties": {
+        "id": {"title": "ID", "type": "integer", "readOnly": true}, "measure": {"title": "Measure", "description": "Measure to which the comment belongs.", "type": "string", "minLength": 1}, "parent": {"title": "Parent", "description": "The parent comment.", "type": "string", "minLength": 1}, "description": {"title": "Beschreibung", "type": "string", "readOnly": true, "minLength": 1}, "created": {"title": "Erstellt", "type": "string", "format": "date-time", "readOnly": true}, "updated": {"title": "Ge\u00e4ndert", "type": "string", "format": "date-time", "readOnly": true}}}, "Country": {"type": "object", "properties": {"id": {"title": "ID", "type": "integer", "readOnly": true}, "name": {"title": "Name", "type": "string", "readOnly": true, "minLength": 1}, "flag_circle": {"title": "Flag circle", "type": "string", "readOnly": true, "format": "uri"}, "flag_rectangle": {"title": "Flag rectangle", "type": "string", "readOnly": true, "format": "uri"}, "created": {"title": "Erstellt", "type": "string", "format": "date-time", "readOnly": true}, "updated": {"title": "Ge\u00e4ndert", "type": "string", "format": "date-time", "readOnly": true}}}, "Goal": {"type": "object", "properties": {"id": {"title": "ID", "type": "integer", "readOnly": true}, "situation": {"title": "Situation", "type": "integer", "readOnly": true}, "title": {"title": "Titel", "type": "string", "readOnly": true, "minLength": 1}, "description": {"title": "Beschreibung", "type": "string", "readOnly": true, "minLength": 1}, "created": {"title": "Erstellt", "type": "string", "format": "date-time", "readOnly": true}, "updated": {"title": "Ge\u00e4ndert", "type": "string", "format": "date-time", "readOnly": true}}}, "Measure": {"type": "object", "properties": {"id": {"title": "ID", "type": "integer", "readOnly": true}, "goal": {"title": "Ziel", "type": "integer", "readOnly": true}, "title": {"title": "Titel", "type": "string", "readOnly": true, "minLength": 1}, "description": {"title": "Beschreibung", "type": "string", "readOnly": true, "minLength": 1}, "created": {"title": "Erstellt", "type": "string", "format": "date-time", "readOnly": true}, "updated": {"title": "Ge\u00e4ndert", "type": "string", "format": "date-time", "readOnly": true}}}, "Situation": {"type": "object", "properties": {"id": {"title": "ID", "type": "integer", "readOnly": true}, "building_block": {"title": "Grundbaustein", "type": "integer", "readOnly": true}, "title": {"title": "Titel", "type": "string", "readOnly": true, "minLength": 1}, "description": {"title": "Beschreibung", "type": "string", "readOnly": true, "minLength": 1}, "created": {"title": "Erstellt", "type": "string", "format": "date-time", "readOnly": true}, "updated": {"title": "Ge\u00e4ndert", "type": "string", "format": "date-time", "readOnly": true}}}, "StrategyMeasureInformation": {"required": ["measure", "strategy"], "type": "object", "properties": {"id": {"title": "ID", "type": "integer", "readOnly": true}, "measure": {"title": "Measure", "type": "integer"}, "strategy": {"title": "Strategy", "type": "integer"}, "description": {"title": "Beschreibung", "type": "string", "x-nullable": true}, "created": {"title": "Erstellt", "type": "string", "format": "date-time", "readOnly": true}, "updated": {"title": "Ge\u00e4ndert", "type": "string", "format": "date-time", "readOnly": true}}}, "Strategy": {"required": ["title"], "type": "object", "properties": {"id": {"title": "ID", "type": "integer", "readOnly": true}, "user": {"title": "Benutzer", "type": "integer", "readOnly": true}, "title": {"title": "Titel", "type": "string", "maxLength": 50, "minLength": 1}, "description": {"title": "Beschreibung", "type": "string", "x-nullable": true}, "is_published": {"title": "Ist ver\u00f6ffentlicht", "type": "boolean"}, "strategy_measure_information": {"type": "array", "items": {"$ref": "#/definitions/StrategyMeasureInformation"}, "readOnly": true}, "created": {"title": "Erstellt", "type": "string", "format": "date-time", "readOnly": true}, "updated": {"title": "Ge\u00e4ndert", "type": "string", "format": "date-time", "readOnly": true}}}, "User": {"required": ["email"], "type": "object", "properties": {"id": {"title": "ID", "type": "integer", "readOnly": true}, "email": {"title": "Email", "type": "string", "format": "email", "maxLength": 50, "minLength": 1}, "country": {"title": "Land", "type": "integer", "x-nullable": true}, "firstname": {"title": "Vorname", "type": "string", "maxLength": 50, "x-nullable": true}, "lastname": {"title": "Nachname", "type": "string", "maxLength": 50, "x-nullable": true}, "current_country": {"title": "Ausgew\u00e4hltes Land", "type": "integer", "x-nullable": true}, "created": {"title": "Erstellt", "type": "string", "format": "date-time", "readOnly": true}, "updated": {"title": "Ge\u00e4ndert", "type": "string", "format": "date-time", "readOnly": true}}}}}
+

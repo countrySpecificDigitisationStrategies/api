@@ -1,9 +1,12 @@
 from django.utils.translation import gettext_lazy as _
+from django.utils.decorators import method_decorator
+
 from rest_framework import mixins, serializers, viewsets
+
+from drf_yasg.utils import swagger_auto_schema
 
 from api.models import Situation
 from api.utils import *
-
 
 fields = AppList(
     'id',
@@ -12,8 +15,8 @@ fields = AppList(
     'created', 'updated'
 )
 
-class SituationSerializer(serializers.ModelSerializer):
 
+class SituationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Situation
         fields = fields
@@ -25,7 +28,6 @@ class SituationViewSet(
     mixins.RetrieveModelMixin,
     viewsets.GenericViewSet
 ):
-
     queryset = Situation.objects.all()
     serializer_class = SituationSerializer
     authentication_classes = []

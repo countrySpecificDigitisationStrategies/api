@@ -1,0 +1,22 @@
+[
+  {
+    "model": "api.measure",
+    "pk": 1,
+    "fields": {
+      "goal": 1,
+      "title": "M1",
+      "created": "2019-01-01T12:00:00+03:00",
+      "updated": "2019-01-01T12:00:00+03:00"
+    }
+  },
+  {
+    "model": "api.measure",
+    "pk": 2,
+    "fields": {
+      "goal": 2,
+      "title": "M2",
+      "created": "2019-01-01T12:00:00+03:00",
+      "updated": "2019-01-01T12:00:00+03:00"
+    }
+  }
+]
