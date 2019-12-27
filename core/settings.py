@@ -158,3 +158,7 @@ JET_SIDE_MENU_ITEMS = [
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+REDOC_SETTINGS = {
+   #'SPEC_URL': 'http://192.168.178.180:8000/static/openapi.json'
+}
