@@ -6,8 +6,9 @@ from api.models import AbstractModel
 
 class Strategy(AbstractModel):
 
-    user = models.ForeignKey('User', related_name='strategies', on_delete=models.CASCADE, verbose_name=_('user'))
+    user = models.ForeignKey('User', related_name='strategies', on_delete=models.PROTECT, verbose_name=_('user'))
 
+    country = models.ForeignKey('Country', related_name='strategies', on_delete=models.PROTECT, verbose_name=_('country'))
     title = models.CharField(_('title'), max_length=50)
     description = models.TextField(_('description'), blank=True, null=True)
     measures = models.ManyToManyField('Measure', blank=True, through='StrategyMeasureInformation', verbose_name=_('measures'))

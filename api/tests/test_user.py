@@ -20,8 +20,8 @@ class UserTestCase(AbstractTestCase):
         json = response.json()
 
         self.assertEqual(response.status_code, 200)
-        self.assertIsInstance(json['country']['id'], int)
-        self.assertIsInstance(json['current_country']['id'], int)
+        self.assertEqual(json['country']['id'], 1)
+        self.assertEqual(json['current_country']['id'], 1)
 
     def test_patch(self):
         user = Token.objects.get(code=self.header['HTTP_AUTHORIZATION']).user

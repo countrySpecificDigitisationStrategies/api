@@ -1,0 +1,20 @@
+[
+  {
+    "model": "api.buildingblock",
+    "pk": 1,
+    "fields": {
+      "title": "B1",
+      "created": "2019-01-01T12:00:00+03:00",
+      "updated": "2019-01-01T12:00:00+03:00"
+    }
+  },
+  {
+    "model": "api.buildingblock",
+    "pk": 2,
+    "fields": {
+      "title": "B2",
+      "created": "2019-01-01T12:00:00+03:00",
+      "updated": "2019-01-01T12:00:00+03:00"
+    }
+  }
+]

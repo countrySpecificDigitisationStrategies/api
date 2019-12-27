@@ -1,0 +1,22 @@
+[
+  {
+    "model": "api.goal",
+    "pk": 1,
+    "fields": {
+      "situation": 1,
+      "title": "G1",
+      "created": "2019-01-01T12:00:00+03:00",
+      "updated": "2019-01-01T12:00:00+03:00"
+    }
+  },
+  {
+    "model": "api.goal",
+    "pk": 2,
+    "fields": {
+      "situation": 2,
+      "title": "G2",
+      "created": "2019-01-01T12:00:00+03:00",
+      "updated": "2019-01-01T12:00:00+03:00"
+    }
+  }
+]

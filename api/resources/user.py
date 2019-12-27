@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from api.models import User, Token, Country
-from api.permissions import UserIsUserOwnerPermission
+from api.permissions import UserIsUserPermission
 from api.resources.country import CountrySerializer
 from api.utils import *
 
@@ -14,6 +14,7 @@ from api.utils import *
 fields = AppList(
     'id',
     'email', 'country', 'firstname', 'lastname', 'current_country',
+    'is_admin', 'is_representative', 'is_moderator',
     'created', 'updated'
 )
 
@@ -53,16 +54,21 @@ class UserViewSet(
 
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated, UserIsUserOwnerPermission]
+    permission_classes = [IsAuthenticated, UserIsUserPermission]
 
     @action(detail=False)
     def me(self, request, *args, **kwargs):
-        token = get_object_or_404(Token, code=request.META.get('HTTP_AUTHORIZATION'))
-        json = UserSerializer(token.user, many=False, context={'request': request}).data
-        return Response(json, status.HTTP_200_OK)
+        #token = get_object_or_404(Token, code=request.META.get('HTTP_AUTHORIZATION'))
+        #json = UserSerializer(request.user, many=False, context={'request': request}).data
+        #json = UserSerializer(request.user, many=False).data
+        return Response(
+            data=UserSerializer(request.user, many=False).data,
+            status=status.HTTP_200_OK
+        )
 
     @action(detail=False)
     def logout(self, request, *args, **kwargs):
         token = get_object_or_404(Token, code=request.META.get('HTTP_AUTHORIZATION'))
         token.delete()
-        return Response(status.HTTP_200_OK)
+
+        return Response(status=status.HTTP_200_OK)

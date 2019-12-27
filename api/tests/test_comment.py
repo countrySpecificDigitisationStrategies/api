@@ -4,7 +4,7 @@ from api.models import BuildingBlock, Situation, Goal, Measure, Comment
 
 class CommentTestCase(AbstractTestCase):
 
-    fixtures = ['user', 'token']
+    fixtures = ['country', 'user', 'token']
 
     def setUp(self):
         super().setUp()

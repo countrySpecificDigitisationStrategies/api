@@ -28,13 +28,13 @@ class StrategyMeasureInformationSerializer(serializers.ModelSerializer):
 fields = AppList(
     'id',
     'user',
-    'title', 'description', 'is_published',
+    'country', 'title', 'description', 'is_published',
     'strategy_measure_information',
     'created', 'updated'
 )
 
 patch_fields = AppList(
-    'title', 'description', 'measures', 'is_published',
+    'country', 'title', 'description', 'measures', 'is_published',
 )
 
 
@@ -46,7 +46,6 @@ class StrategySerializer(serializers.ModelSerializer):
         model = Strategy
         fields = fields
         read_only_fields = fields - patch_fields
-        #depth = 1
 
     def create(self, validated_data):
         validated_data['user'] = self.context['request'].user
@@ -64,6 +63,7 @@ class StrategyViewSet(
 
     queryset = Strategy.objects.all()
     serializer_class = StrategySerializer
+    filterset_fields = ['country']
 
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:
