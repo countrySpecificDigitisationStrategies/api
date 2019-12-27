@@ -1,0 +1,394 @@
+info:
+  title: Digitisation Strategies
+  description: This API allows you to create country specific digitisation strategies.
+  version: 1.0.0
+security:
+  - Basic: []
+paths:
+  /building-blocks:
+    get:
+      operationId: Get List of all Building Blocks
+      description: some description coming soon
+      parameters: []
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Bad Request
+      tags:
+        - building-blocks
+    parameters: []
+  /building-blocks/{id}:
+    get:
+      operationId: Get Building Block by ID
+      description: Providing you the Building Block you are looking for.
+      parameters: []
+      responses:
+        '200':
+          description: ''
+        '404':
+          description: Building Block Not Found
+      tags:
+        - building-blocks
+    parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Grundbaustein.
+        required: true
+        $ref:''
+        type: integer
+  /comments:
+    get:
+      operationId: Get List of all Comments
+      description: some description coming soon
+      parameters:
+        - name: measure
+          in: query
+          description: ''
+          required: false
+          $ref:''
+          type: string
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Bad Request
+      tags:
+        - comments
+    parameters: []
+  /comments/{id}:
+    get:
+      operationId: Get Comment by ID
+      description: some description coming soon.
+      parameters: []
+      responses:
+        '200':
+          description: ''
+        '404':
+          description: Comment Not Found
+      tags:
+        - comments
+    parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Kommentar.
+        required: true
+        $ref:''
+        type: integer
+  /countries:
+    get:
+      operationId: Get List of all Countries
+      description: some description coming soon
+      parameters: []
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Bad Request
+      tags:
+        - countries
+    parameters: []
+  /countries/{id}:
+    get:
+      operationId: Get Country by ID
+      description: some description coming soon.
+      parameters: []
+      responses:
+        '200':
+          description: ''
+        '404':
+          description: Country Not Found
+      tags:
+        - countries
+    parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Land.
+        required: true
+        $ref:''
+        type: integer
+  /goals:
+    get:
+      operationId: Get List of all Goals
+      description: some description coming soon
+      parameters:
+        - name: situation
+          in: query
+          description: ''
+          required: false
+          $ref:''
+          type: string
+      responses:
+        '200':
+          description: ''
+
+        '400':
+          description: Bad Request
+      tags:
+        - goals
+    parameters: []
+  /goals/{id}:
+    get:
+      operationId: Get Goal by ID
+      description: some description coming soon.
+      parameters: []
+      responses:
+        '200':
+          description: ''
+        '404':
+          description: Goal Not Found
+      tags:
+        - goals
+    parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Ziel.
+        required: true
+        $ref:''
+        type: integer
+  /measures:
+    get:
+      operationId: Get List of all Measures
+      description: some description coming soon
+      parameters:
+        - name: goal
+          in: query
+          description: ''
+          required: false
+          $ref:''
+          type: string
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Bad Request
+      tags:
+        - measures
+    parameters: []
+  /measures/{id}:
+    get:
+      operationId: Get Measure by ID
+      description: some description coming soon.
+      parameters: []
+      responses:
+        '200':
+          description: ''
+        '404':
+          description: Measure Not Found
+      tags:
+        - measures
+    parameters:
+      - name: id
+        in: path
+        description: "A unique integer value identifying this Ma\xDFnahme."
+        required: true
+        $ref:''
+        type: integer
+  /situations:
+    get:
+      operationId: Get List of all Situations
+      description: some description coming soon
+      parameters:
+        - name: building_block
+          in: query
+          description: ''
+          required: false
+          $ref:''
+          type: string
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Bad Request
+      tags:
+        - situations
+    parameters: []
+  /situations/{id}:
+    get:
+      operationId: Get Situation by ID
+      description: some description coming soon.
+      parameters: []
+      responses:
+        '200':
+          description: ''
+        '404':
+          description: Situation Not Found
+      tags:
+        - situations
+    parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Situation.
+        required: true
+        $ref:''
+        type: integer
+  /strategies:
+    get:
+      operationId: Get List of all Strategies
+      description: some description coming soon
+      parameters: []
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Bad Request
+      tags:
+        - strategies
+    post:
+      operationId: Create new Strategy
+      description: some description coming soon
+      parameters:
+        - name: data
+          in: body
+          required: true
+          $ref:''
+          schema:
+            $ref: '#/definitions/Strategy'
+      responses:
+        '201':
+          description: ''
+        '400':
+          description: Bad Request
+      tags:
+        - strategies
+    parameters: []
+  /strategies/{id}:
+    get:
+      operationId: Get Strategie by ID
+      description: some description coming soon.
+      parameters: []
+      responses:
+        '200':
+          description: ''
+        '404':
+          description: Strategy Not Found
+      tags:
+        - strategies
+    put:
+      operationId: Edit specific Strategy
+      description: some description coming soon
+      parameters:
+        - name: data
+          in: body
+          required: true
+          $ref:''
+          schema:
+            $ref: '#/definitions/Strategy'
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Bad Request
+      tags:
+        - strategies
+    patch:
+      operationId: strategies_partial_update
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          $ref:''
+          schema:
+            $ref: '#/definitions/Strategy'
+      responses:
+        '200':
+          description: ''
+      tags:
+        - strategies
+    delete:
+      operationId: Delete specific Strategy
+      description: some description coming soon
+      parameters: []
+      responses:
+        '204':
+          description: ''
+        '404':
+          description: Strategy Not Found
+      tags:
+        - strategies
+    parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Strategy.
+        required: true
+        $ref:
+        type: integer
+  /users/logout:
+    get:
+      operationId: users_logout
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - users
+    parameters: []
+  /users/me:
+    get:
+      operationId: users_me
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - users
+    parameters: []
+  /users/{id}:
+    put:
+      operationId: Edit specific User
+      description: some description coming soon
+      parameters:
+        - name: data
+          in: body
+          required: true
+          $ref:
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Bad Request
+      tags:
+        - users
+    patch:
+      operationId: users_partial_update
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          $ref:''
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '200':
+          description: ''
+
+      tags:
+        - users
+    delete:
+      operationId: Delete specific User
+      description: some description coming soon
+      parameters: []
+      responses:
+        '204':
+          description: ''
+
+        '404':
+          description: User Not Found
+      tags:
+        - users
+    parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Benutzer.
+        required: true
+        $ref:''
+        type: integer
+
+openapi:'3.0.0'
+
