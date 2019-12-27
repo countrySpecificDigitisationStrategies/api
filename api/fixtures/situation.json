@@ -1,24 +1,20 @@
 [
   {
-    "model": "api.user",
+    "model": "api.situation",
     "pk": 1,
     "fields": {
-      "email": "user1@mail.com",
-      "country": 1,
-      "current_country": 1,
-      "is_active": true,
+      "building_block": 1,
+      "title": "S1",
       "created": "2019-01-01T12:00:00+03:00",
       "updated": "2019-01-01T12:00:00+03:00"
     }
   },
   {
-    "model": "api.user",
+    "model": "api.situation",
     "pk": 2,
     "fields": {
-      "email": "user2@mail.com",
-      "country": 2,
-      "current_country": 2,
-      "is_active": true,
+      "building_block": 2,
+      "title": "S2",
       "created": "2019-01-01T12:00:00+03:00",
       "updated": "2019-01-01T12:00:00+03:00"
     }

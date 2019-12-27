@@ -1,7 +1,7 @@
 from rest_framework.permissions import BasePermission
 
 
-class UserIsUserOwnerPermission(BasePermission):
+class UserIsUserPermission(BasePermission):
 
     def has_object_permission(self, request, view, obj):
         return request.user == obj

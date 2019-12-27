@@ -6,8 +6,8 @@ from api.models import Country
 @admin.register(Country)
 class CountryAdmin(admin.ModelAdmin):
 
-    list_display = ['name', 'created', 'updated']
-    search_fields = ['name', 'created', 'updated']
+    list_display = ['name', 'is_developing_country', 'created', 'updated']
+    search_fields = ['name', 'is_developing_country', 'created', 'updated']
 
     fieldsets = [
         [None, {
@@ -16,6 +16,7 @@ class CountryAdmin(admin.ModelAdmin):
                 'name',
                 'flag_circle',
                 'flag_rectangle',
+                'is_developing_country',
                 'created',
                 'updated'
             ]
