@@ -3,10 +3,13 @@
     "model": "api.user",
     "pk": 1,
     "fields": {
-      "email": "user1@mail.com",
+      "email": "admin@mail.com",
+      "password": "pbkdf2_sha256$150000$de96JvLRcB8R$eBuuYH4UiSVuAiBeG4yv7CAeMT9atxiN60vy0YpuTQM=",
       "country": 1,
       "current_country": 1,
       "is_active": true,
+      "is_staff": true,
+      "is_superuser": true,
       "created": "2019-01-01T12:00:00+03:00",
       "updated": "2019-01-01T12:00:00+03:00"
     }
