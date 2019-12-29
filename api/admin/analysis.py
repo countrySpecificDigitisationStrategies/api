@@ -6,6 +6,6 @@ from api.models import Analysis
 @admin.register(Analysis)
 class AnalysisAdmin(admin.ModelAdmin):
 
-    list_display = ['created', 'updated']
+    list_display = ['country', 'created', 'updated']
     search_fields = ['created', 'updated']
 
