@@ -8,7 +8,7 @@ class Strategy(AbstractModel):
 
     user = models.ForeignKey('User', related_name='strategies', on_delete=models.PROTECT, verbose_name=_('user'))
 
-    country = models.ForeignKey('Country', related_name='strategies', on_delete=models.PROTECT, verbose_name=_('country'))
+    country = models.OneToOneField('Country', blank=True, null=True, on_delete=models.PROTECT)
     title = models.CharField(_('title'), max_length=50)
     description = models.TextField(_('description'), blank=True, null=True)
     measures = models.ManyToManyField('Measure', blank=True, through='StrategyMeasureInformation', verbose_name=_('measures'))
