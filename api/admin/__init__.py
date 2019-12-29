@@ -7,6 +7,7 @@ from api.admin.goal import GoalAdmin
 from api.admin.measure import MeasureAdmin
 from api.admin.situation import SituationAdmin
 from api.admin.strategy import StrategyAdmin
+from api.admin.analysis import AnalysisAdmin
 from api.admin.user import *
 
 admin.site.site_header = 'SysDev'

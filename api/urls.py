@@ -1,7 +1,7 @@
 from django.conf.urls import include, url
 from rest_framework.routers import DefaultRouter
 
-from api.resources import AuthViewSet, BuildingBlockViewSet, CommentViewSet, CountryViewSet, GoalViewSet, MeasureViewSet, SituationViewSet, StrategyViewSet, UserViewSet
+from api.resources import AuthViewSet, BuildingBlockViewSet, CommentViewSet, CountryViewSet, GoalViewSet, MeasureViewSet, SituationViewSet, StrategyViewSet, UserViewSet, AnalysisViewSet
 
 
 router = DefaultRouter(trailing_slash=False)
@@ -15,6 +15,7 @@ router.register(r'measures', MeasureViewSet, base_name='measures')
 router.register(r'situations', SituationViewSet, base_name='situations')
 router.register(r'strategies', StrategyViewSet, base_name='strategies')
 router.register(r'users', UserViewSet, base_name='users')
+router.register(r'analysis', AnalysisViewSet, base_name='analysis')
 
 urlpatterns = [
     url('', include(router.urls))

@@ -7,3 +7,4 @@ from api.resources.measure import MeasureViewSet
 from api.resources.situation import SituationViewSet
 from api.resources.strategy import StrategyViewSet
 from api.resources.user import UserViewSet
+from api.resources.analysis import AnalysisViewSet

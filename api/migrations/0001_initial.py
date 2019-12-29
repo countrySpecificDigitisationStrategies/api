@@ -235,4 +235,14 @@ class Migration(migrations.Migration):
             name='user_permissions',
             field=models.ManyToManyField(blank=True, help_text='Specific permissions for this user.', related_name='user_set', related_query_name='user', to='auth.Permission', verbose_name='user permissions'),
         ),
+        migrations.CreateModel(
+            name='Analysis',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('updated', models.DateTimeField(auto_now=True, verbose_name='updated')),
+                ('created', models.DateTimeField(auto_now_add=True, verbose_name='created')),
+                ('content', models.TextField(blank=True, null=True, verbose_name='content')),
+                ('country', models.ForeignKey(on_delete=models.CASCADE, related_name='analysis', to='api.Country')),
+            ]
+        ),
     ]
