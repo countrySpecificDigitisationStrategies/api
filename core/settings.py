@@ -159,6 +159,8 @@ JET_SIDE_MENU_ITEMS = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 
+CSRF_TRUSTED_ORIGINS = ['sysdev-api.therealbrudi.com']
+
 REDOC_SETTINGS = {
    #'SPEC_URL': 'http://192.168.178.180:8000/static/openapi.json'
 }
