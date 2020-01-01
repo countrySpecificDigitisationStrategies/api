@@ -9,7 +9,7 @@ class Goal(AbstractModel):
     situation = models.ForeignKey('Situation', related_name='goals', on_delete=models.CASCADE, verbose_name=_('situation'))
 
     title = models.CharField(_('title'), max_length=50)
-    description = models.TextField(_('description'), blank=True, null=True)
+    description = models.TextField(_('description'))
 
     def __str__(self):
         return '{}'.format(self.title)

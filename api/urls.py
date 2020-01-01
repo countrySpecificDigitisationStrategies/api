@@ -1,3 +1,4 @@
+"""
 from django.conf.urls import include, url
 from rest_framework.routers import DefaultRouter
 
@@ -18,4 +19,47 @@ router.register(r'users', UserViewSet, base_name='users')
 
 urlpatterns = [
     url('', include(router.urls))
+]
+"""
+
+
+from django.conf.urls import include, url
+from rest_framework.routers import DefaultRouter
+from rest_framework_nested import routers
+
+from api.resources import AuthViewSet, BuildingBlockViewSet, CommentViewSet, CountryViewSet, DiscussionViewSet, GoalViewSet, MeasureViewSet, SituationViewSet, StrategyViewSet, ThreadViewSet, UserViewSet
+
+
+default_router = DefaultRouter(trailing_slash=False)
+
+default_router.register(r'auth', AuthViewSet, basename='auth')
+default_router.register(r'users', UserViewSet, basename='users')
+default_router.register(r'countries', CountryViewSet, basename='countries')
+default_router.register(r'threads', ThreadViewSet, basename='threads')
+default_router.register(r'comments', CommentViewSet, basename='comments')
+default_router.register(r'discussion', DiscussionViewSet, basename='discussion')
+
+
+router = routers.SimpleRouter()
+router.register(r'strategies', StrategyViewSet)
+
+building_blocks_router = routers.NestedSimpleRouter(router, r'strategies', lookup='strategy')
+building_blocks_router.register(r'building-blocks', BuildingBlockViewSet)
+
+situations_router = routers.NestedSimpleRouter(building_blocks_router, r'building-blocks', lookup='building_block')
+situations_router.register(r'situations', SituationViewSet)
+
+goals_router = routers.NestedSimpleRouter(situations_router, r'situations', lookup='situation')
+goals_router.register(r'goals', GoalViewSet)
+
+#strategy_measure_router = routers.NestedSimpleRouter(goals_router, r'goals', lookup='goal')
+#strategy_measure_router.register(r'strategy-measures', StrategyMeasureViewSet)
+
+
+urlpatterns = [
+    url(r'^', include(default_router.urls)),
+    url(r'^', include(router.urls)),
+    url(r'^', include(building_blocks_router.urls)),
+    url(r'^', include(situations_router.urls)),
+    url(r'^', include(goals_router.urls)),
 ]

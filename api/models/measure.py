@@ -9,7 +9,7 @@ class Measure(AbstractModel):
     goal = models.ForeignKey('Goal', related_name='measures', on_delete=models.CASCADE, verbose_name=_('goal'))
 
     title = models.CharField(_('title'), max_length=50)
-    description = models.TextField(_('description'), blank=True, null=True)
+    description = models.TextField(_('description'))
 
     def __str__(self):
         return '{}'.format(self.title)
