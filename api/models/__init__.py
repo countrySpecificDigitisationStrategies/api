@@ -7,4 +7,5 @@ from api.models.goal import Goal
 from api.models.measure import Measure
 from api.models.situation import Situation
 from api.models.strategy import Strategy, StrategyMeasureInformation
+from api.models.thread import Thread
 from api.models.user import User, Token, EmailConfirmation, PasswordReset

@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
-from api.models import BuildingBlock, Situation, Goal, Measure, Strategy, StrategyMeasureInformation, Comment, User
+
+from api.models import BuildingBlock, Situation, Goal, Measure, Country, User, Strategy, StrategyMeasureInformation, Thread, Comment
 
 
 class Command(BaseCommand):
@@ -95,24 +96,64 @@ class Command(BaseCommand):
 
 
 
-        #user = User.objects.get(email='admin@sysdev.com')
-
-
-
-        """strategy_a, created = Strategy.objects.get_or_create(
-            user=user,
-            title='Strategy A',
-            description='Strategy A description'
+        measure_a, created = Measure.objects.get_or_create(
+            goal=goal_a,
+            title='Measure A',
+            description='Measure A description'
         )
 
-        strategy_measure_information, created = StrategyMeasureInformation.objects.get_or_create(
-            measure=measure_a,
+        measure_h, created = Measure.objects.get_or_create(
+            goal=goal_h,
+            title='Measure H',
+            description='Measure H description'
+        )
+
+
+
+        country_a, created = Country.objects.get_or_create(name='Country A')
+
+
+
+        user_a, created = User.objects.get_or_create(email='admin@sysdev.com', is_active=True, is_staff=True, is_superuser=True)
+        user_a.set_password('password')
+        user_a.save()
+
+
+
+        strategy_a, created = Strategy.objects.get_or_create(
+            user=user_a,
+            country=country_a,
+            title='Strategy A',
+            description='Strategy A description',
+            is_published=True
+        )
+
+
+
+        strategy_measure_information_a, created = StrategyMeasureInformation.objects.get_or_create(
             strategy=strategy_a,
+            measure=measure_a,
             description='Comment on Measure A in Strategy A'
         )
 
-        strategy_measure_information, created = StrategyMeasureInformation.objects.get_or_create(
-            measure=measure_b,
+        strategy_measure_information_b, created = StrategyMeasureInformation.objects.get_or_create(
             strategy=strategy_a,
-            description='Comment on Measure B in Strategy A'
-        )"""
+            measure=measure_h,
+            description='Comment on Measure H in Strategy A'
+        )
+
+
+
+        thread_a, created = Thread.objects.get_or_create(
+            user=user_a,
+            strategy_measure=strategy_measure_information_a,
+            title='Thread A',
+            description='Thread A description'
+        )
+
+        thread_b, created = Thread.objects.get_or_create(
+            user=user_a,
+            strategy_measure=strategy_measure_information_b,
+            title='Thread B',
+            description='Thread B description'
+        )

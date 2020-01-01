@@ -1,10 +1,4 @@
-from django.utils.translation import gettext_lazy as _
-from django.utils.decorators import method_decorator
-
-from rest_framework import mixins, serializers, viewsets, status
-from rest_framework.decorators import api_view, action
-
-from drf_yasg.utils import swagger_auto_schema
+from rest_framework import mixins, serializers, viewsets
 
 from api.models import BuildingBlock
 from api.utils import *
@@ -30,9 +24,8 @@ class BuildingBlockViewSet(
     mixins.RetrieveModelMixin,
     viewsets.GenericViewSet
 ):
+
     queryset = BuildingBlock.objects.all()
     serializer_class = BuildingBlockSerializer
     authentication_classes = []
     permission_classes = []
-
-
