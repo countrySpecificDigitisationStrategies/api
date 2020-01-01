@@ -140,7 +140,8 @@ JET_SIDE_MENU_ITEMS = [
     {
         'label': _('system'),
         'items': [
-            {'name': 'api.user', 'label': _('users')}
+            {'name': 'api.user', 'label': _('users')},
+            {'name': 'api.country', 'label': _('countries')}
         ]
     },
     {
@@ -151,8 +152,8 @@ JET_SIDE_MENU_ITEMS = [
             {'name': 'api.goal', 'label': _('goals')},
             {'name': 'api.measure', 'label': _('measures')},
             {'name': 'api.strategy', 'label': _('strategies')},
-            {'name': 'api.comment', 'label': _('comments')},
-            {'name': 'api.country', 'label': _('countries')}
+            {'name': 'api.thread', 'label': _('threads')},
+            {'name': 'api.comment', 'label': _('comments')}
         ]
     }
 ]

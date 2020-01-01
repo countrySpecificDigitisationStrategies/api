@@ -9,12 +9,12 @@ from api.utils import *
 
 fields = AppList(
     'id',
-    'measure', 'strategy', 'description',
+    'strategy', 'measure', 'description',
     'created', 'updated'
 )
 
 patch_fields = AppList(
-    'measure', 'strategy', 'description',
+    'strategy', 'measure', 'description'
 )
 
 class StrategyMeasureInformationSerializer(serializers.ModelSerializer):
