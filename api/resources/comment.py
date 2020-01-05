@@ -4,6 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from api.exceptions import AppException
 from api.models import Comment
 from api.permissions import UserIsObjectOwnerPermission
+from api.resources.user import UserSerializer
 from api.utils import *
 
 
@@ -20,6 +21,8 @@ post_fields = AppList(
 
 class CommentSerializer(serializers.ModelSerializer):
 
+    user = UserSerializer(many=False, read_only=True)
+
     class Meta:
         model = Comment
         fields = fields
@@ -33,7 +36,7 @@ class CommentSerializer(serializers.ModelSerializer):
                 raise AppException
 
         validated_data['user'] = self.context['request'].user
-        
+
         return super().create(validated_data)
 
 

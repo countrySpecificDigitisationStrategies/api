@@ -11,7 +11,7 @@ class Strategy(AbstractModel):
     country = models.OneToOneField('Country', on_delete=models.PROTECT)
     title = models.CharField(_('title'), max_length=50)
     description = models.TextField(_('description'))
-    measures = models.ManyToManyField('Measure', blank=True, through='StrategyMeasureInformation', verbose_name=_('measures'))
+    measures = models.ManyToManyField('Measure', blank=True, through='StrategyMeasure', verbose_name=_('measures'))
     is_published = models.BooleanField(_('is_published'), default=False)
 
     def __str__(self):
@@ -21,9 +21,10 @@ class Strategy(AbstractModel):
         verbose_name = _('strategy')
         verbose_name_plural = _('strategies')
 
-class StrategyMeasureInformation(AbstractModel):
 
-    strategy = models.ForeignKey('Strategy', related_name='strategy_measure_information', on_delete=models.PROTECT)
+class StrategyMeasure(AbstractModel):
+
+    strategy = models.ForeignKey('Strategy', related_name='strategy_measures', on_delete=models.PROTECT)
     measure = models.ForeignKey('Measure', on_delete=models.PROTECT)
 
     description = models.TextField(_('description'), blank=True, null=True)

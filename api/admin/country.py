@@ -14,6 +14,7 @@ class CountryAdmin(admin.ModelAdmin):
             'fields': [
                 'id',
                 'name',
+                'flag',
                 'flag_circle',
                 'flag_rectangle',
                 'is_developing_country',
