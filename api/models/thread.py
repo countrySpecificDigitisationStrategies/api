@@ -7,7 +7,7 @@ from api.models import AbstractModel
 class Thread(AbstractModel):
 
     user = models.ForeignKey('User', related_name='threads', on_delete=models.CASCADE, verbose_name=_('user'))
-    strategy_measure = models.ForeignKey('StrategyMeasureInformation', related_name='threads', on_delete=models.PROTECT, verbose_name=_('strategy_measure'))
+    strategy_measure = models.ForeignKey('StrategyMeasure', related_name='threads', on_delete=models.PROTECT, verbose_name=_('strategy_measure'))
 
     title = models.CharField(_('title'), max_length=50)
     description = models.TextField(_('description'))

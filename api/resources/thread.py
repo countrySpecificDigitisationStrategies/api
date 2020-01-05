@@ -3,6 +3,8 @@ from rest_framework.permissions import IsAuthenticated
 
 from api.models import Thread
 from api.permissions import UserIsObjectOwnerPermission
+from api.resources.comment import CommentSerializer
+from api.resources.user import UserSerializer
 from api.utils import *
 
 
@@ -10,6 +12,7 @@ fields = AppList(
     'id',
     'user', 'strategy_measure',
     'title', 'description',
+    'comments',
     'created', 'updated'
 )
 
@@ -20,6 +23,9 @@ post_fields = AppList(
 
 
 class ThreadSerializer(serializers.ModelSerializer):
+
+    user = UserSerializer(many=False, read_only=True)
+    comments = CommentSerializer(many=True, read_only=True)
 
     class Meta:
         model = Thread

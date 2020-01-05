@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from api.models import BuildingBlock, Situation, Goal, Measure, Country, User, Strategy, StrategyMeasureInformation, Thread, Comment
+from api.models import BuildingBlock, Situation, Goal, Measure, Country, User, Strategy, StrategyMeasure, Thread, Comment
 
 
 class Command(BaseCommand):
@@ -102,21 +102,38 @@ class Command(BaseCommand):
             description='Measure A description'
         )
 
-        measure_h, created = Measure.objects.get_or_create(
-            goal=goal_h,
-            title='Measure H',
-            description='Measure H description'
+        measure_b, created = Measure.objects.get_or_create(
+            goal=goal_b,
+            title='Measure B',
+            description='Measure B description'
+        )
+
+        measure_c, created = Measure.objects.get_or_create(
+            goal=goal_c,
+            title='Measure C',
+            description='Measure C description'
+        )
+
+        measure_d, created = Measure.objects.get_or_create(
+            goal=goal_d,
+            title='Measure D',
+            description='Measure D description'
         )
 
 
 
         country_a, created = Country.objects.get_or_create(name='Country A')
+        country_b, created = Country.objects.get_or_create(name='Country B')
 
 
 
         user_a, created = User.objects.get_or_create(email='admin@sysdev.com', is_active=True, is_staff=True, is_superuser=True)
         user_a.set_password('password')
         user_a.save()
+
+        user_b, created = User.objects.get_or_create(email='admin_2@sysdev.com', is_active=True, is_staff=True, is_superuser=True)
+        user_b.set_password('password')
+        user_b.save()
 
 
 
@@ -128,32 +145,82 @@ class Command(BaseCommand):
             is_published=True
         )
 
-
-
-        strategy_measure_information_a, created = StrategyMeasureInformation.objects.get_or_create(
-            strategy=strategy_a,
-            measure=measure_a,
-            description='Comment on Measure A in Strategy A'
+        strategy_b, created = Strategy.objects.get_or_create(
+            user=user_b,
+            country=country_b,
+            title='Strategy B',
+            description='Strategy B description',
+            is_published=True
         )
 
-        strategy_measure_information_b, created = StrategyMeasureInformation.objects.get_or_create(
+
+
+        strategy_measure_a, created = StrategyMeasure.objects.get_or_create(
             strategy=strategy_a,
-            measure=measure_h,
-            description='Comment on Measure H in Strategy A'
+            measure=measure_a,
+            description='Details on Measure A in Strategy A'
+        )
+
+        strategy_measure_b, created = StrategyMeasure.objects.get_or_create(
+            strategy=strategy_a,
+            measure=measure_b,
+            description='Details on Measure B in Strategy A'
+        )
+
+        strategy_measure_c, created = StrategyMeasure.objects.get_or_create(
+            strategy=strategy_b,
+            measure=measure_c,
+            description='Details on Measure C in Strategy B'
+        )
+
+        strategy_measure_d, created = StrategyMeasure.objects.get_or_create(
+            strategy=strategy_b,
+            measure=measure_d,
+            description='Details on Measure D in Strategy B'
         )
 
 
 
         thread_a, created = Thread.objects.get_or_create(
             user=user_a,
-            strategy_measure=strategy_measure_information_a,
+            strategy_measure=strategy_measure_a,
             title='Thread A',
             description='Thread A description'
         )
 
         thread_b, created = Thread.objects.get_or_create(
-            user=user_a,
-            strategy_measure=strategy_measure_information_b,
+            user=user_b,
+            strategy_measure=strategy_measure_b,
             title='Thread B',
             description='Thread B description'
+        )
+
+
+
+        comment_a, created = Comment.objects.get_or_create(
+            user=user_b,
+            thread=thread_a,
+            parent=None,
+            description='Comment A description'
+        )
+
+        comment_b, created = Comment.objects.get_or_create(
+            user=user_a,
+            thread=thread_a,
+            parent=comment_a,
+            description='Comment B description'
+        )
+
+        comment_c, created = Comment.objects.get_or_create(
+            user=user_a,
+            thread=thread_b,
+            parent=None,
+            description='Comment C description'
+        )
+
+        comment_d, created = Comment.objects.get_or_create(
+            user=user_b,
+            thread=thread_a,
+            parent=comment_c,
+            description='Comment D description'
         )

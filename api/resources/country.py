@@ -1,17 +1,13 @@
-from django.utils.translation import gettext_lazy as _
-from django.utils.decorators import method_decorator
-
 from rest_framework import mixins, serializers, viewsets
 
-from drf_yasg.utils import swagger_auto_schema
-
-from api.models import Country, Strategy
-from api.resources.strategy import StrategySerializer
+from api.models import Country
+#from api.resources.strategy import StrategySerializer
 from api.utils import *
+
 
 fields = AppList(
     'id',
-    'name', 'flag_circle', 'flag_rectangle', 'is_developing_country',
+    'name', 'flag', 'flag_circle', 'flag_rectangle', 'is_developing_country',
     'strategy',
     'created', 'updated'
 )

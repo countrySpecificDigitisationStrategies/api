@@ -1,15 +1,19 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import mixins, serializers, viewsets
 
 from api.exceptions import AppException
-from api.models import Strategy, StrategyMeasureInformation, BuildingBlock, Situation, Goal
+from api.models import BuildingBlock, Situation, Goal, Measure, Strategy, StrategyMeasure
 from api.permissions import UserIsObjectOwnerPermission
 from api.resources.building_block import BuildingBlockSerializer
+from api.resources.country import CountrySerializer
+from api.resources.thread import ThreadSerializer
 from api.utils import *
 
 
 fields = AppList(
     'id',
     'strategy', 'measure', 'description',
+    'threads',
     'created', 'updated'
 )
 
@@ -17,31 +21,79 @@ patch_fields = AppList(
     'strategy', 'measure', 'description'
 )
 
-class StrategyMeasureInformationSerializer(serializers.ModelSerializer):
+
+class StrategyMeasureSerializer(serializers.ModelSerializer):
+
+    threads = ThreadSerializer(many=True, read_only=True)
 
     class Meta:
-        model = StrategyMeasureInformation
+        model = StrategyMeasure
         fields = fields
         read_only_fields = fields - patch_fields
+
+
+class StrategyMeasureViewSet(
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    viewsets.GenericViewSet
+):
+
+    queryset = StrategyMeasure.objects.all()
+    serializer_class = StrategyMeasureSerializer
+    authentication_classes = []
+    permission_classes = []
+    filterset_fields = ['strategy', 'measure']
+
+    def get_queryset(self):
+        goal_pk = self.kwargs.get('goal_pk')
+        situation_pk = self.kwargs.get('situation_pk')
+        building_block_pk = self.kwargs.get('building_block_pk')
+        strategy_pk = self.kwargs.get('strategy_pk')
+        if strategy_pk:
+            strategy = get_object_or_404(Strategy, pk=strategy_pk)
+            measures = Measure.objects.filter(id__in=strategy.strategy_measures.all()).distinct()
+            goals = Goal.objects.filter(measures__in=measures).distinct()
+
+            goal = Goal.objects.get(id=goal_pk)
+            goal_measures = goal.measures.all()
+
+            #goals_measures = [list((goal.measures.all())) for goal in goals]
+            goals_measures = []
+            for goal in goals:
+                a = list(goal.measures.all())
+                for b in a:
+                    goals_measures.append(b)
+
+            #goals_measures_ids = [measure.id for measure in goals_measures]
+
+            new_measures = [measure for measure in goals_measures if measure in list(goal_measures)]
+
+            strategy_measures = StrategyMeasure.objects.filter(measure__in=new_measures).distinct()
+
+            return strategy_measures
+        return StrategyMeasure.objects.all()
 
 
 fields = AppList(
     'id',
     'user',
     'country', 'title', 'description', 'is_published',
-    'strategy_measure_information',
+    'strategy_measures',
     'building_blocks',
     'created', 'updated'
 )
 
 patch_fields = AppList(
     'country', 'title', 'description', 'is_published',
-    'strategy_measure_information'
+    'strategy_measures'
 )
+
 
 class StrategySerializer(serializers.ModelSerializer):
 
-    strategy_measure_information = StrategyMeasureInformationSerializer(many=True)
+    #user = UserSerializer(many=False, read_only=True)
+    country = CountrySerializer(many=False, read_only=True)
+    strategy_measures = StrategyMeasureSerializer(many=True, read_only=False)
     building_blocks = serializers.SerializerMethodField('get_building_blocks', read_only=True)
 
     class Meta:

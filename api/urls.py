@@ -27,10 +27,14 @@ from django.conf.urls import include, url
 from rest_framework.routers import DefaultRouter
 from rest_framework_nested import routers
 
-from api.resources import AuthViewSet, BuildingBlockViewSet, CommentViewSet, CountryViewSet, DiscussionViewSet, GoalViewSet, MeasureViewSet, SituationViewSet, StrategyViewSet, ThreadViewSet, UserViewSet
+from api.resources import AuthViewSet, BuildingBlockViewSet, CommentViewSet, CountryViewSet, DiscussionViewSet, GoalViewSet, MeasureViewSet, SituationViewSet, StrategyViewSet, StrategyMeasureViewSet, ThreadViewSet, UserViewSet
 
 
 default_router = DefaultRouter(trailing_slash=False)
+
+default_router.register(r'building-blocks', BuildingBlockViewSet, basename='building-blocks')
+default_router.register(r'situations', SituationViewSet, basename='situations')
+default_router.register(r'goals', GoalViewSet, basename='goals')
 
 default_router.register(r'auth', AuthViewSet, basename='auth')
 default_router.register(r'users', UserViewSet, basename='users')
@@ -52,8 +56,8 @@ situations_router.register(r'situations', SituationViewSet)
 goals_router = routers.NestedSimpleRouter(situations_router, r'situations', lookup='situation')
 goals_router.register(r'goals', GoalViewSet)
 
-#strategy_measure_router = routers.NestedSimpleRouter(goals_router, r'goals', lookup='goal')
-#strategy_measure_router.register(r'strategy-measures', StrategyMeasureViewSet)
+strategy_measure_router = routers.NestedSimpleRouter(goals_router, r'goals', lookup='goal')
+strategy_measure_router.register(r'strategy-measures', StrategyMeasureViewSet)
 
 
 urlpatterns = [
@@ -62,4 +66,5 @@ urlpatterns = [
     url(r'^', include(building_blocks_router.urls)),
     url(r'^', include(situations_router.urls)),
     url(r'^', include(goals_router.urls)),
+    url(r'^', include(strategy_measure_router.urls)),
 ]
