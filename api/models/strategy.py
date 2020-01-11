@@ -8,10 +8,10 @@ class Strategy(AbstractModel):
 
     user = models.ForeignKey('User', related_name='strategies', on_delete=models.PROTECT, verbose_name=_('user'))
 
-    country = models.OneToOneField('Country', on_delete=models.PROTECT)
+    country = models.OneToOneField('Country', on_delete=models.PROTECT, verbose_name=_('country'))
     title = models.CharField(_('title'), max_length=50)
     description = models.TextField(_('description'))
-    measures = models.ManyToManyField('Measure', blank=True, through='StrategyMeasure', verbose_name=_('measures'))
+    measures = models.ManyToManyField('Measure', through='StrategyMeasure', verbose_name=_('measures'))
     is_published = models.BooleanField(_('is_published'), default=False)
 
     def __str__(self):
@@ -25,12 +25,12 @@ class Strategy(AbstractModel):
 class StrategyMeasure(AbstractModel):
 
     strategy = models.ForeignKey('Strategy', related_name='strategy_measures', on_delete=models.PROTECT)
-    measure = models.ForeignKey('Measure', on_delete=models.PROTECT)
+    measure = models.ForeignKey('Measure', related_name='strategy_measures', on_delete=models.PROTECT)
 
     description = models.TextField(_('description'), blank=True, null=True)
 
     def __str__(self):
-        return '{}'.format(self.description)
+        return '{}'.format(self.description or '-')
 
     class Meta:
         verbose_name = _('strategy_measure')

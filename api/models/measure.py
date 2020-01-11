@@ -6,7 +6,7 @@ from api.models import AbstractModel
 
 class Measure(AbstractModel):
 
-    goal = models.ForeignKey('Goal', related_name='measures', on_delete=models.CASCADE, verbose_name=_('goal'))
+    situation = models.ForeignKey('Situation', related_name='measures', on_delete=models.CASCADE, verbose_name=_('situation'))
 
     title = models.CharField(_('title'), max_length=50)
     description = models.TextField(_('description'))

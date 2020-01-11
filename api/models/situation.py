@@ -6,7 +6,7 @@ from api.models import AbstractModel
 
 class Situation(AbstractModel):
 
-    building_block = models.ForeignKey('BuildingBlock', related_name='situations', on_delete=models.CASCADE, verbose_name=_('building_block'))
+    situation_category = models.ForeignKey('SituationCategory', related_name='situations', on_delete=models.CASCADE, verbose_name=_('situation_category'))
 
     title = models.CharField(_('title'), max_length=50)
     description = models.TextField(_('description'))

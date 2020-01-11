@@ -6,15 +6,15 @@ from api.models import Situation
 @admin.register(Situation)
 class SituationAdmin(admin.ModelAdmin):
 
-    list_display = ['title', 'created', 'updated']
+    list_display = ['situation_category', 'title', 'created', 'updated']
     search_fields = ['title', 'description', 'created', 'updated']
-    list_filter = ['building_block']
+    list_filter = ['situation_category']
 
     fieldsets = [
         [None, {
             'fields': [
                 'id',
-                'building_block',
+                'situation_category',
                 'title',
                 'description',
                 'created',

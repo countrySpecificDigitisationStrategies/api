@@ -1,20 +1,20 @@
 from django.contrib import admin
 
-from api.models import Goal
+from api.models import Analysis
 
 
-@admin.register(Goal)
-class GoalAdmin(admin.ModelAdmin):
+@admin.register(Analysis)
+class AnalysisAdmin(admin.ModelAdmin):
 
-    list_display = ['title', 'created', 'updated']
+    list_display = ['country', 'title', 'created', 'updated']
     search_fields = ['title', 'description', 'created', 'updated']
-    list_filter = ['situation']
+    list_filter = ['country']
 
     fieldsets = [
         [None, {
             'fields': [
                 'id',
-                'situation',
+                'country',
                 'title',
                 'description',
                 'created',
