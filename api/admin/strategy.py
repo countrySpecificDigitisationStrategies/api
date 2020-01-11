@@ -4,6 +4,7 @@ from api.models import Strategy, StrategyMeasure
 
 
 class StrategyMeasureInline(admin.TabularInline):
+
     model = StrategyMeasure
     extra = 0
 
@@ -13,5 +14,24 @@ class StrategyAdmin(admin.ModelAdmin):
 
     list_display = ['user', 'title', 'is_published', 'created', 'updated']
     search_fields = ['title', 'description', 'created', 'updated']
+    list_filter = ['user', 'country']
+
+    fieldsets = [
+        [None, {
+            'fields': [
+                'id',
+                'user',
+                'country',
+                'title',
+                'description',
+                #'measures',
+                'is_published',
+                'created',
+                'updated'
+            ]
+        }]
+    ]
+
+    readonly_fields = ['id', 'created', 'updated']
 
     inlines = [StrategyMeasureInline]

@@ -1,33 +1,35 @@
 from rest_framework import mixins, serializers, viewsets
 
-from api.models import Situation
+from api.models import SituationCategory
 from api.utils import *
+
 
 fields = AppList(
     'id',
-    'situation_category',
+    'building_block',
     'title', 'description',
-    'measures',
+    'goal_title', 'goal_description',
+    'situations',
     'created', 'updated'
 )
 
 
-class SituationSerializer(serializers.ModelSerializer):
+class SituationCategorySerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Situation
+        model = SituationCategory
         fields = fields
         read_only_fields = fields
 
 
-class SituationViewSet(
+class SituationCategoryViewSet(
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,
     viewsets.GenericViewSet
 ):
 
-    queryset = Situation.objects.all()
-    serializer_class = SituationSerializer
+    queryset = SituationCategory.objects.all()
+    serializer_class = SituationCategorySerializer
     authentication_classes = []
     permission_classes = []
-    filterset_fields = ['situation_category']
+    filterset_fields = ['building_block']

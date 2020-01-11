@@ -106,8 +106,8 @@ LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
 
-MEDIA_URL =  '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#MEDIA_URL =  '/media/'
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -141,15 +141,16 @@ JET_SIDE_MENU_ITEMS = [
         'label': _('system'),
         'items': [
             {'name': 'api.user', 'label': _('users')},
-            {'name': 'api.country', 'label': _('countries')}
+            {'name': 'api.country', 'label': _('countries')},
+            {'name': 'api.analysis', 'label': _('analyses')}
         ]
     },
     {
         'label': _('application'),
         'items': [
             {'name': 'api.buildingblock', 'label': _('building_blocks')},
+            {'name': 'api.situationcategory', 'label': _('situation_categories')},
             {'name': 'api.situation', 'label': _('situations')},
-            {'name': 'api.goal', 'label': _('goals')},
             {'name': 'api.measure', 'label': _('measures')},
             {'name': 'api.strategy', 'label': _('strategies')},
             {'name': 'api.thread', 'label': _('threads')},
@@ -158,10 +159,10 @@ JET_SIDE_MENU_ITEMS = [
     }
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True
-
-CSRF_TRUSTED_ORIGINS = ['sysdev-api.therealbrudi.com']
-
 REDOC_SETTINGS = {
    #'SPEC_URL': 'http://192.168.178.180:8000/static/openapi.json'
 }
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+CSRF_TRUSTED_ORIGINS = ['sysdev-api.therealbrudi.com']

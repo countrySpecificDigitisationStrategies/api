@@ -15,7 +15,6 @@ class BuildingBlockAdmin(admin.ModelAdmin):
                 'id',
                 'title',
                 'description',
-                'image',
                 'created',
                 'updated'
             ]

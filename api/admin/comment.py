@@ -6,14 +6,15 @@ from api.models import Comment
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
 
-    list_display = ['thread', 'created', 'updated']
+    list_display = ['user', 'thread', 'created', 'updated']
     search_fields = ['description']
-    list_filter = ['thread']
+    list_filter = ['user', 'thread']
 
     fieldsets = [
         [None, {
             'fields': [
                 'id',
+                'user',
                 'thread',
                 'parent',
                 'description',
