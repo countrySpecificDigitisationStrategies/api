@@ -1,33 +1,33 @@
 from rest_framework import mixins, serializers, viewsets
 
-from api.models import Situation
+from api.models import Analysis
 from api.utils import *
 
 fields = AppList(
     'id',
-    'situation_category',
+    'country',
     'title', 'description',
-    'measures',
     'created', 'updated'
 )
 
 
-class SituationSerializer(serializers.ModelSerializer):
+class AnalysisSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Situation
+        model = Analysis
         fields = fields
         read_only_fields = fields
+        depth = 1
 
 
-class SituationViewSet(
+class AnalysisViewSet(
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,
     viewsets.GenericViewSet
 ):
 
-    queryset = Situation.objects.all()
-    serializer_class = SituationSerializer
+    queryset = Analysis.objects.all()
+    serializer_class = AnalysisSerializer
     authentication_classes = []
     permission_classes = []
-    filterset_fields = ['situation_category']
+    filterset_fields = ['country']

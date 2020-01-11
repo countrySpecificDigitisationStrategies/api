@@ -1,48 +1,16 @@
-from rest_framework import serializers, viewsets
-from rest_framework.decorators import action
-from rest_framework.response import Response
+from rest_framework import serializers
 
-from api.models import BuildingBlock, Situation, Goal, Strategy, StrategyMeasure, Measure
-from api.resources.strategy import StrategyMeasureSerializer
+from api.models import BuildingBlock, SituationCategory, Situation, StrategyMeasure
 from api.utils import *
 
 
 fields = AppList(
     'id',
-    'situation',
-    'title', 'description',
-    'strategy_measures',
-    'created', 'updated'
-)
-
-
-class GoalSerializer(serializers.ModelSerializer):
-
-    strategy_measures = serializers.SerializerMethodField()
-
-    class Meta:
-        model = Goal
-        fields = fields
-        read_only_fields = fields
-
-    def get_strategy_measures(self, obj):
-        measures = obj.measures.all()
-        strategy_measures = StrategyMeasure.objects.filter(measure__in=measures)
-        return StrategyMeasureSerializer(strategy_measures, many=True).data
-
-
-fields = AppList(
-    'id',
-    'building_block',
-    'title', 'description',
-    'goals',
-    'created', 'updated'
+    'title'
 )
 
 
 class SituationSerializer(serializers.ModelSerializer):
-
-    goals = GoalSerializer(many=True, read_only=True)
 
     class Meta:
         model = Situation
@@ -52,15 +20,26 @@ class SituationSerializer(serializers.ModelSerializer):
 
 fields = AppList(
     'id',
-    'title', 'description', 'image',
-    'situations',
-    'created', 'updated'
+    'title',
+    'goal_title'
+)
+
+
+class SituationCategorySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = SituationCategory
+        fields = fields
+        read_only_fields = fields
+
+
+fields = AppList(
+    'id',
+    'title'
 )
 
 
 class BuildingBlockSerializer(serializers.ModelSerializer):
-
-    situations = SituationSerializer(many=True, read_only=True)
 
     class Meta:
         model = BuildingBlock
@@ -68,6 +47,25 @@ class BuildingBlockSerializer(serializers.ModelSerializer):
         read_only_fields = fields
 
 
+fields = AppList(
+    'id',
+    'measure',
+    'thread_count'
+)
+
+
+class StrategyMeasureSerializer(serializers.ModelSerializer):
+
+    thread_count = serializers.SerializerMethodField('get_thread_count', read_only=True)
+
+    class Meta:
+        model = StrategyMeasure
+        fields = fields
+        read_only_fields = fields
+
+    def get_thread_count(self, obj):
+        print(obj)
+        return obj.threads.all().count()
 
 
 
@@ -83,7 +81,9 @@ class BuildingBlockSerializer(serializers.ModelSerializer):
 
 
 
-class DiscussionViewSet(
+
+
+"""class DiscussionViewSet(
     viewsets.GenericViewSet
 ):
 
@@ -116,7 +116,7 @@ class DiscussionViewSet(
             data['building_blocks'] = building_blocks_data
 
             print('loop')
-            """for index_a, building_block in enumerate(building_blocks):
+            for index_a, building_block in enumerate(building_blocks):
                 situations_a = [(s) for s in building_block.situations.all() if s in situations]
                 situations_data = SituationSerializer(situations_a, many=True).data
                 data['building_blocks'][index_a]['situations'] = situations_data
@@ -132,7 +132,7 @@ class DiscussionViewSet(
                         measures = goal.measures.all()
                         strategy_measures = StrategyMeasure.objects.filter(measure__in=measures)
                         strategy_measures_data = StrategyMeasureSerializer(strategy_measures, many=True).data
-                        data['building_blocks'][index_a]['situations'][index_b]['goals'][index_c]['strategy_measures'] = strategy_measures_data"""
+                        data['building_blocks'][index_a]['situations'][index_b]['goals'][index_c]['strategy_measures'] = strategy_measures_data
 
 
         else:
@@ -158,4 +158,4 @@ class DiscussionViewSet(
 
         return Response(
             data=data
-        )
+        )"""

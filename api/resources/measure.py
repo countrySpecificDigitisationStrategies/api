@@ -6,7 +6,8 @@ from api.utils import *
 
 fields = AppList(
     'id',
-    'goal', 'title', 'description',
+    'situation',
+    'title', 'description',
     'created', 'updated'
 )
 
@@ -24,8 +25,9 @@ class MeasureViewSet(
     mixins.RetrieveModelMixin,
     viewsets.GenericViewSet
 ):
+
     queryset = Measure.objects.all()
     serializer_class = MeasureSerializer
     authentication_classes = []
     permission_classes = []
-    filterset_fields = ['goal']
+    filterset_fields = ['situation']

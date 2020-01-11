@@ -21,7 +21,7 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('jet/', include('jet.urls', 'jet')),
     path('admin/', admin.site.urls),
-    url(r'^api/v1/', include('api.urls')),
+    url(r'^v1/', include('api.urls')),
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc')
 ]
 
