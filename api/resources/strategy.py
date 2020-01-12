@@ -210,7 +210,7 @@ class StrategyViewSet(
         return super().update(request, *args, **kwargs)"""
 
     @action(detail=True, methods=['get'])
-    def discussion_tree(self, request, pk=None):
+    def discussion_tree(self, request, pk=None, authentication_classes=[], permission_classes=[]):
         from api.resources.discussion import BuildingBlockSerializer, SituationCategorySerializer, SituationSerializer, StrategyMeasureSerializer
 
         strategy = get_object_or_404(Strategy, pk=pk)
