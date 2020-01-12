@@ -193,7 +193,7 @@ class StrategyViewSet(
     filterset_fields = ['user', 'country']
 
     def get_permissions(self):
-        if self.action in ['list', 'retrieve']:
+        if self.action in ['list', 'retrieve', 'discussion_tree']:
             permission_classes = []
         else:
             permission_classes = [IsAuthenticated, UserIsObjectOwnerPermission]
@@ -210,7 +210,7 @@ class StrategyViewSet(
         return super().update(request, *args, **kwargs)"""
 
     @action(detail=True, methods=['get'])
-    def discussion_tree(self, request, pk=None, authentication_classes=[], permission_classes=[]):
+    def discussion_tree(self, request, pk=None):
         from api.resources.discussion import BuildingBlockSerializer, SituationCategorySerializer, SituationSerializer, StrategyMeasureSerializer
 
         strategy = get_object_or_404(Strategy, pk=pk)
