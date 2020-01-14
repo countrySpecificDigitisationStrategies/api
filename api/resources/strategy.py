@@ -242,9 +242,9 @@ class StrategyViewSet(
                         strategy_measures_a = [(s) for s in measure.strategy_measures.all()]
                         #strategy_measures_a = [(s) for s in measure.strategy_measures.all() if s in measures]
                         strategy_measures_data = StrategyMeasureSerializer(strategy_measures_a, many=True).data
-                        print(index_a)
-                        print(index_b)
-                        print(index_c)
+                        print('index_a ' + index_a)
+                        print('index_b ' + index_b)
+                        print('index_c ' + index_c)
                         data['building_blocks'][index_a]['situation_categories'][index_b]['situations'][index_c]['strategy_measures'] = strategy_measures_data
 
         return Response(data=data)
