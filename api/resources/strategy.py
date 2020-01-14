@@ -216,6 +216,7 @@ class StrategyViewSet(
         strategy = get_object_or_404(Strategy, pk=pk)
 
         measures = strategy.measures.all().distinct()
+        strategy_measures = strategy.strategy_measures.all().distinct()
         situations = Situation.objects.filter(measures__in=measures.all()).distinct()
         situation_categories = SituationCategory.objects.filter(situations__in=situations.all()).distinct()
         building_blocks = BuildingBlock.objects.filter(situation_categories__in=situation_categories.all()).distinct()
@@ -229,22 +230,15 @@ class StrategyViewSet(
             situation_categories_data = SituationCategorySerializer(situation_categories_a, many=True).data
             data['building_blocks'][index_a]['situation_categories'] = situation_categories_data
 
-            for index_b, situation_category in enumerate(situation_categories):
+            for index_b, situation_category in enumerate(building_block.situation_categories.all()):
                 situations_a = [(s) for s in situation_category.situations.all() if s in situations]
                 situations_data = SituationSerializer(situations_a, many=True).data
                 data['building_blocks'][index_a]['situation_categories'][index_b]['situations'] = situations_data
 
-                for index_c, situation in enumerate(situations):
-                    #measures_a = [(s) for s in situation.measures.all() if s in measures]
-
-                    for index_d, measure in enumerate(measures):
-                    #for index_d, measure in enumerate(situation.measures.all()):
-                        strategy_measures_a = [(s) for s in measure.strategy_measures.all()]
-                        #strategy_measures_a = [(s) for s in measure.strategy_measures.all() if s in measures]
+                for index_c, situation in enumerate(situation_category.situations.all()):
+                    for index_d, measure in enumerate(situation.measures.all()):
+                        strategy_measures_a = [(s) for s in measure.strategy_measures.all() if s in strategy_measures]
                         strategy_measures_data = StrategyMeasureSerializer(strategy_measures_a, many=True).data
-                        print('index_a {}'.format(index_a))
-                        print('index_b {}'.format(index_b))
-                        print('index_c {}'.format(index_c))
                         data['building_blocks'][index_a]['situation_categories'][index_b]['situations'][index_c]['strategy_measures'] = strategy_measures_data
 
         return Response(data=data)
