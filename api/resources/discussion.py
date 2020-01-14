@@ -62,9 +62,9 @@ class StrategyMeasureSerializer(serializers.ModelSerializer):
         model = StrategyMeasure
         fields = fields
         read_only_fields = fields
+        depth = 1
 
     def get_thread_count(self, obj):
-        print(obj)
         return obj.threads.all().count()
 
 
