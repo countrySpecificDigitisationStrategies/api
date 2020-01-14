@@ -215,11 +215,11 @@ class StrategyViewSet(
 
         strategy = get_object_or_404(Strategy, pk=pk)
 
-        measures = strategy.measures.all()
-        strategy_measures = strategy.strategy_measures.all()
-        situations = Situation.objects.filter(measures__in=measures.all())
-        situation_categories = SituationCategory.objects.filter(situations__in=situations.all())
-        building_blocks = BuildingBlock.objects.filter(situation_categories__in=situation_categories.all())
+        measures = strategy.measures.all().distinct()
+        strategy_measures = strategy.strategy_measures.all().distinct()
+        situations = Situation.objects.filter(measures__in=measures.all()).distinct()
+        situation_categories = SituationCategory.objects.filter(situations__in=situations.all()).distinct()
+        building_blocks = BuildingBlock.objects.filter(situation_categories__in=situation_categories.all()).distinct()
 
         data = {}
         building_blocks_data = BuildingBlockSerializer(building_blocks, many=True).data
@@ -230,12 +230,12 @@ class StrategyViewSet(
             situation_categories_data = SituationCategorySerializer(situation_categories_a, many=True).data
             data['building_blocks'][index_a]['situation_categories'] = situation_categories_data
 
-            for index_b, situation_category in enumerate(building_block.situation_categories.all()):
+            for index_b, situation_category in enumerate(situation_categories_a):
                 situations_a = [(s) for s in situation_category.situations.all() if s in situations]
                 situations_data = SituationSerializer(situations_a, many=True).data
                 data['building_blocks'][index_a]['situation_categories'][index_b]['situations'] = situations_data
 
-                for index_c, situation in enumerate(situation_category.situations.all()):
+                for index_c, situation in enumerate(situations_a):
                     sms = None
                     for measure in situation.measures.all():
                         if not sms:
