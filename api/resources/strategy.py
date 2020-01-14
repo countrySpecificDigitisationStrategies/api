@@ -215,11 +215,11 @@ class StrategyViewSet(
 
         strategy = get_object_or_404(Strategy, pk=pk)
 
-        measures = strategy.measures.all().distinct()
-        strategy_measures = strategy.strategy_measures.all().distinct()
-        situations = Situation.objects.filter(measures__in=measures.all()).distinct()
-        situation_categories = SituationCategory.objects.filter(situations__in=situations.all()).distinct()
-        building_blocks = BuildingBlock.objects.filter(situation_categories__in=situation_categories.all()).distinct()
+        measures = strategy.measures.all()
+        strategy_measures = strategy.strategy_measures.all()
+        situations = Situation.objects.filter(measures__in=measures.all())
+        situation_categories = SituationCategory.objects.filter(situations__in=situations.all())
+        building_blocks = BuildingBlock.objects.filter(situation_categories__in=situation_categories.all())
 
         data = {}
         building_blocks_data = BuildingBlockSerializer(building_blocks, many=True).data
@@ -236,9 +236,15 @@ class StrategyViewSet(
                 data['building_blocks'][index_a]['situation_categories'][index_b]['situations'] = situations_data
 
                 for index_c, situation in enumerate(situation_category.situations.all()):
-                    for index_d, measure in enumerate(situation.measures.all()):
-                        strategy_measures_a = [(s) for s in measure.strategy_measures.all() if s in strategy_measures]
-                        strategy_measures_data = StrategyMeasureSerializer(strategy_measures_a, many=True).data
-                        data['building_blocks'][index_a]['situation_categories'][index_b]['situations'][index_c]['strategy_measures'] = strategy_measures_data
+                    sms = None
+                    for measure in situation.measures.all():
+                        if not sms:
+                            sms = measure.strategy_measures.all()
+                        else:
+                            sms = sms | measure.strategy_measures.all()
+
+                    strategy_measures_data = StrategyMeasureSerializer(sms, many=True).data
+
+                    data['building_blocks'][index_a]['situation_categories'][index_b]['situations'][index_c]['strategy_measures'] = strategy_measures_data
 
         return Response(data=data)
