@@ -8,7 +8,7 @@ class Measure(AbstractModel):
 
     situation = models.ForeignKey('Situation', related_name='measures', on_delete=models.CASCADE, verbose_name=_('situation'))
 
-    title = models.CharField(_('title'), max_length=50)
+    title = models.CharField(_('title'), max_length=250)
     description = models.TextField(_('description'))
 
     def __str__(self):
