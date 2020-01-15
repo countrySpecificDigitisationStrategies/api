@@ -8,7 +8,7 @@ class Situation(AbstractModel):
 
     situation_category = models.ForeignKey('SituationCategory', related_name='situations', on_delete=models.CASCADE, verbose_name=_('situation_category'))
 
-    title = models.CharField(_('title'), max_length=50)
+    title = models.CharField(_('title'), max_length=250)
     description = models.TextField(_('description'))
 
     def __str__(self):

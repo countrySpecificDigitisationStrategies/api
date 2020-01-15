@@ -6,7 +6,7 @@ from api.models import AbstractModel
 
 class BuildingBlock(AbstractModel):
 
-    title = models.CharField(_('title'), max_length=50)
+    title = models.CharField(_('title'), max_length=250)
     description = models.TextField(_('description'))
 
     def __str__(self):

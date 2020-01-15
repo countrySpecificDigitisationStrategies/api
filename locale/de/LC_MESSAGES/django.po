@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-17 13:05+0000\n"
+"POT-Creation-Date: 2020-01-15 13:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,39 +26,60 @@ msgstr "Geändert"
 msgid "created"
 msgstr "Erstellt"
 
-#: api/models/building_block.py:9 api/models/goal.py:11
+#: api/models/analysis.py:9 api/models/country.py:19 api/models/strategy.py:11
+#: api/models/user.py:17
+msgid "country"
+msgstr "Land"
+
+#: api/models/analysis.py:11 api/models/building_block.py:9
 #: api/models/measure.py:11 api/models/situation.py:11
-#: api/models/strategy.py:11
+#: api/models/situation_category.py:11 api/models/strategy.py:12
+#: api/models/thread.py:12
 msgid "title"
 msgstr "Titel"
 
-#: api/models/building_block.py:10 api/models/comment.py:12
-#: api/models/goal.py:12 api/models/measure.py:12 api/models/situation.py:12
-#: api/models/strategy.py:12 api/models/strategy.py:28
+#: api/models/analysis.py:12 api/models/building_block.py:10
+#: api/models/comment.py:13 api/models/measure.py:12 api/models/situation.py:12
+#: api/models/situation_category.py:12 api/models/strategy.py:13
+#: api/models/strategy.py:30 api/models/thread.py:13
 msgid "description"
 msgstr "Beschreibung"
 
-#: api/models/building_block.py:17 api/models/situation.py:9
+#: api/models/analysis.py:18
+msgid "analysis"
+msgstr "Analyse"
+
+#: api/models/analysis.py:19 core/settings.py:145
+msgid "analyses"
+msgstr "Analysen"
+
+#: api/models/building_block.py:16 api/models/situation_category.py:9
 msgid "building_block"
 msgstr "Grundbaustein"
 
-#: api/models/building_block.py:18 core/settings.py:149
+#: api/models/building_block.py:17 core/settings.py:151
 msgid "building_blocks"
 msgstr "Grundbausteine"
 
-#: api/models/comment.py:9 api/models/measure.py:18
-msgid "measure"
-msgstr "Maßnahme"
+#: api/models/comment.py:9 api/models/strategy.py:9 api/models/thread.py:9
+#: api/models/user.py:41 api/models/user.py:47 api/models/user.py:67
+#: api/models/user.py:88
+msgid "user"
+msgstr "Benutzer"
 
-#: api/models/comment.py:10
+#: api/models/comment.py:10 api/models/thread.py:19
+msgid "thread"
+msgstr "Thread"
+
+#: api/models/comment.py:11
 msgid "parent"
 msgstr "Referenziert"
 
-#: api/models/comment.py:18
+#: api/models/comment.py:19
 msgid "comment"
 msgstr "Kommentar"
 
-#: api/models/comment.py:19 core/settings.py:154
+#: api/models/comment.py:20 core/settings.py:157
 msgid "comments"
 msgstr "Kommentare"
 
@@ -66,128 +87,178 @@ msgstr "Kommentare"
 msgid "name"
 msgstr "Name"
 
-#: api/models/country.py:17 api/models/user.py:15
-msgid "country"
-msgstr "Land"
+#: api/models/country.py:13
+msgid "is_developing_country"
+msgstr "Ist Entwicklungsland"
 
-#: api/models/country.py:18 core/settings.py:155
+#: api/models/country.py:20 core/settings.py:144
 msgid "countries"
 msgstr "Länder"
 
-#: api/models/email_confirmation.py:15 api/models/password_reset.py:11
-#: api/models/strategy.py:9 api/models/token.py:11 api/models/user.py:39
-msgid "user"
-msgstr "Benutzer"
-
-#: api/models/email_confirmation.py:17 api/models/password_reset.py:13
-#: api/models/token.py:13
-msgid "code"
-msgstr "Kennung"
-
-#: api/models/email_confirmation.py:23
-msgid "email_confirmation"
-msgstr "Emailbestätigung"
-
-#: api/models/email_confirmation.py:24
-msgid "email_confirmations"
-msgstr "Emailbestätigungen"
-
-#: api/models/goal.py:9 api/models/situation.py:18
+#: api/models/measure.py:9 api/models/situation.py:18
 msgid "situation"
 msgstr "Situation"
 
-#: api/models/goal.py:18 api/models/measure.py:9
-msgid "goal"
-msgstr "Ziel"
+#: api/models/measure.py:18
+msgid "measure"
+msgstr "Maßnahme"
 
-#: api/models/goal.py:19 core/settings.py:151
-msgid "goals"
-msgstr "Ziele"
-
-#: api/models/measure.py:19 api/models/strategy.py:13 core/settings.py:152
+#: api/models/measure.py:19 api/models/strategy.py:14 core/settings.py:154
 msgid "measures"
 msgstr "Maßnahmen"
 
-#: api/models/password_reset.py:19
-msgid "password_reset"
-msgstr "Passwort Reset"
+#: api/models/situation.py:9 api/models/situation_category.py:21
+msgid "situation_category"
+msgstr "Situationskategorie"
 
-#: api/models/password_reset.py:20
-msgid "password_resets"
-msgstr "Passwort Resets"
-
-#: api/models/situation.py:19 core/settings.py:150
+#: api/models/situation.py:19 core/settings.py:153
 msgid "situations"
 msgstr "Situationen"
 
-#: api/models/strategy.py:14
+#: api/models/situation_category.py:14
+msgid "goal_title"
+msgstr "Ziel Titel"
+
+#: api/models/situation_category.py:15
+msgid "goal_description"
+msgstr "Ziel Beschreibung"
+
+#: api/models/situation_category.py:22 core/settings.py:152
+msgid "situation_categories"
+msgstr "Situationskategorien"
+
+#: api/models/strategy.py:15
 msgid "is_published"
 msgstr "Ist veröffentlicht"
 
-#: api/models/strategy.py:20
+#: api/models/strategy.py:21
 msgid "strategy"
 msgstr "Strategy"
 
-#: api/models/strategy.py:21 core/settings.py:153
+#: api/models/strategy.py:22 core/settings.py:155
 msgid "strategies"
 msgstr "Strategien"
 
-#: api/models/token.py:19
-msgid "token"
-msgstr "Token"
+#: api/models/strategy.py:36 api/models/thread.py:10
+msgid "strategy_measure"
+msgstr "Strategiemaßnahme"
 
-#: api/models/token.py:20
-msgid "tokens"
-msgstr "Token"
+#: api/models/strategy.py:37
+msgid "strategy_measures"
+msgstr "Strategiemaßnahmen"
 
-#: api/models/user.py:14
+#: api/models/thread.py:20 core/settings.py:156
+msgid "threads"
+msgstr "Threads"
+
+#: api/models/user.py:16
 msgid "email"
 msgstr "Email"
 
-#: api/models/user.py:16
+#: api/models/user.py:18
 msgid "firstname"
 msgstr "Vorname"
 
-#: api/models/user.py:17
+#: api/models/user.py:19
 msgid "lastname"
 msgstr "Nachname"
 
-#: api/models/user.py:18
+#: api/models/user.py:20
 msgid "current_country"
 msgstr "Ausgewähltes Land"
 
-#: api/models/user.py:20
+#: api/models/user.py:22
 msgid "is_admin"
 msgstr "Ist Admin"
 
-#: api/models/user.py:21
+#: api/models/user.py:23
 msgid "is_representative"
 msgstr "Ist Repräsentant"
 
-#: api/models/user.py:22
+#: api/models/user.py:24
 msgid "is_moderator"
 msgstr "Ist Moderator"
 
-#: api/models/user.py:25
+#: api/models/user.py:27
 msgid "is_active"
 msgstr "Ist Aktiv"
 
-#: api/models/user.py:26
+#: api/models/user.py:28
 msgid "is_staff"
 msgstr "Ist Staff"
 
-#: api/models/user.py:27
+#: api/models/user.py:29
 msgid "is_superuser"
 msgstr "Ist Superuser"
 
-#: api/models/user.py:40 core/settings.py:143
+#: api/models/user.py:42 core/settings.py:143
 msgid "users"
 msgstr "Benutzer"
+
+#: api/models/user.py:49 api/models/user.py:69 api/models/user.py:90
+msgid "code"
+msgstr "Kennung"
+
+#: api/models/user.py:55
+msgid "token"
+msgstr "Token"
+
+#: api/models/user.py:56
+msgid "tokens"
+msgstr "Token"
+
+#: api/models/user.py:75
+msgid "email_confirmation"
+msgstr "Emailbestätigung"
+
+#: api/models/user.py:76
+msgid "email_confirmations"
+msgstr "Emailbestätigungen"
+
+#: api/models/user.py:96
+msgid "password_reset"
+msgstr "Passwort Reset"
+
+#: api/models/user.py:97
+msgid "password_resets"
+msgstr "Passwort Resets"
+
+#: api/templates/rest_framework/base.html:54
+msgid "navbar"
+msgstr ""
+
+#: api/templates/rest_framework/base.html:92
+msgid "content"
+msgstr ""
+
+#: api/templates/rest_framework/base.html:95
+msgid "request form"
+msgstr ""
+
+#: api/templates/rest_framework/base.html:153
+msgid "Extra Actions"
+msgstr "Situationen"
+
+#: api/templates/rest_framework/base.html:167
+msgid "Filters"
+msgstr ""
+
+#: api/templates/rest_framework/base.html:174
+msgid "main content"
+msgstr ""
+
+#: api/templates/rest_framework/base.html:190
+msgid "request info"
+msgstr ""
+
+#: api/templates/rest_framework/base.html:194
+msgid "response info"
+msgstr ""
 
 #: core/settings.py:141
 msgid "system"
 msgstr "System"
 
-#: core/settings.py:147
+#: core/settings.py:149
 msgid "application"
 msgstr "Applikation"

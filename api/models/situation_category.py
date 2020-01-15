@@ -8,10 +8,10 @@ class SituationCategory(AbstractModel):
 
     building_block = models.ForeignKey('BuildingBlock', related_name='situation_categories', on_delete=models.CASCADE, verbose_name=_('building_block'))
 
-    title = models.CharField(_('title'), max_length=50)
+    title = models.CharField(_('title'), max_length=250)
     description = models.TextField(_('description'))
 
-    goal_title = models.CharField(_('goal_title'), max_length=50)
+    goal_title = models.CharField(_('goal_title'), max_length=250)
     goal_description = models.TextField(_('goal_description'))
 
     def __str__(self):

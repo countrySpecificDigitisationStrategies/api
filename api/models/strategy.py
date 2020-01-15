@@ -9,7 +9,7 @@ class Strategy(AbstractModel):
     user = models.ForeignKey('User', related_name='strategies', on_delete=models.PROTECT, verbose_name=_('user'))
 
     country = models.OneToOneField('Country', on_delete=models.PROTECT, verbose_name=_('country'))
-    title = models.CharField(_('title'), max_length=50)
+    title = models.CharField(_('title'), max_length=250)
     description = models.TextField(_('description'))
     measures = models.ManyToManyField('Measure', through='StrategyMeasure', verbose_name=_('measures'))
     is_published = models.BooleanField(_('is_published'), default=False)
