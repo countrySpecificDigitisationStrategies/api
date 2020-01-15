@@ -65,7 +65,7 @@ class StrategyMeasureSerializer(serializers.ModelSerializer):
         depth = 1
 
     def get_thread_count(self, obj):
-        return obj.threads.all().count()
+        return obj.strategy_measure_threads.all().count()
 
 
 

@@ -1,21 +1,21 @@
 from django.contrib import admin
 
-from api.models import Comment
+from api.models import StrategyMeasureComment
 
 
-@admin.register(Comment)
-class CommentAdmin(admin.ModelAdmin):
+@admin.register(StrategyMeasureComment)
+class StrategyMeasureCommentAdmin(admin.ModelAdmin):
 
-    list_display = ['user', 'thread', 'created', 'updated']
+    list_display = ['user', 'strategy_measure_thread', 'created', 'updated']
     search_fields = ['description']
-    list_filter = ['user', 'thread']
+    list_filter = ['user', 'strategy_measure_thread']
 
     fieldsets = [
         [None, {
             'fields': [
                 'id',
                 'user',
-                'thread',
+                'strategy_measure_thread',
                 'parent',
                 'description',
                 'created',

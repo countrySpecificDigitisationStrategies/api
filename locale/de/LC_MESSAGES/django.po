@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-15 13:35+0000\n"
+"POT-Creation-Date: 2020-01-15 18:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,14 +34,15 @@ msgstr "Land"
 #: api/models/analysis.py:11 api/models/building_block.py:9
 #: api/models/measure.py:11 api/models/situation.py:11
 #: api/models/situation_category.py:11 api/models/strategy.py:12
-#: api/models/thread.py:12
+#: api/models/threads/strategy_measure_thread.py:12
 msgid "title"
 msgstr "Titel"
 
 #: api/models/analysis.py:12 api/models/building_block.py:10
-#: api/models/comment.py:13 api/models/measure.py:12 api/models/situation.py:12
-#: api/models/situation_category.py:12 api/models/strategy.py:13
-#: api/models/strategy.py:30 api/models/thread.py:13
+#: api/models/comments/strategy_measure_comment.py:13 api/models/measure.py:12
+#: api/models/situation.py:12 api/models/situation_category.py:12
+#: api/models/strategy.py:13 api/models/strategy.py:30
+#: api/models/threads/strategy_measure_thread.py:13
 msgid "description"
 msgstr "Beschreibung"
 
@@ -61,27 +62,28 @@ msgstr "Grundbaustein"
 msgid "building_blocks"
 msgstr "Grundbausteine"
 
-#: api/models/comment.py:9 api/models/strategy.py:9 api/models/thread.py:9
-#: api/models/user.py:41 api/models/user.py:47 api/models/user.py:67
-#: api/models/user.py:88
+#: api/models/comments/strategy_measure_comment.py:9 api/models/strategy.py:9
+#: api/models/threads/strategy_measure_thread.py:9 api/models/user.py:41
+#: api/models/user.py:47 api/models/user.py:67 api/models/user.py:88
 msgid "user"
 msgstr "Benutzer"
 
-#: api/models/comment.py:10 api/models/thread.py:19
-msgid "thread"
-msgstr "Thread"
+#: api/models/comments/strategy_measure_comment.py:10
+#: api/models/threads/strategy_measure_thread.py:19
+msgid "strategy_measure_thread"
+msgstr "Maßnahme Thread"
 
-#: api/models/comment.py:11
+#: api/models/comments/strategy_measure_comment.py:11
 msgid "parent"
 msgstr "Referenziert"
 
-#: api/models/comment.py:19
-msgid "comment"
-msgstr "Kommentar"
+#: api/models/comments/strategy_measure_comment.py:19
+msgid "strategy_measure_comment"
+msgstr "Maßnahme Kommentar"
 
-#: api/models/comment.py:20 core/settings.py:157
-msgid "comments"
-msgstr "Kommentare"
+#: api/models/comments/strategy_measure_comment.py:20 core/settings.py:162
+msgid "strategy_measure_comments"
+msgstr "Maßnahmen Kommentare"
 
 #: api/models/country.py:9
 msgid "name"
@@ -139,7 +141,7 @@ msgstr "Strategy"
 msgid "strategies"
 msgstr "Strategien"
 
-#: api/models/strategy.py:36 api/models/thread.py:10
+#: api/models/strategy.py:36 api/models/threads/strategy_measure_thread.py:10
 msgid "strategy_measure"
 msgstr "Strategiemaßnahme"
 
@@ -147,9 +149,9 @@ msgstr "Strategiemaßnahme"
 msgid "strategy_measures"
 msgstr "Strategiemaßnahmen"
 
-#: api/models/thread.py:20 core/settings.py:156
-msgid "threads"
-msgstr "Threads"
+#: api/models/threads/strategy_measure_thread.py:20 core/settings.py:161
+msgid "strategy_measure_threads"
+msgstr "Maßnahmen Threads"
 
 #: api/models/user.py:16
 msgid "email"
@@ -262,3 +264,7 @@ msgstr "System"
 #: core/settings.py:149
 msgid "application"
 msgstr "Applikation"
+
+#: core/settings.py:159
+msgid "strategy_measures_threads_and_comments"
+msgstr "Maßnahmen Diskussion"

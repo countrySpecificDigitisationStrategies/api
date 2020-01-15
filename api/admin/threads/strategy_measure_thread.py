@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from api.models import Thread
+from api.models import StrategyMeasureThread
 
 
-@admin.register(Thread)
-class ThreadAdmin(admin.ModelAdmin):
+@admin.register(StrategyMeasureThread)
+class StrategyMeasureThreadAdmin(admin.ModelAdmin):
 
     list_display = ['user', 'strategy_measure', 'title', 'created', 'updated']
     search_fields = ['title', 'description']
