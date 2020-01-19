@@ -9,7 +9,6 @@ from api.models import Country, BuildingBlock, SituationCategory, Situation, Mea
 from api.permissions import UserIsObjectOwnerPermission
 from api.resources.building_block import BuildingBlockSerializer
 from api.resources.country import CountrySerializer
-from api.resources.thread import ThreadSerializer
 from api.resources.measure import MeasureSerializer
 from api.resources.user import UserSerializer
 from api.utils import *

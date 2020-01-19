@@ -152,9 +152,14 @@ JET_SIDE_MENU_ITEMS = [
             {'name': 'api.situationcategory', 'label': _('situation_categories')},
             {'name': 'api.situation', 'label': _('situations')},
             {'name': 'api.measure', 'label': _('measures')},
-            {'name': 'api.strategy', 'label': _('strategies')},
-            {'name': 'api.thread', 'label': _('threads')},
-            {'name': 'api.comment', 'label': _('comments')}
+            {'name': 'api.strategy', 'label': _('strategies')}
+        ]
+    },
+    {
+        'label': _('strategy_measures_threads_and_comments'),
+        'items': [
+            {'name': 'api.strategymeasurethread', 'label': _('strategy_measure_threads')},
+            {'name': 'api.strategymeasurecomment', 'label': _('strategy_measure_comments')}
         ]
     }
 ]

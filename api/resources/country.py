@@ -1,7 +1,6 @@
 from rest_framework import mixins, serializers, viewsets
 
 from api.models import Country
-#from api.resources.strategy import StrategySerializer
 from api.utils import *
 
 
@@ -15,17 +14,10 @@ fields = AppList(
 
 class CountrySerializer(serializers.ModelSerializer):
 
-    #strategy = serializers.SerializerMethodField('get_strategy', read_only=True)
-
     class Meta:
         model = Country
         fields = fields
         read_only_fields = fields
-
-    """def get_strategy(self, obj):
-        strategy = Strategy.objects.filter(country=obj)
-        #return None
-        return StrategySerializer(strategy).data"""
 
 
 class CountryViewSet(
