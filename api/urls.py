@@ -1,7 +1,9 @@
 from django.conf.urls import include, url
 from rest_framework.routers import DefaultRouter
 
-from api.resources import AnalysisViewSet, AuthViewSet, BuildingBlockViewSet, StrategyMeasureCommentViewSet, CountryViewSet, MeasureViewSet, SituationCategoryViewSet, SituationViewSet, StrategyViewSet, StrategyMeasureViewSet, StrategyMeasureThreadViewSet, UserViewSet
+from api.resources import AnalysisViewSet, AuthViewSet, BuildingBlockViewSet, CountryViewSet, MeasureViewSet, SituationCategoryViewSet, SituationViewSet, StrategyViewSet, StrategyMeasureViewSet, UserViewSet, \
+    BuildingBlockCommentViewSet, SituationCategoryCommentViewSet, SituationCommentViewSet, StrategyMeasureCommentViewSet, \
+    BuildingBlockThreadViewSet, SituationCategoryThreadViewSet, SituationThreadViewSet, StrategyMeasureThreadViewSet
 
 
 router = DefaultRouter(trailing_slash=False)
@@ -17,6 +19,15 @@ router.register(r'situations', SituationViewSet, basename='situations')
 router.register(r'measures', MeasureViewSet, basename='measures')
 router.register(r'strategies', StrategyViewSet, basename='strategies')
 router.register(r'strategy-measures', StrategyMeasureViewSet, basename='strategy-measures')
+
+router.register(r'building-block-threads', BuildingBlockThreadViewSet, basename='building-block-threads')
+router.register(r'building-block-comments', BuildingBlockCommentViewSet, basename='building-block-comments')
+
+router.register(r'situation-category-threads', SituationCategoryThreadViewSet, basename='situation-category-threads')
+router.register(r'situation-category-comments', SituationCategoryCommentViewSet, basename='situation-category-comments')
+
+router.register(r'situation-threads', SituationThreadViewSet, basename='situation-threads')
+router.register(r'situation-comments', SituationCommentViewSet, basename='situation-comments')
 
 router.register(r'strategy-measure-threads', StrategyMeasureThreadViewSet, basename='strategy-measure-threads')
 router.register(r'strategy-measure-comments', StrategyMeasureCommentViewSet, basename='strategy-measure-comments')

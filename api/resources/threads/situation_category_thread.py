@@ -2,34 +2,34 @@ from rest_framework import mixins, serializers, viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from api.models import StrategyMeasureThread
+from api.models import SituationCategoryThread
 from api.permissions import UserIsObjectOwnerPermission
-from api.resources.comments.strategy_measure_comment import StrategyMeasureCommentSerializer
+from api.resources.comments.situation_category_comment import SituationCategoryCommentSerializer
 from api.resources.user import UserSerializer
 from api.utils import *
 
 
 fields = AppList(
     'id',
-    'user', 'strategy_measure',
+    'user', 'strategy', 'situation_category',
     'title', 'description',
     'comment_count',
     'created', 'updated'
 )
 
 post_fields = AppList(
-    'strategy_measure',
+    'strategy', 'situation_category',
     'title', 'description',
 )
 
 
-class StrategyMeasureThreadSerializer(serializers.ModelSerializer):
+class SituationCategoryThreadSerializer(serializers.ModelSerializer):
 
     user = UserSerializer(many=False, read_only=True)
     comment_count = serializers.SerializerMethodField('get_comment_count', read_only=True)
 
     class Meta:
-        model = StrategyMeasureThread
+        model = SituationCategoryThread
         fields = fields
         read_only_fields = fields - post_fields
 
@@ -38,30 +38,30 @@ class StrategyMeasureThreadSerializer(serializers.ModelSerializer):
         return super().create(validated_data)
 
     def get_comment_count(self, obj):
-        return obj.strategy_measure_comments.count()
+        return obj.situation_category_comments.count()
 
 
 fields = AppList(
     'id',
-    'user', 'strategy_measure',
+    'user', 'strategy', 'situation_category',
     'title', 'description',
-    'strategy_measure_comments',
+    'situation_category_comments',
     'created', 'updated'
 )
 
 
-class StrategyMeasureThreadRetrieveSerializer(serializers.ModelSerializer):
+class SituationCategoryThreadRetrieveSerializer(serializers.ModelSerializer):
 
     user = UserSerializer(many=False, read_only=True)
-    strategy_measure_comments = StrategyMeasureCommentSerializer(many=True, read_only=True)
+    situation_category_comments = SituationCategoryCommentSerializer(many=True, read_only=True)
 
     class Meta:
-        model = StrategyMeasureThread
+        model = SituationCategoryThread
         fields = fields
         read_only_fields = fields
 
 
-class StrategyMeasureThreadViewSet(
+class SituationCategoryThreadViewSet(
     mixins.CreateModelMixin,
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,
@@ -69,9 +69,9 @@ class StrategyMeasureThreadViewSet(
     viewsets.GenericViewSet
 ):
 
-    queryset = StrategyMeasureThread.objects.all()
-    serializer_class = StrategyMeasureThreadSerializer
-    filterset_fields = ['user', 'strategy_measure']
+    queryset = SituationCategoryThread.objects.all()
+    serializer_class = SituationCategoryThreadSerializer
+    filterset_fields = ['user', 'strategy', 'situation_category']
 
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:
@@ -82,5 +82,5 @@ class StrategyMeasureThreadViewSet(
 
     def retrieve(self, request, *args, **kwargs):
        instance = self.get_object()
-       serializer = StrategyMeasureThreadRetrieveSerializer(instance)
+       serializer = SituationCategoryThreadRetrieveSerializer(instance)
        return Response(serializer.data)

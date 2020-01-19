@@ -1,0 +1,388 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-19 14:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: api/models/abstract_model.py:7
+msgid "updated"
+msgstr "Geändert"
+
+#: api/models/abstract_model.py:8
+msgid "created"
+msgstr "Erstellt"
+
+#: api/models/analysis.py:9 api/models/country.py:19 api/models/strategy.py:11
+#: api/models/user.py:17
+msgid "country"
+msgstr "Land"
+
+#: api/models/analysis.py:11 api/models/building_block.py:9
+#: api/models/measure.py:11 api/models/situation.py:11
+#: api/models/situation_category.py:11 api/models/strategy.py:12
+#: api/models/threads/building_block_thread.py:13
+#: api/models/threads/situation_category_thread.py:13
+#: api/models/threads/situation_thread.py:13
+#: api/models/threads/strategy_measure_thread.py:12
+msgid "title"
+msgstr "Titel"
+
+#: api/models/analysis.py:12 api/models/building_block.py:10
+#: api/models/comments/building_block_comment.py:13
+#: api/models/comments/situation_category_comment.py:13
+#: api/models/comments/situation_comment.py:13
+#: api/models/comments/strategy_measure_comment.py:13 api/models/measure.py:12
+#: api/models/situation.py:12 api/models/situation_category.py:12
+#: api/models/strategy.py:13 api/models/strategy.py:30
+#: api/models/threads/building_block_thread.py:14
+#: api/models/threads/situation_category_thread.py:14
+#: api/models/threads/situation_thread.py:14
+#: api/models/threads/strategy_measure_thread.py:13
+msgid "description"
+msgstr "Beschreibung"
+
+#: api/models/analysis.py:18
+msgid "analysis"
+msgstr "Analyse"
+
+#: api/models/analysis.py:19 core/settings.py:145
+msgid "analyses"
+msgstr "Analysen"
+
+#: api/models/building_block.py:16 api/models/situation_category.py:9
+#: api/models/threads/building_block_thread.py:11
+msgid "building_block"
+msgstr "Grundbaustein"
+
+#: api/models/building_block.py:17 core/settings.py:151
+msgid "building_blocks"
+msgstr "Grundbausteine"
+
+#: api/models/comments/building_block_comment.py:9
+#: api/models/comments/situation_category_comment.py:9
+#: api/models/comments/situation_comment.py:9
+#: api/models/comments/strategy_measure_comment.py:9 api/models/strategy.py:9
+#: api/models/threads/building_block_thread.py:9
+#: api/models/threads/situation_category_thread.py:9
+#: api/models/threads/situation_thread.py:9
+#: api/models/threads/strategy_measure_thread.py:9 api/models/user.py:41
+#: api/models/user.py:47 api/models/user.py:67 api/models/user.py:88
+msgid "user"
+msgstr "Benutzer"
+
+#: api/models/comments/building_block_comment.py:10
+#: api/models/threads/building_block_thread.py:20
+#, fuzzy
+#| msgid "building_block"
+msgid "building_block_thread"
+msgstr "Grundbaustein"
+
+#: api/models/comments/building_block_comment.py:11
+#: api/models/comments/situation_category_comment.py:11
+#: api/models/comments/situation_comment.py:11
+#: api/models/comments/strategy_measure_comment.py:11
+msgid "parent"
+msgstr "Referenziert"
+
+#: api/models/comments/building_block_comment.py:19
+#, fuzzy
+#| msgid "building_block"
+msgid "building_block_comment"
+msgstr "Grundbaustein"
+
+#: api/models/comments/building_block_comment.py:20 core/settings.py:162
+#, fuzzy
+#| msgid "building_blocks"
+msgid "building_block_comments"
+msgstr "Grundbausteine"
+
+#: api/models/comments/situation_category_comment.py:10
+#: api/models/threads/situation_category_thread.py:20
+#, fuzzy
+#| msgid "situation_category"
+msgid "situation_category_thread"
+msgstr "Situationskategorie"
+
+#: api/models/comments/situation_category_comment.py:19
+#, fuzzy
+#| msgid "situation_category"
+msgid "situation_category_comment"
+msgstr "Situationskategorie"
+
+#: api/models/comments/situation_category_comment.py:20 core/settings.py:169
+#, fuzzy
+#| msgid "situation_categories"
+msgid "situation_category_comments"
+msgstr "Situationskategorien"
+
+#: api/models/comments/situation_comment.py:10
+#: api/models/threads/situation_thread.py:20
+#, fuzzy
+#| msgid "situation_categories"
+msgid "situation_thread"
+msgstr "Situationskategorien"
+
+#: api/models/comments/situation_comment.py:19
+#, fuzzy
+#| msgid "situation_categories"
+msgid "situation_comment"
+msgstr "Situationskategorien"
+
+#: api/models/comments/situation_comment.py:20 core/settings.py:176
+#, fuzzy
+#| msgid "situation_categories"
+msgid "situation_comments"
+msgstr "Situationskategorien"
+
+#: api/models/comments/strategy_measure_comment.py:10
+#: api/models/threads/strategy_measure_thread.py:19
+msgid "strategy_measure_thread"
+msgstr "Maßnahme Thread"
+
+#: api/models/comments/strategy_measure_comment.py:19
+msgid "strategy_measure_comment"
+msgstr "Maßnahme Kommentar"
+
+#: api/models/comments/strategy_measure_comment.py:20 core/settings.py:183
+msgid "strategy_measure_comments"
+msgstr "Maßnahmen Kommentare"
+
+#: api/models/country.py:9
+msgid "name"
+msgstr "Name"
+
+#: api/models/country.py:13
+msgid "is_developing_country"
+msgstr "Ist Entwicklungsland"
+
+#: api/models/country.py:20 core/settings.py:144
+msgid "countries"
+msgstr "Länder"
+
+#: api/models/measure.py:9 api/models/situation.py:18
+#: api/models/threads/situation_thread.py:11
+msgid "situation"
+msgstr "Situation"
+
+#: api/models/measure.py:18
+msgid "measure"
+msgstr "Maßnahme"
+
+#: api/models/measure.py:19 api/models/strategy.py:14 core/settings.py:154
+msgid "measures"
+msgstr "Maßnahmen"
+
+#: api/models/situation.py:9 api/models/situation_category.py:21
+#: api/models/threads/situation_category_thread.py:11
+msgid "situation_category"
+msgstr "Situationskategorie"
+
+#: api/models/situation.py:19 core/settings.py:153
+msgid "situations"
+msgstr "Situationen"
+
+#: api/models/situation_category.py:14
+msgid "goal_title"
+msgstr "Ziel Titel"
+
+#: api/models/situation_category.py:15
+msgid "goal_description"
+msgstr "Ziel Beschreibung"
+
+#: api/models/situation_category.py:22 core/settings.py:152
+msgid "situation_categories"
+msgstr "Situationskategorien"
+
+#: api/models/strategy.py:15
+msgid "is_published"
+msgstr "Ist veröffentlicht"
+
+#: api/models/strategy.py:21 api/models/threads/building_block_thread.py:10
+#: api/models/threads/situation_category_thread.py:10
+#: api/models/threads/situation_thread.py:10
+msgid "strategy"
+msgstr "Strategy"
+
+#: api/models/strategy.py:22 core/settings.py:155
+msgid "strategies"
+msgstr "Strategien"
+
+#: api/models/strategy.py:36 api/models/threads/strategy_measure_thread.py:10
+msgid "strategy_measure"
+msgstr "Strategiemaßnahme"
+
+#: api/models/strategy.py:37
+msgid "strategy_measures"
+msgstr "Strategiemaßnahmen"
+
+#: api/models/threads/building_block_thread.py:21 core/settings.py:161
+#, fuzzy
+#| msgid "building_blocks"
+msgid "building_block_threads"
+msgstr "Grundbausteine"
+
+#: api/models/threads/situation_category_thread.py:21 core/settings.py:168
+#, fuzzy
+#| msgid "situation_categories"
+msgid "situation_category_threads"
+msgstr "Situationskategorien"
+
+#: api/models/threads/situation_thread.py:21 core/settings.py:175
+#, fuzzy
+#| msgid "situation_categories"
+msgid "situation_threads"
+msgstr "Situationskategorien"
+
+#: api/models/threads/strategy_measure_thread.py:20 core/settings.py:182
+msgid "strategy_measure_threads"
+msgstr "Maßnahmen Threads"
+
+#: api/models/user.py:16
+msgid "email"
+msgstr "Email"
+
+#: api/models/user.py:18
+msgid "firstname"
+msgstr "Vorname"
+
+#: api/models/user.py:19
+msgid "lastname"
+msgstr "Nachname"
+
+#: api/models/user.py:20
+msgid "current_country"
+msgstr "Ausgewähltes Land"
+
+#: api/models/user.py:22
+msgid "is_admin"
+msgstr "Ist Admin"
+
+#: api/models/user.py:23
+msgid "is_representative"
+msgstr "Ist Repräsentant"
+
+#: api/models/user.py:24
+msgid "is_moderator"
+msgstr "Ist Moderator"
+
+#: api/models/user.py:27
+msgid "is_active"
+msgstr "Ist Aktiv"
+
+#: api/models/user.py:28
+msgid "is_staff"
+msgstr "Ist Staff"
+
+#: api/models/user.py:29
+msgid "is_superuser"
+msgstr "Ist Superuser"
+
+#: api/models/user.py:42 core/settings.py:143
+msgid "users"
+msgstr "Benutzer"
+
+#: api/models/user.py:49 api/models/user.py:69 api/models/user.py:90
+msgid "code"
+msgstr "Kennung"
+
+#: api/models/user.py:55
+msgid "token"
+msgstr "Token"
+
+#: api/models/user.py:56
+msgid "tokens"
+msgstr "Token"
+
+#: api/models/user.py:75
+msgid "email_confirmation"
+msgstr "Emailbestätigung"
+
+#: api/models/user.py:76
+msgid "email_confirmations"
+msgstr "Emailbestätigungen"
+
+#: api/models/user.py:96
+msgid "password_reset"
+msgstr "Passwort Reset"
+
+#: api/models/user.py:97
+msgid "password_resets"
+msgstr "Passwort Resets"
+
+#: api/templates/rest_framework/base.html:54
+msgid "navbar"
+msgstr ""
+
+#: api/templates/rest_framework/base.html:92
+msgid "content"
+msgstr ""
+
+#: api/templates/rest_framework/base.html:95
+msgid "request form"
+msgstr ""
+
+#: api/templates/rest_framework/base.html:153
+msgid "Extra Actions"
+msgstr "Situationen"
+
+#: api/templates/rest_framework/base.html:167
+msgid "Filters"
+msgstr ""
+
+#: api/templates/rest_framework/base.html:174
+msgid "main content"
+msgstr ""
+
+#: api/templates/rest_framework/base.html:190
+msgid "request info"
+msgstr ""
+
+#: api/templates/rest_framework/base.html:194
+msgid "response info"
+msgstr ""
+
+#: core/settings.py:141
+msgid "system"
+msgstr "System"
+
+#: core/settings.py:149
+msgid "application"
+msgstr "Applikation"
+
+#: core/settings.py:159
+#, fuzzy
+#| msgid "strategy_measures_threads_and_comments"
+msgid "building_block_threads_and_comments"
+msgstr "Maßnahmen Diskussion"
+
+#: core/settings.py:166
+#, fuzzy
+#| msgid "strategy_measures_threads_and_comments"
+msgid "situation_category_threads_and_comments"
+msgstr "Maßnahmen Diskussion"
+
+#: core/settings.py:173
+#, fuzzy
+#| msgid "strategy_measures_threads_and_comments"
+msgid "situation_threads_and_comments"
+msgstr "Maßnahmen Diskussion"
+
+#: core/settings.py:180
+#, fuzzy
+#| msgid "strategy_measures_threads_and_comments"
+msgid "strategy_measure_threads_and_comments"
+msgstr "Maßnahmen Diskussion"
