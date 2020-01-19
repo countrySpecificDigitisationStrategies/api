@@ -9,5 +9,11 @@ from api.resources.situation import SituationViewSet
 from api.resources.strategy import StrategyViewSet, StrategyMeasureViewSet
 from api.resources.user import UserViewSet
 
-from api.resources.threads.strategy_measure_thread import StrategyMeasureThreadViewSet
+from api.resources.comments.building_block_comment import BuildingBlockCommentViewSet
+from api.resources.comments.situation_category_comment import SituationCategoryCommentViewSet
+from api.resources.comments.situation_comment import SituationCommentViewSet
 from api.resources.comments.strategy_measure_comment import StrategyMeasureCommentViewSet
+from api.resources.threads.building_block_thread import BuildingBlockThreadViewSet
+from api.resources.threads.situation_category_thread import SituationCategoryThreadViewSet
+from api.resources.threads.situation_thread import SituationThreadViewSet
+from api.resources.threads.strategy_measure_thread import StrategyMeasureThreadViewSet
