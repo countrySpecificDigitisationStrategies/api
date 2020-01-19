@@ -156,7 +156,28 @@ JET_SIDE_MENU_ITEMS = [
         ]
     },
     {
-        'label': _('strategy_measures_threads_and_comments'),
+        'label': _('building_block_threads_and_comments'),
+        'items': [
+            {'name': 'api.buildingblockthread', 'label': _('building_block_threads')},
+            {'name': 'api.buildingblockcomment', 'label': _('building_block_comments')}
+        ]
+    },
+    {
+        'label': _('situation_category_threads_and_comments'),
+        'items': [
+            {'name': 'api.situationcategorythread', 'label': _('situation_category_threads')},
+            {'name': 'api.situationcategorycomment', 'label': _('situation_category_comments')}
+        ]
+    },
+    {
+        'label': _('situation_threads_and_comments'),
+        'items': [
+            {'name': 'api.situationthread', 'label': _('situation_threads')},
+            {'name': 'api.situationcomment', 'label': _('situation_comments')}
+        ]
+    },
+    {
+        'label': _('strategy_measure_threads_and_comments'),
         'items': [
             {'name': 'api.strategymeasurethread', 'label': _('strategy_measure_threads')},
             {'name': 'api.strategymeasurecomment', 'label': _('strategy_measure_comments')}
