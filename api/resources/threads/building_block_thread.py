@@ -13,6 +13,7 @@ fields = AppList(
     'id',
     'user', 'strategy', 'building_block',
     'title', 'description',
+    'is_closed',
     'comment_count',
     'created', 'updated'
 )
@@ -20,6 +21,7 @@ fields = AppList(
 post_fields = AppList(
     'strategy', 'building_block',
     'title', 'description',
+    'is_closed'
 )
 
 

@@ -1,7 +1,7 @@
 from api.resources.analysis import AnalysisViewSet
 from api.resources.auth import AuthViewSet
+from api.resources.board import BoardViewSet
 from api.resources.building_block import BuildingBlockViewSet
-#from api.resources.discussion import DiscussionViewSet
 from api.resources.country import CountryViewSet
 from api.resources.measure import MeasureViewSet
 from api.resources.situation_category import SituationCategoryViewSet
@@ -13,7 +13,10 @@ from api.resources.comments.building_block_comment import BuildingBlockCommentVi
 from api.resources.comments.situation_category_comment import SituationCategoryCommentViewSet
 from api.resources.comments.situation_comment import SituationCommentViewSet
 from api.resources.comments.strategy_measure_comment import StrategyMeasureCommentViewSet
+from api.resources.comments.strategy_comment import StrategyCommentViewSet
+
 from api.resources.threads.building_block_thread import BuildingBlockThreadViewSet
 from api.resources.threads.situation_category_thread import SituationCategoryThreadViewSet
 from api.resources.threads.situation_thread import SituationThreadViewSet
 from api.resources.threads.strategy_measure_thread import StrategyMeasureThreadViewSet
+from api.resources.threads.strategy_thread import StrategyThreadViewSet

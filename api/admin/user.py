@@ -39,7 +39,6 @@ class User(UserAdmin):
             'fields': [
                 'id',
                 'email', 'country', 'firstname', 'lastname', 'current_country',
-                'is_admin', 'is_representative', 'is_moderator',
                 'last_login', 'password',
                 'created', 'updated'
             ]
@@ -50,7 +49,6 @@ class User(UserAdmin):
         (None, {
             'fields': [
                 'email', 'country', 'firstname', 'lastname', 'current_country',
-                'is_admin', 'is_representative', 'is_moderator',
                 'password1', 'password2'
             ]
         }),

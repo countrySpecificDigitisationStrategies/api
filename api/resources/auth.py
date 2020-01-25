@@ -30,6 +30,9 @@ class AuthViewSet(viewsets.GenericViewSet):
 
         user = User.objects.create(
             email=json['email'],
+            firstname=json.get('firstname'),
+            lastname=json.get('lastname'),
+            country=json.get('country'),
             is_active=True
         )
         user.set_password(json['password'])
