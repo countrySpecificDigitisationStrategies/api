@@ -6,11 +6,7 @@ from api.models import AbstractModel
 
 class Strategy(AbstractModel):
 
-    #user = models.ForeignKey('User', related_name='strategies', on_delete=models.PROTECT, verbose_name=_('user'))
-    #country = models.OneToOneField('Country', on_delete=models.PROTECT, verbose_name=_('country'))
-
-    #board = models.OneToOneField('Board', on_delete=models.PROTECT, verbose_name=_('board'))
-    board = models.OneToOneField('Board', on_delete=models.PROTECT, verbose_name=_('board'), blank=True, null=True)
+    board = models.OneToOneField('Board', on_delete=models.PROTECT, verbose_name=_('board'))
 
     title = models.CharField(_('title'), max_length=250)
     description = models.TextField(_('description'))
