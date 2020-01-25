@@ -1,467 +1,1351 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Digitisation Strategies x",
-    "description": " #Introductin This API allows you to create country specific digitisation strategies. ",
-    "version": "1.0.0",
-    "x-logo": {
-      "url": "https://github.com/countrySpecificDigitisationStrategies/webapp/blob/develop/src/assets/ziik.jpg",
-      "backgroundColor": "#0033A0",
-      "altText": "Ziik Logo"
-    }
+    "title": "Digitisation Strategies TEST",
+    "description": "This API allows you to create country specific digitisation strategies.",
+    "version": "1.0.0"
   },
   "host": "127.0.0.1:8000",
-  "schemes": ["http"],
-  "basePath": "/api/v1",
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "http"
+  ],
+  "basePath": "/v1",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "securityDefinitions": {
     "Basic": {
       "type": "basic"
     }
   },
-  "x-tagGroups": [
+  "security": [
     {
-      "name": "General",
-      "tags": ["users"]
-    },
-    {
-      "name": "Strategy Plan",
-      "tags": ["building-blocks", "comments","countries","goals","measures","situations", "strategies"]
+      "Basic": []
     }
-    ],
-   "tags": [
-     {
-      "name": "users",
-      "description": " description about user ",
-      "x-displayName": "User"
-    },
-     {
-      "name": "building-blocks",
-      "description": " description about building block ",
-      "x-displayName": "Building Blocks"
-     },
-     {
-      "name": "comments",
-      "description": " description about comment ",
-      "x-displayName": "Comment"
-    },
-     {
-      "name": "countries",
-      "description": " description about country  ",
-      "x-displayName": "Country"
-    },
-     {
-      "name": "goals",
-      "description": " description about goal ",
-      "x-displayName": "Goal"
-    },
-     {
-      "name": "measures",
-      "description": " description about measure ",
-      "x-displayName": "Measure"
-    },
-      {
-      "name": "situations",
-      "description": " description about situation ",
-      "x-displayName": "Situation"
-    },
-      {
-      "name": "strategies",
-      "description": " description about strategy ",
-      "x-displayName": "Strategy"
-    }
-   ],
-
-  "security": [{"Basic": []}],
+  ],
   "paths": {
-    "/building-blocks": {
+    "/analyses": {
       "get": {
-        "operationId": "Get List of all Building Blocks",
-        "description": "some description coming soon",
+        "operationId": "analyses_list",
+        "description": "",
+        "parameters": [
+          {
+            "name": "country",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Analysis"
+              }
+            }
+          }
+        },
+        "tags": [
+          "analyses"
+        ]
+      },
+      "parameters": []
+    },
+    "/analyses/{id}": {
+      "get": {
+        "operationId": "analyses_read",
+        "description": "",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "A list of all Building Bloccks was retrieved successfully",
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Analysis"
+            }
+          }
+        },
+        "tags": [
+          "analyses"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this analysis.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/auth/login": {
+      "post": {
+        "operationId": "auth_login",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "auth"
+        ]
+      },
+      "parameters": []
+    },
+    "/auth/register": {
+      "post": {
+        "operationId": "auth_register",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "auth"
+        ]
+      },
+      "parameters": []
+    },
+    "/building-block-comments": {
+      "get": {
+        "operationId": "building-block-comments_list",
+        "description": "",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "building_block_thread",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BuildingBlockComment"
+              }
+            }
+          }
+        },
+        "tags": [
+          "building-block-comments"
+        ]
+      },
+      "post": {
+        "operationId": "building-block-comments_create",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BuildingBlockComment"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/BuildingBlockComment"
+            }
+          }
+        },
+        "tags": [
+          "building-block-comments"
+        ]
+      },
+      "parameters": []
+    },
+    "/building-block-comments/{id}": {
+      "get": {
+        "operationId": "building-block-comments_read",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/BuildingBlockComment"
+            }
+          }
+        },
+        "tags": [
+          "building-block-comments"
+        ]
+      },
+      "put": {
+        "operationId": "building-block-comments_update",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BuildingBlockComment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/BuildingBlockComment"
+            }
+          }
+        },
+        "tags": [
+          "building-block-comments"
+        ]
+      },
+      "patch": {
+        "operationId": "building-block-comments_partial_update",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BuildingBlockComment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/BuildingBlockComment"
+            }
+          }
+        },
+        "tags": [
+          "building-block-comments"
+        ]
+      },
+      "delete": {
+        "operationId": "building-block-comments_delete",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "building-block-comments"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this building_block_comment.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/building-block-threads": {
+      "get": {
+        "operationId": "building-block-threads_list",
+        "description": "",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "strategy",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "building_block",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BuildingBlockThread"
+              }
+            }
+          }
+        },
+        "tags": [
+          "building-block-threads"
+        ]
+      },
+      "post": {
+        "operationId": "building-block-threads_create",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BuildingBlockThread"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/BuildingBlockThread"
+            }
+          }
+        },
+        "tags": [
+          "building-block-threads"
+        ]
+      },
+      "parameters": []
+    },
+    "/building-block-threads/{id}": {
+      "get": {
+        "operationId": "building-block-threads_read",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/BuildingBlockThread"
+            }
+          }
+        },
+        "tags": [
+          "building-block-threads"
+        ]
+      },
+      "put": {
+        "operationId": "building-block-threads_update",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BuildingBlockThread"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/BuildingBlockThread"
+            }
+          }
+        },
+        "tags": [
+          "building-block-threads"
+        ]
+      },
+      "patch": {
+        "operationId": "building-block-threads_partial_update",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BuildingBlockThread"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/BuildingBlockThread"
+            }
+          }
+        },
+        "tags": [
+          "building-block-threads"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this building_block_thread.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/building-blocks": {
+      "get": {
+        "operationId": "building-blocks_list",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
             "schema": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/BuildingBlock"
               }
             }
-          },
-          "400": {
-            "description": "Bad Request"
           }
         },
-        "tags": ["building-blocks"]
+        "tags": [
+          "building-blocks"
+        ]
       },
       "parameters": []
     },
     "/building-blocks/{id}": {
       "get": {
-        "operationId": "Get Building Block by ID",
-        "description": "Providing you the Building Block you are looking for.",
+        "operationId": "building-blocks_read",
+        "description": "",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "The requested Building Block was retrieved successfully",
-            "schema": {"$ref": "#/definitions/BuildingBlock"}
-          },
-          "404": {
-            "description": "Building Block Not Found"
-          }
-        },
-        "tags": ["building-blocks"]},
-      "parameters": [{
-                       "name": "id",
-                       "in": "path",
-                       "description": "A unique integer value identifying this Grundbaustein.",
-                       "required": true,
-                       "type": "integer"
-                     }]
-    },
-    "/comments": {
-      "get": {
-        "operationId": "Get List of all Comments",
-        "description": "some description coming soon",
-        "parameters": [{
-                         "name": "measure",
-                         "in": "query",
-                         "description": "",
-                         "required": false,
-                         "type": "string"
-                       }],
-        "responses": {
-          "200": {
-            "description": "A list of all Comments was retrieved successfully",
+            "description": "",
             "schema": {
-              "type": "array",
-              "items": {"$ref": "#/definitions/Comment"}
+              "$ref": "#/definitions/BuildingBlock"
             }
-          },
-          "400": {
-            "description": "Bad Request"
           }
         },
-        "tags": ["comments"]},
-      "parameters": []
-    },
-    "/comments/{id}": {
-      "get": {
-        "operationId": "Get Comment by ID",
-        "description": "some description coming soon.",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "The requested Comment was retrieved successfully",
-            "schema": {"$ref": "#/definitions/Comment"}
-          },
-          "404": {
-            "description": "Comment Not Found"
-          }
-        },
-        "tags": ["comments"]},
-      "parameters": [{
-        "name": "id",
-        "in": "path",
-        "description": "A unique integer value identifying this Kommentar.",
-        "required": true,
-        "type": "integer"
-      }]
+        "tags": [
+          "building-blocks"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this building_block.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
     },
     "/countries": {
       "get": {
-        "operationId": "Get List of all Countries",
-        "description": "some description coming soon",
+        "operationId": "countries_list",
+        "description": "",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "A list of all Countries was retrieved successfully",
+            "description": "",
             "schema": {
               "type": "array",
-              "items": {"$ref": "#/definitions/Country"}
+              "items": {
+                "$ref": "#/definitions/Country"
+              }
             }
-          },
-          "400": {
-            "description": "Bad Request"
           }
         },
-        "tags": ["countries"]},
+        "tags": [
+          "countries"
+        ]
+      },
       "parameters": []
     },
     "/countries/{id}": {
       "get": {
-        "operationId": "Get Country by ID",
-        "description": "some description coming soon.",
+        "operationId": "countries_read",
+        "description": "",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "The requested Country was retrieved successfully",
-            "schema": {"$ref": "#/definitions/Country"}},
-          "404": {
-            "description": "Country Not Found"}},
-        "tags": ["countries"]},
-      "parameters": [{
-        "name": "id",
-        "in": "path",
-        "description": "A unique integer value identifying this Land.",
-        "required": true,
-        "type": "integer"
-      }]
-    },
-    "/goals": {
-      "get": {
-        "operationId": "Get List of all Goals",
-        "description": "some description coming soon",
-        "parameters": [{
-          "name": "situation",
-          "in": "query",
-          "description": "",
-          "required": false,
-          "type": "string"
-        }],
-        "responses": {
-          "200": {
-            "description": "A list of all Goals was retrieved successfully",
+            "description": "",
             "schema": {
-              "type": "array",
-              "items": {"$ref": "#/definitions/Goal"}
+              "$ref": "#/definitions/Country"
             }
-          },
-          "400": {
-            "description": "Bad Request"}
-        },
-        "tags": ["goals"]},
-      "parameters": []
-    },
-    "/goals/{id}": {
-      "get": {
-        "operationId": "Get Goal by ID",
-        "description": "some description coming soon.",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "The requested Goal was retrieved successfully",
-            "schema": {"$ref": "#/definitions/Goal"}
-          },
-          "404": {
-            "description": "Goal Not Found"
           }
         },
-        "tags": ["goals"]},
-      "parameters": [{
-        "name": "id",
-        "in": "path",
-        "description": "A unique integer value identifying this Ziel.",
-        "required": true,
-        "type": "integer"
-      }]
+        "tags": [
+          "countries"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this country.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
     },
     "/measures": {
       "get": {
-        "operationId": "Get List of all Measures",
-        "description": "some description coming soon",
-        "parameters": [{
-          "name": "goal",
-          "in": "query",
-          "description": "",
-          "required": false,
-          "type": "string"
-        }],
+        "operationId": "measures_list",
+        "description": "",
+        "parameters": [
+          {
+            "name": "situation",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "A list of all Measures was retrieved successfully",
+            "description": "",
             "schema": {
               "type": "array",
-              "items": {"$ref": "#/definitions/Measure"}
+              "items": {
+                "$ref": "#/definitions/Measure"
+              }
             }
-          },
-          "400": {
-            "description": "Bad Request"
           }
         },
-        "tags": ["measures"]},
+        "tags": [
+          "measures"
+        ]
+      },
       "parameters": []
     },
     "/measures/{id}": {
       "get": {
-        "operationId": "Get Measure by ID",
-        "description": "some description coming soon.",
+        "operationId": "measures_read",
+        "description": "",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "The requested Measure was retrieved successfully",
+            "description": "",
             "schema": {
               "$ref": "#/definitions/Measure"
             }
-          },
-          "404": {
-            "description": "Measure Not Found"
           }
         },
-        "tags": ["measures"]},
-      "parameters": [{
-        "name": "id",
-        "in": "path",
-        "description": "A unique integer value identifying this Ma\u00dfnahme.",
-        "required": true,
-        "type": "integer"
-      }]
+        "tags": [
+          "measures"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this measure.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/situation-categories": {
+      "get": {
+        "operationId": "situation-categories_list",
+        "description": "",
+        "parameters": [
+          {
+            "name": "building_block",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SituationCategory"
+              }
+            }
+          }
+        },
+        "tags": [
+          "situation-categories"
+        ]
+      },
+      "parameters": []
+    },
+    "/situation-categories/{id}": {
+      "get": {
+        "operationId": "situation-categories_read",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SituationCategory"
+            }
+          }
+        },
+        "tags": [
+          "situation-categories"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this situation_category.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/situation-category-comments": {
+      "get": {
+        "operationId": "situation-category-comments_list",
+        "description": "",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "situation_category_thread",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SituationCategoryComment"
+              }
+            }
+          }
+        },
+        "tags": [
+          "situation-category-comments"
+        ]
+      },
+      "post": {
+        "operationId": "situation-category-comments_create",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SituationCategoryComment"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SituationCategoryComment"
+            }
+          }
+        },
+        "tags": [
+          "situation-category-comments"
+        ]
+      },
+      "parameters": []
+    },
+    "/situation-category-comments/{id}": {
+      "get": {
+        "operationId": "situation-category-comments_read",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SituationCategoryComment"
+            }
+          }
+        },
+        "tags": [
+          "situation-category-comments"
+        ]
+      },
+      "put": {
+        "operationId": "situation-category-comments_update",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SituationCategoryComment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SituationCategoryComment"
+            }
+          }
+        },
+        "tags": [
+          "situation-category-comments"
+        ]
+      },
+      "patch": {
+        "operationId": "situation-category-comments_partial_update",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SituationCategoryComment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SituationCategoryComment"
+            }
+          }
+        },
+        "tags": [
+          "situation-category-comments"
+        ]
+      },
+      "delete": {
+        "operationId": "situation-category-comments_delete",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "situation-category-comments"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this situation_category_comment.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/situation-category-threads": {
+      "get": {
+        "operationId": "situation-category-threads_list",
+        "description": "",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "strategy",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "situation_category",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SituationCategoryThread"
+              }
+            }
+          }
+        },
+        "tags": [
+          "situation-category-threads"
+        ]
+      },
+      "post": {
+        "operationId": "situation-category-threads_create",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SituationCategoryThread"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SituationCategoryThread"
+            }
+          }
+        },
+        "tags": [
+          "situation-category-threads"
+        ]
+      },
+      "parameters": []
+    },
+    "/situation-category-threads/{id}": {
+      "get": {
+        "operationId": "situation-category-threads_read",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SituationCategoryThread"
+            }
+          }
+        },
+        "tags": [
+          "situation-category-threads"
+        ]
+      },
+      "put": {
+        "operationId": "situation-category-threads_update",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SituationCategoryThread"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SituationCategoryThread"
+            }
+          }
+        },
+        "tags": [
+          "situation-category-threads"
+        ]
+      },
+      "patch": {
+        "operationId": "situation-category-threads_partial_update",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SituationCategoryThread"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SituationCategoryThread"
+            }
+          }
+        },
+        "tags": [
+          "situation-category-threads"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this situation_category_thread.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/situation-comments": {
+      "get": {
+        "operationId": "situation-comments_list",
+        "description": "",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "situation_thread",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SituationComment"
+              }
+            }
+          }
+        },
+        "tags": [
+          "situation-comments"
+        ]
+      },
+      "post": {
+        "operationId": "situation-comments_create",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SituationComment"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SituationComment"
+            }
+          }
+        },
+        "tags": [
+          "situation-comments"
+        ]
+      },
+      "parameters": []
+    },
+    "/situation-comments/{id}": {
+      "get": {
+        "operationId": "situation-comments_read",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SituationComment"
+            }
+          }
+        },
+        "tags": [
+          "situation-comments"
+        ]
+      },
+      "put": {
+        "operationId": "situation-comments_update",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SituationComment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SituationComment"
+            }
+          }
+        },
+        "tags": [
+          "situation-comments"
+        ]
+      },
+      "patch": {
+        "operationId": "situation-comments_partial_update",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SituationComment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SituationComment"
+            }
+          }
+        },
+        "tags": [
+          "situation-comments"
+        ]
+      },
+      "delete": {
+        "operationId": "situation-comments_delete",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "situation-comments"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this situation_comment.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/situation-threads": {
+      "get": {
+        "operationId": "situation-threads_list",
+        "description": "",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "strategy",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "situation",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SituationThread"
+              }
+            }
+          }
+        },
+        "tags": [
+          "situation-threads"
+        ]
+      },
+      "post": {
+        "operationId": "situation-threads_create",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SituationThread"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SituationThread"
+            }
+          }
+        },
+        "tags": [
+          "situation-threads"
+        ]
+      },
+      "parameters": []
+    },
+    "/situation-threads/{id}": {
+      "get": {
+        "operationId": "situation-threads_read",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SituationThread"
+            }
+          }
+        },
+        "tags": [
+          "situation-threads"
+        ]
+      },
+      "put": {
+        "operationId": "situation-threads_update",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SituationThread"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SituationThread"
+            }
+          }
+        },
+        "tags": [
+          "situation-threads"
+        ]
+      },
+      "patch": {
+        "operationId": "situation-threads_partial_update",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SituationThread"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SituationThread"
+            }
+          }
+        },
+        "tags": [
+          "situation-threads"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this situation_thread.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
     },
     "/situations": {
       "get": {
-        "operationId": "Get List of all Situations",
-        "description": "some description coming soon",
-        "parameters": [{
-          "name": "building_block",
-          "in": "query",
-          "description": "",
-          "required": false,
-          "type": "string"
-        }],
+        "operationId": "situations_list",
+        "description": "",
+        "parameters": [
+          {
+            "name": "situation_category",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "A list of all Situations was retrieved successfully",
+            "description": "",
             "schema": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Situation"
               }
             }
-          },
-          "400": {
-            "description": "Bad Request"
           }
         },
-        "tags": ["situations"]
+        "tags": [
+          "situations"
+        ]
       },
       "parameters": []
     },
     "/situations/{id}": {
       "get": {
-        "operationId": "Get Situation by ID",
-        "description": "some description coming soon.",
+        "operationId": "situations_read",
+        "description": "",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "The requested Situation was retrieved successfully",
+            "description": "",
             "schema": {
               "$ref": "#/definitions/Situation"
             }
-          },
-          "404": {
-            "description": "Situation Not Found"
           }
         },
-        "tags": ["situations"]
+        "tags": [
+          "situations"
+        ]
       },
-      "parameters": [{
-        "name": "id",
-        "in": "path",
-        "description": "A unique integer value identifying this Situation.",
-        "required": true,
-        "type": "integer"
-      }]
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this situation.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
     },
     "/strategies": {
       "get": {
-        "operationId": "Get List of all Strategies",
-        "description": "some description coming soon",
-        "parameters": [],
+        "operationId": "strategies_list",
+        "description": "",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "A list of all Strategies was retrieved successfully",
+            "description": "",
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Strategy"}
+                "$ref": "#/definitions/Strategy"
+              }
             }
-          },
-          "400": {
-            "description": "Bad Request"
           }
         },
-        "tags": ["strategies"]},
+        "tags": [
+          "strategies"
+        ]
+      },
       "post": {
-        "operationId": "Create new Strategy",
-        "description": "some description coming soon",
-        "parameters": [{
-          "name": "data",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/Strategy"
-          }
-        }],
-        "responses": {
-          "201": {
-            "description": "Strategy entry was created",
+        "operationId": "strategies_create",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/Strategy"
             }
-          },
-          "400": {
-            "description": "Bad Request"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Strategy"
+            }
           }
         },
-        "tags": ["strategies"]
+        "tags": [
+          "strategies"
+        ]
       },
       "parameters": []
     },
     "/strategies/{id}": {
       "get": {
-        "operationId": "Get Strategie by ID",
-        "description": "some description coming soon.",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "The requested Strategy was retrieved successfully",
-            "schema": {
-              "$ref": "#/definitions/Strategy"
-            }
-          },
-          "404": {
-            "description": "Strategy Not Found"
-          }
-        },
-        "tags": ["strategies"]
-      },
-      "put": {
-        "operationId": "Edit specific Strategy",
-        "description": "some description coming soon",
-        "parameters": [{
-          "name": "data",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/Strategy"
-          }
-        }],
-        "responses": {
-          "200": {
-            "description": "Strategy entry was updated.",
-            "schema": {
-              "$ref": "#/definitions/Strategy"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        },
-        "tags": ["strategies"]
-      },
-      "patch": {
-        "operationId": "strategies_partial_update",
+        "operationId": "strategies_read",
         "description": "",
-        "parameters": [{
-          "name": "data",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/Strategy"
-          }
-        }],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
@@ -470,30 +1354,464 @@
             }
           }
         },
-        "tags": ["strategies"]},
-      "delete": {
-        "operationId": "Delete specific Strategy",
-        "description": "some description coming soon",
-        "parameters": [],
-        "responses": {
-          "204": {
-            "description": "Strategy was deleted.",
+        "tags": [
+          "strategies"
+        ]
+      },
+      "put": {
+        "operationId": "strategies_update",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/Strategy"
             }
-          },
-          "404": {
-            "description": "Strategy Not Found"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Strategy"
+            }
           }
         },
-        "tags": ["strategies"]},
-      "parameters": [{
-        "name": "id",
-        "in": "path",
-        "description": "A unique integer value identifying this Strategy.",
-        "required": true,
-        "type": "integer"
-      }]
+        "tags": [
+          "strategies"
+        ]
+      },
+      "patch": {
+        "operationId": "strategies_partial_update",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Strategy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Strategy"
+            }
+          }
+        },
+        "tags": [
+          "strategies"
+        ]
+      },
+      "delete": {
+        "operationId": "strategies_delete",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "strategies"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this strategy.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/strategies/{id}/discussion_tree": {
+      "get": {
+        "operationId": "strategies_discussion_tree",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Strategy"
+            }
+          }
+        },
+        "tags": [
+          "strategies"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this strategy.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/strategy-measure-comments": {
+      "get": {
+        "operationId": "strategy-measure-comments_list",
+        "description": "",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "strategy_measure_thread",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StrategyMeasureComment"
+              }
+            }
+          }
+        },
+        "tags": [
+          "strategy-measure-comments"
+        ]
+      },
+      "post": {
+        "operationId": "strategy-measure-comments_create",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StrategyMeasureComment"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/StrategyMeasureComment"
+            }
+          }
+        },
+        "tags": [
+          "strategy-measure-comments"
+        ]
+      },
+      "parameters": []
+    },
+    "/strategy-measure-comments/{id}": {
+      "get": {
+        "operationId": "strategy-measure-comments_read",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/StrategyMeasureComment"
+            }
+          }
+        },
+        "tags": [
+          "strategy-measure-comments"
+        ]
+      },
+      "put": {
+        "operationId": "strategy-measure-comments_update",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StrategyMeasureComment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/StrategyMeasureComment"
+            }
+          }
+        },
+        "tags": [
+          "strategy-measure-comments"
+        ]
+      },
+      "patch": {
+        "operationId": "strategy-measure-comments_partial_update",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StrategyMeasureComment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/StrategyMeasureComment"
+            }
+          }
+        },
+        "tags": [
+          "strategy-measure-comments"
+        ]
+      },
+      "delete": {
+        "operationId": "strategy-measure-comments_delete",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "strategy-measure-comments"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this strategy_measure_comment.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/strategy-measure-threads": {
+      "get": {
+        "operationId": "strategy-measure-threads_list",
+        "description": "",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "strategy_measure",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StrategyMeasureThread"
+              }
+            }
+          }
+        },
+        "tags": [
+          "strategy-measure-threads"
+        ]
+      },
+      "post": {
+        "operationId": "strategy-measure-threads_create",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StrategyMeasureThread"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/StrategyMeasureThread"
+            }
+          }
+        },
+        "tags": [
+          "strategy-measure-threads"
+        ]
+      },
+      "parameters": []
+    },
+    "/strategy-measure-threads/{id}": {
+      "get": {
+        "operationId": "strategy-measure-threads_read",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/StrategyMeasureThread"
+            }
+          }
+        },
+        "tags": [
+          "strategy-measure-threads"
+        ]
+      },
+      "put": {
+        "operationId": "strategy-measure-threads_update",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StrategyMeasureThread"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/StrategyMeasureThread"
+            }
+          }
+        },
+        "tags": [
+          "strategy-measure-threads"
+        ]
+      },
+      "patch": {
+        "operationId": "strategy-measure-threads_partial_update",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StrategyMeasureThread"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/StrategyMeasureThread"
+            }
+          }
+        },
+        "tags": [
+          "strategy-measure-threads"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this strategy_measure_thread.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/strategy-measures": {
+      "get": {
+        "operationId": "strategy-measures_list",
+        "description": "",
+        "parameters": [
+          {
+            "name": "strategy",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "measure",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StrategyMeasure"
+              }
+            }
+          }
+        },
+        "tags": [
+          "strategy-measures"
+        ]
+      },
+      "parameters": []
+    },
+    "/strategy-measures/{id}": {
+      "get": {
+        "operationId": "strategy-measures_read",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/StrategyMeasure"
+            }
+          }
+        },
+        "tags": [
+          "strategy-measures"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this strategy_measure.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
     },
     "/users/logout": {
       "get": {
@@ -511,7 +1829,9 @@
             }
           }
         },
-        "tags": ["users"]
+        "tags": [
+          "users"
+        ]
       },
       "parameters": []
     },
@@ -531,44 +1851,26 @@
             }
           }
         },
-        "tags": ["users"]
+        "tags": [
+          "users"
+        ]
       },
       "parameters": []
     },
     "/users/{id}": {
       "put": {
-        "operationId": "Edit specific User",
-        "description": "some description coming soon",
-        "parameters": [{
-          "name": "data",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/User"
-          }
-        }],
-        "responses": {
-          "200": {
-            "description": "User was updated.",
-            "schema": {
-              "$ref": "#/definitions/User"}
-          },
-          "400": {
-            "description": "Bad Request"}
-        },
-        "tags": ["users"]
-      },
-      "patch": {
-        "operationId": "users_partial_update",
+        "operationId": "users_update",
         "description": "",
-        "parameters": [{
-          "name": "data",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/User"
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
           }
-        }],
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -577,33 +1879,319 @@
             }
           }
         },
-        "tags": ["users"]
+        "tags": [
+          "users"
+        ]
+      },
+      "patch": {
+        "operationId": "users_partial_update",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        },
+        "tags": [
+          "users"
+        ]
       },
       "delete": {
-        "operationId": "Delete specific User",
-        "description": "some description coming soon",
+        "operationId": "users_delete",
+        "description": "",
         "parameters": [],
         "responses": {
           "204": {
-            "description": "User entitý was deleted.",
-            "schema": {
-              "$ref": "#/definitions/User"}
-          },
-          "404": {
-            "description": "User Not Found"
+            "description": ""
           }
         },
-        "tags": ["users"]
+        "tags": [
+          "users"
+        ]
       },
-      "parameters": [{
-        "name": "id",
-        "in": "path",
-        "description": "A unique integer value identifying this Benutzer.",
-        "required": true,
-        "type": "integer"}]
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this Benutzer.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
     }
   },
   "definitions": {
+    "Analysis": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "country": {
+          "required": [
+            "name"
+          ],
+          "type": "object",
+          "properties": {
+            "id": {
+              "title": "ID",
+              "type": "integer",
+              "readOnly": true
+            },
+            "updated": {
+              "title": "Updated",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "created": {
+              "title": "Created",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "name": {
+              "title": "Name",
+              "type": "string",
+              "maxLength": 250,
+              "minLength": 1
+            },
+            "flag": {
+              "title": "Flag",
+              "type": "string",
+              "readOnly": true,
+              "x-nullable": true,
+              "format": "uri"
+            },
+            "flag_circle": {
+              "title": "Flag circle",
+              "type": "string",
+              "readOnly": true,
+              "x-nullable": true,
+              "format": "uri"
+            },
+            "flag_rectangle": {
+              "title": "Flag rectangle",
+              "type": "string",
+              "readOnly": true,
+              "x-nullable": true,
+              "format": "uri"
+            },
+            "is_developing_country": {
+              "title": "Is_developing_country",
+              "type": "boolean"
+            }
+          },
+          "readOnly": true
+        },
+        "title": {
+          "title": "Title",
+          "type": "string",
+          "readOnly": true,
+          "minLength": 1
+        },
+        "description": {
+          "title": "Description",
+          "type": "string",
+          "readOnly": true,
+          "minLength": 1
+        },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated": {
+          "title": "Updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "User": {
+      "title": "User",
+      "required": [
+        "email"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "email": {
+          "title": "Email",
+          "type": "string",
+          "format": "email",
+          "maxLength": 50,
+          "minLength": 1
+        },
+        "country": {
+          "title": "Country",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "firstname": {
+          "title": "Firstname",
+          "type": "string",
+          "maxLength": 50,
+          "x-nullable": true
+        },
+        "lastname": {
+          "title": "Lastname",
+          "type": "string",
+          "maxLength": 50,
+          "x-nullable": true
+        },
+        "current_country": {
+          "title": "Current_country",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "is_admin": {
+          "title": "Is_admin",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "is_representative": {
+          "title": "Is_representative",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "is_moderator": {
+          "title": "Is_moderator",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated": {
+          "title": "Updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "BuildingBlockComment": {
+      "required": [
+        "building_block_thread",
+        "description"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "user": {
+          "$ref": "#/definitions/User"
+        },
+        "building_block_thread": {
+          "title": "Building_block_thread",
+          "type": "integer"
+        },
+        "parent": {
+          "title": "Parent",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "description": {
+          "title": "Description",
+          "type": "string",
+          "minLength": 1
+        },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated": {
+          "title": "Updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "BuildingBlockThread": {
+      "required": [
+        "strategy",
+        "building_block",
+        "title",
+        "description"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "user": {
+          "$ref": "#/definitions/User"
+        },
+        "strategy": {
+          "title": "Strategy",
+          "type": "integer"
+        },
+        "building_block": {
+          "title": "Building_block",
+          "type": "integer"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string",
+          "maxLength": 250,
+          "minLength": 1
+        },
+        "description": {
+          "title": "Description",
+          "type": "string",
+          "minLength": 1
+        },
+        "comment_count": {
+          "title": "Comment count",
+          "type": "string",
+          "readOnly": true
+        },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated": {
+          "title": "Updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
     "BuildingBlock": {
       "type": "object",
       "properties": {
@@ -613,40 +2201,681 @@
           "readOnly": true
         },
         "title": {
-          "title": "Titel",
+          "title": "Title",
           "type": "string",
           "readOnly": true,
           "minLength": 1
         },
         "description": {
-          "title": "Beschreibung",
+          "title": "Description",
           "type": "string",
           "readOnly": true,
           "minLength": 1
         },
-        "image": {
-          "title": "Image",
-          "type": "string",
+        "situation_categories": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
           "readOnly": true,
-          "format": "uri"
+          "uniqueItems": true
         },
         "created": {
-          "title": "Erstellt",
+          "title": "Created",
           "type": "string",
           "format": "date-time",
           "readOnly": true
         },
         "updated": {
-          "title": "Ge\u00e4ndert",
+          "title": "Updated",
           "type": "string",
           "format": "date-time",
           "readOnly": true
         }
       }
     },
-    "Comment": {
-      "required": ["measure", "parent"],
+    "Country": {
       "type": "object",
       "properties": {
-        "id": {"title": "ID", "type": "integer", "readOnly": true}, "measure": {"title": "Measure", "description": "Measure to which the comment belongs.", "type": "string", "minLength": 1}, "parent": {"title": "Parent", "description": "The parent comment.", "type": "string", "minLength": 1}, "description": {"title": "Beschreibung", "type": "string", "readOnly": true, "minLength": 1}, "created": {"title": "Erstellt", "type": "string", "format": "date-time", "readOnly": true}, "updated": {"title": "Ge\u00e4ndert", "type": "string", "format": "date-time", "readOnly": true}}}, "Country": {"type": "object", "properties": {"id": {"title": "ID", "type": "integer", "readOnly": true}, "name": {"title": "Name", "type": "string", "readOnly": true, "minLength": 1}, "flag_circle": {"title": "Flag circle", "type": "string", "readOnly": true, "format": "uri"}, "flag_rectangle": {"title": "Flag rectangle", "type": "string", "readOnly": true, "format": "uri"}, "created": {"title": "Erstellt", "type": "string", "format": "date-time", "readOnly": true}, "updated": {"title": "Ge\u00e4ndert", "type": "string", "format": "date-time", "readOnly": true}}}, "Goal": {"type": "object", "properties": {"id": {"title": "ID", "type": "integer", "readOnly": true}, "situation": {"title": "Situation", "type": "integer", "readOnly": true}, "title": {"title": "Titel", "type": "string", "readOnly": true, "minLength": 1}, "description": {"title": "Beschreibung", "type": "string", "readOnly": true, "minLength": 1}, "created": {"title": "Erstellt", "type": "string", "format": "date-time", "readOnly": true}, "updated": {"title": "Ge\u00e4ndert", "type": "string", "format": "date-time", "readOnly": true}}}, "Measure": {"type": "object", "properties": {"id": {"title": "ID", "type": "integer", "readOnly": true}, "goal": {"title": "Ziel", "type": "integer", "readOnly": true}, "title": {"title": "Titel", "type": "string", "readOnly": true, "minLength": 1}, "description": {"title": "Beschreibung", "type": "string", "readOnly": true, "minLength": 1}, "created": {"title": "Erstellt", "type": "string", "format": "date-time", "readOnly": true}, "updated": {"title": "Ge\u00e4ndert", "type": "string", "format": "date-time", "readOnly": true}}}, "Situation": {"type": "object", "properties": {"id": {"title": "ID", "type": "integer", "readOnly": true}, "building_block": {"title": "Grundbaustein", "type": "integer", "readOnly": true}, "title": {"title": "Titel", "type": "string", "readOnly": true, "minLength": 1}, "description": {"title": "Beschreibung", "type": "string", "readOnly": true, "minLength": 1}, "created": {"title": "Erstellt", "type": "string", "format": "date-time", "readOnly": true}, "updated": {"title": "Ge\u00e4ndert", "type": "string", "format": "date-time", "readOnly": true}}}, "StrategyMeasureInformation": {"required": ["measure", "strategy"], "type": "object", "properties": {"id": {"title": "ID", "type": "integer", "readOnly": true}, "measure": {"title": "Measure", "type": "integer"}, "strategy": {"title": "Strategy", "type": "integer"}, "description": {"title": "Beschreibung", "type": "string", "x-nullable": true}, "created": {"title": "Erstellt", "type": "string", "format": "date-time", "readOnly": true}, "updated": {"title": "Ge\u00e4ndert", "type": "string", "format": "date-time", "readOnly": true}}}, "Strategy": {"required": ["title"], "type": "object", "properties": {"id": {"title": "ID", "type": "integer", "readOnly": true}, "user": {"title": "Benutzer", "type": "integer", "readOnly": true}, "title": {"title": "Titel", "type": "string", "maxLength": 50, "minLength": 1}, "description": {"title": "Beschreibung", "type": "string", "x-nullable": true}, "is_published": {"title": "Ist ver\u00f6ffentlicht", "type": "boolean"}, "strategy_measure_information": {"type": "array", "items": {"$ref": "#/definitions/StrategyMeasureInformation"}, "readOnly": true}, "created": {"title": "Erstellt", "type": "string", "format": "date-time", "readOnly": true}, "updated": {"title": "Ge\u00e4ndert", "type": "string", "format": "date-time", "readOnly": true}}}, "User": {"required": ["email"], "type": "object", "properties": {"id": {"title": "ID", "type": "integer", "readOnly": true}, "email": {"title": "Email", "type": "string", "format": "email", "maxLength": 50, "minLength": 1}, "country": {"title": "Land", "type": "integer", "x-nullable": true}, "firstname": {"title": "Vorname", "type": "string", "maxLength": 50, "x-nullable": true}, "lastname": {"title": "Nachname", "type": "string", "maxLength": 50, "x-nullable": true}, "current_country": {"title": "Ausgew\u00e4hltes Land", "type": "integer", "x-nullable": true}, "created": {"title": "Erstellt", "type": "string", "format": "date-time", "readOnly": true}, "updated": {"title": "Ge\u00e4ndert", "type": "string", "format": "date-time", "readOnly": true}}}}}
-
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "name": {
+          "title": "Name",
+          "type": "string",
+          "readOnly": true,
+          "minLength": 1
+        },
+        "flag": {
+          "title": "Flag",
+          "type": "string",
+          "readOnly": true,
+          "format": "uri"
+        },
+        "flag_circle": {
+          "title": "Flag circle",
+          "type": "string",
+          "readOnly": true,
+          "format": "uri"
+        },
+        "flag_rectangle": {
+          "title": "Flag rectangle",
+          "type": "string",
+          "readOnly": true,
+          "format": "uri"
+        },
+        "is_developing_country": {
+          "title": "Is_developing_country",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "strategy": {
+          "title": "Strategy",
+          "type": "string",
+          "readOnly": true
+        },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated": {
+          "title": "Updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "Measure": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "situation": {
+          "title": "Situation",
+          "type": "integer",
+          "readOnly": true
+        },
+        "title": {
+          "title": "Title",
+          "type": "string",
+          "readOnly": true,
+          "minLength": 1
+        },
+        "description": {
+          "title": "Description",
+          "type": "string",
+          "readOnly": true,
+          "minLength": 1
+        },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated": {
+          "title": "Updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "SituationCategory": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "building_block": {
+          "title": "Building_block",
+          "type": "integer",
+          "readOnly": true
+        },
+        "title": {
+          "title": "Title",
+          "type": "string",
+          "readOnly": true,
+          "minLength": 1
+        },
+        "description": {
+          "title": "Description",
+          "type": "string",
+          "readOnly": true,
+          "minLength": 1
+        },
+        "goal_title": {
+          "title": "Goal_title",
+          "type": "string",
+          "readOnly": true,
+          "minLength": 1
+        },
+        "goal_description": {
+          "title": "Goal_description",
+          "type": "string",
+          "readOnly": true,
+          "minLength": 1
+        },
+        "situations": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "readOnly": true,
+          "uniqueItems": true
+        },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated": {
+          "title": "Updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "SituationCategoryComment": {
+      "required": [
+        "situation_category_thread",
+        "description"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "user": {
+          "$ref": "#/definitions/User"
+        },
+        "situation_category_thread": {
+          "title": "Situation_category_thread",
+          "type": "integer"
+        },
+        "parent": {
+          "title": "Parent",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "description": {
+          "title": "Description",
+          "type": "string",
+          "minLength": 1
+        },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated": {
+          "title": "Updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "SituationCategoryThread": {
+      "required": [
+        "strategy",
+        "situation_category",
+        "title",
+        "description"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "user": {
+          "$ref": "#/definitions/User"
+        },
+        "strategy": {
+          "title": "Strategy",
+          "type": "integer"
+        },
+        "situation_category": {
+          "title": "Situation_category",
+          "type": "integer"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string",
+          "maxLength": 250,
+          "minLength": 1
+        },
+        "description": {
+          "title": "Description",
+          "type": "string",
+          "minLength": 1
+        },
+        "comment_count": {
+          "title": "Comment count",
+          "type": "string",
+          "readOnly": true
+        },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated": {
+          "title": "Updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "SituationComment": {
+      "required": [
+        "situation_thread",
+        "description"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "user": {
+          "$ref": "#/definitions/User"
+        },
+        "situation_thread": {
+          "title": "Situation_thread",
+          "type": "integer"
+        },
+        "parent": {
+          "title": "Parent",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "description": {
+          "title": "Description",
+          "type": "string",
+          "minLength": 1
+        },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated": {
+          "title": "Updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "SituationThread": {
+      "required": [
+        "strategy",
+        "situation",
+        "title",
+        "description"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "user": {
+          "$ref": "#/definitions/User"
+        },
+        "strategy": {
+          "title": "Strategy",
+          "type": "integer"
+        },
+        "situation": {
+          "title": "Situation",
+          "type": "integer"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string",
+          "maxLength": 250,
+          "minLength": 1
+        },
+        "description": {
+          "title": "Description",
+          "type": "string",
+          "minLength": 1
+        },
+        "comment_count": {
+          "title": "Comment count",
+          "type": "string",
+          "readOnly": true
+        },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated": {
+          "title": "Updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "Situation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "situation_category": {
+          "title": "Situation_category",
+          "type": "integer",
+          "readOnly": true
+        },
+        "title": {
+          "title": "Title",
+          "type": "string",
+          "readOnly": true,
+          "minLength": 1
+        },
+        "description": {
+          "title": "Description",
+          "type": "string",
+          "readOnly": true,
+          "minLength": 1
+        },
+        "measures": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "readOnly": true,
+          "uniqueItems": true
+        },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated": {
+          "title": "Updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "NStrategyMeasure": {
+      "required": [
+        "measure"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "integer"
+        },
+        "strategy": {
+          "title": "Strategy",
+          "type": "integer",
+          "readOnly": true
+        },
+        "measure": {
+          "title": "Measure",
+          "type": "integer"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string",
+          "x-nullable": true
+        },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated": {
+          "title": "Updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "Strategy": {
+      "required": [
+        "country",
+        "title",
+        "description",
+        "strategy_measures"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "user": {
+          "$ref": "#/definitions/User"
+        },
+        "country": {
+          "title": "Country",
+          "type": "integer"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string",
+          "maxLength": 250,
+          "minLength": 1
+        },
+        "description": {
+          "title": "Description",
+          "type": "string",
+          "minLength": 1
+        },
+        "is_published": {
+          "title": "Is_published",
+          "type": "boolean"
+        },
+        "strategy_measures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NStrategyMeasure"
+          }
+        },
+        "building_blocks": {
+          "title": "Building blocks",
+          "type": "string",
+          "readOnly": true
+        },
+        "situation_categories": {
+          "title": "Situation categories",
+          "type": "string",
+          "readOnly": true
+        },
+        "situations": {
+          "title": "Situations",
+          "type": "string",
+          "readOnly": true
+        },
+        "measures": {
+          "title": "Measures",
+          "type": "string",
+          "readOnly": true
+        },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated": {
+          "title": "Updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "StrategyMeasureComment": {
+      "required": [
+        "strategy_measure_thread",
+        "description"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "user": {
+          "$ref": "#/definitions/User"
+        },
+        "strategy_measure_thread": {
+          "title": "Strategy_measure_thread",
+          "type": "integer"
+        },
+        "parent": {
+          "title": "Parent",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "description": {
+          "title": "Description",
+          "type": "string",
+          "minLength": 1
+        },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated": {
+          "title": "Updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "StrategyMeasureThread": {
+      "required": [
+        "strategy_measure",
+        "title",
+        "description"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "user": {
+          "$ref": "#/definitions/User"
+        },
+        "strategy_measure": {
+          "title": "Strategy_measure",
+          "type": "integer"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string",
+          "maxLength": 250,
+          "minLength": 1
+        },
+        "description": {
+          "title": "Description",
+          "type": "string",
+          "minLength": 1
+        },
+        "comment_count": {
+          "title": "Comment count",
+          "type": "string",
+          "readOnly": true
+        },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated": {
+          "title": "Updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "StrategyMeasure": {
+      "required": [
+        "strategy"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "strategy": {
+          "title": "Strategy",
+          "type": "integer"
+        },
+        "measure": {
+          "title": "Measure",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "title": "Description",
+          "type": "string",
+          "x-nullable": true
+        },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated": {
+          "title": "Updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}
