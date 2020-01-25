@@ -13,6 +13,8 @@ class SituationThread(AbstractModel):
     title = models.CharField(_('title'), max_length=250)
     description = models.TextField(_('description'))
 
+    is_closed = models.BooleanField(_('is_closed'), default=False)
+
     def __str__(self):
         return '{}'.format(self.title)
 

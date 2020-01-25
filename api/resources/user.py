@@ -1,31 +1,32 @@
 from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext_lazy as _
-from django.utils.decorators import method_decorator
 from rest_framework import mixins, serializers, viewsets, status
 from rest_framework.decorators import action, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from drf_yasg.utils import swagger_auto_schema
 
-from api.models import User, Token, Country
+from api.models import User, Token, Country, Board
 from api.permissions import UserIsUserPermission
 from api.resources.country import CountrySerializer
+from api.resources.board import BoardSerializer
 from api.utils import *
 
 
 fields = AppList(
     'id',
     'email', 'country', 'firstname', 'lastname', 'current_country',
-    'is_admin', 'is_representative', 'is_moderator',
+    'boards',
     'created', 'updated'
 )
 
 patch_fields = AppList(
-    'email', 'country', 'firstname', 'lastname', 'current_country',
+    'email', 'country', 'firstname', 'lastname', 'current_country'
 )
 
 
 class UserSerializer(serializers.ModelSerializer):
+
+    boards = BoardSerializer(many=True, read_only=True)
 
     class Meta:
         model = User
@@ -45,6 +46,12 @@ class UserSerializer(serializers.ModelSerializer):
             country = Country.objects.get(id=current_country_id)
             representation['current_country'] = CountrySerializer(country).data
 
+        """representation['board'] = None
+        boards = Board.objects.all()
+        for board in boards:
+            if value in board.users.all():
+                representation['board'] = BoardSerializer(board).data"""
+
         return representation
 
 
@@ -60,9 +67,6 @@ class UserViewSet(
 
     @action(detail=False)
     def me(self, request, *args, **kwargs):
-        #token = get_object_or_404(Token, code=request.META.get('HTTP_AUTHORIZATION'))
-        #json = UserSerializer(request.user, many=False, context={'request': request}).data
-        #json = UserSerializer(request.user, many=False).data
         return Response(
             data=UserSerializer(request.user, many=False).data,
             status=status.HTTP_200_OK
