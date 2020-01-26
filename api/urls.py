@@ -2,8 +2,8 @@ from django.conf.urls import include, url
 from rest_framework.routers import DefaultRouter
 
 from api.resources import AnalysisViewSet, AuthViewSet, BoardViewSet, BuildingBlockViewSet, CountryViewSet, MeasureViewSet, SituationCategoryViewSet, SituationViewSet, StrategyViewSet, StrategyMeasureViewSet, UserViewSet, \
-    BuildingBlockCommentViewSet, SituationCategoryCommentViewSet, SituationCommentViewSet, StrategyMeasureCommentViewSet, \
-    BuildingBlockThreadViewSet, SituationCategoryThreadViewSet, SituationThreadViewSet, StrategyMeasureThreadViewSet
+    StrategyCommentViewSet, BuildingBlockCommentViewSet, SituationCategoryCommentViewSet, SituationCommentViewSet, StrategyMeasureCommentViewSet, \
+    StrategyThreadViewSet, BuildingBlockThreadViewSet, SituationCategoryThreadViewSet, SituationThreadViewSet, StrategyMeasureThreadViewSet
 
 
 router = DefaultRouter(trailing_slash=False)
@@ -20,6 +20,9 @@ router.register(r'situations', SituationViewSet, basename='situations')
 router.register(r'measures', MeasureViewSet, basename='measures')
 router.register(r'strategies', StrategyViewSet, basename='strategies')
 router.register(r'strategy-measures', StrategyMeasureViewSet, basename='strategy-measures')
+
+router.register(r'strategy-threads', StrategyThreadViewSet, basename='strategy-threads')
+router.register(r'strategy-comments', StrategyCommentViewSet, basename='strategy-comments')
 
 router.register(r'building-block-threads', BuildingBlockThreadViewSet, basename='building-block-threads')
 router.register(r'building-block-comments', BuildingBlockCommentViewSet, basename='building-block-comments')
