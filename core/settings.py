@@ -87,7 +87,7 @@ AUTH_PASSWORD_VALIDATORS = [
     }
 ]
 
-LANGUAGE_CODE = 'de-DE'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'UTC'
 
@@ -142,6 +142,7 @@ JET_SIDE_MENU_ITEMS = [
         'items': [
             {'name': 'api.user', 'label': _('users')},
             {'name': 'api.country', 'label': _('countries')},
+            {'name': 'api.board', 'label': _('boards')},
             {'name': 'api.analysis', 'label': _('analyses')}
         ]
     },
@@ -153,6 +154,13 @@ JET_SIDE_MENU_ITEMS = [
             {'name': 'api.situation', 'label': _('situations')},
             {'name': 'api.measure', 'label': _('measures')},
             {'name': 'api.strategy', 'label': _('strategies')}
+        ]
+    },
+    {
+        'label': _('strategy_threads_and_comments'),
+        'items': [
+            {'name': 'api.strategythread', 'label': _('strategy_threads')},
+            {'name': 'api.strategycomment', 'label': _('strategy_comments')}
         ]
     },
     {

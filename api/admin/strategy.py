@@ -12,19 +12,17 @@ class StrategyMeasureInline(admin.TabularInline):
 @admin.register(Strategy)
 class StrategyAdmin(admin.ModelAdmin):
 
-    list_display = ['user', 'title', 'is_published', 'created', 'updated']
+    list_display = ['board', 'title', 'is_published', 'created', 'updated']
     search_fields = ['title', 'description', 'created', 'updated']
-    list_filter = ['user', 'country']
+    list_filter = ['board']
 
     fieldsets = [
         [None, {
             'fields': [
                 'id',
-                'user',
-                'country',
+                'board',
                 'title',
                 'description',
-                #'measures',
                 'is_published',
                 'created',
                 'updated'

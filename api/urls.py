@@ -1,7 +1,7 @@
 from django.conf.urls import include, url
 from rest_framework.routers import DefaultRouter
 
-from api.resources import AnalysisViewSet, AuthViewSet, BuildingBlockViewSet, CountryViewSet, MeasureViewSet, SituationCategoryViewSet, SituationViewSet, StrategyViewSet, StrategyMeasureViewSet, UserViewSet, \
+from api.resources import AnalysisViewSet, AuthViewSet, BoardViewSet, BuildingBlockViewSet, CountryViewSet, MeasureViewSet, SituationCategoryViewSet, SituationViewSet, StrategyViewSet, StrategyMeasureViewSet, UserViewSet, \
     BuildingBlockCommentViewSet, SituationCategoryCommentViewSet, SituationCommentViewSet, StrategyMeasureCommentViewSet, \
     BuildingBlockThreadViewSet, SituationCategoryThreadViewSet, SituationThreadViewSet, StrategyMeasureThreadViewSet
 
@@ -12,6 +12,7 @@ router.register(r'auth', AuthViewSet, basename='auth')
 router.register(r'users', UserViewSet, basename='users')
 router.register(r'countries', CountryViewSet, basename='countries')
 router.register(r'analyses', AnalysisViewSet, basename='analyses')
+router.register(r'boards', BoardViewSet, basename='boards')
 
 router.register(r'building-blocks', BuildingBlockViewSet, basename='building-blocks')
 router.register(r'situation-categories', SituationCategoryViewSet, basename='situation-categories')

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from api.models import BuildingBlock, SituationCategory, Situation, StrategyMeasure
+from api.models import Strategy, BuildingBlock, SituationCategory, Situation, StrategyMeasure
 from api.utils import *
 
 
@@ -11,17 +11,37 @@ fields = AppList(
 )
 
 
-class SituationSerializer(serializers.ModelSerializer):
+class StrategySerializer(serializers.ModelSerializer):
 
     thread_count = serializers.SerializerMethodField('get_thread_count', read_only=True)
 
     class Meta:
-        model = Situation
+        model = Strategy
         fields = fields
         read_only_fields = fields
 
     def get_thread_count(self, obj):
-        return obj.situation_threads.all().count()
+        return obj.strategy_threads.all().count()
+
+
+fields = AppList(
+    'id',
+    'title',
+    'thread_count'
+)
+
+
+class BuildingBlockSerializer(serializers.ModelSerializer):
+
+    thread_count = serializers.SerializerMethodField('get_thread_count', read_only=True)
+
+    class Meta:
+        model = BuildingBlock
+        fields = fields
+        read_only_fields = fields
+
+    def get_thread_count(self, obj):
+        return obj.building_block_threads.all().count()
 
 
 fields = AppList(
@@ -52,17 +72,17 @@ fields = AppList(
 )
 
 
-class BuildingBlockSerializer(serializers.ModelSerializer):
+class SituationSerializer(serializers.ModelSerializer):
 
     thread_count = serializers.SerializerMethodField('get_thread_count', read_only=True)
 
     class Meta:
-        model = BuildingBlock
+        model = Situation
         fields = fields
         read_only_fields = fields
 
     def get_thread_count(self, obj):
-        return obj.building_block_threads.all().count()
+        return obj.situation_threads.all().count()
 
 
 fields = AppList(

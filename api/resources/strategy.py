@@ -5,12 +5,11 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from api.exceptions import AppException
-from api.models import Country, BuildingBlock, SituationCategory, Situation, Measure, Strategy, StrategyMeasure
-from api.permissions import UserIsObjectOwnerPermission
+from api.models import Country, BuildingBlock, SituationCategory, Situation, Measure, Strategy, StrategyMeasure, Board
+from api.resources.board import BoardSerializer
 from api.resources.building_block import BuildingBlockSerializer
 from api.resources.country import CountrySerializer
 from api.resources.measure import MeasureSerializer
-from api.resources.user import UserSerializer
 from api.utils import *
 
 
@@ -96,22 +95,23 @@ class NStrategyMeasureSerializer(serializers.ModelSerializer):
 
 fields = AppList(
     'id',
-    'user',
-    'country', 'title', 'description', 'is_published',
+    'board',
+    'title', 'description', 'is_published',
     'strategy_measures',
     'building_blocks', 'situation_categories', 'situations', 'measures',
     'created', 'updated'
 )
 
 patch_fields = AppList(
-    'country', 'title', 'description', 'is_published',
+    'board',
+    'title', 'description', 'is_published',
     'strategy_measures'
 )
 
 
 class StrategySerializer(serializers.ModelSerializer):
 
-    user = UserSerializer(many=False, read_only=True)
+    #board = BoardSerializer(many=False, read_only=False)
     strategy_measures = NStrategyMeasureSerializer(many=True, read_only=False)
 
     building_blocks = serializers.SerializerMethodField('get_building_blocks', read_only=True)
@@ -125,8 +125,6 @@ class StrategySerializer(serializers.ModelSerializer):
         read_only_fields = fields - patch_fields
 
     def create(self, validated_data):
-        validated_data['user'] = self.context['request'].user
-
         strategy_measures_data = validated_data.pop('strategy_measures')
         strategy = super().create(validated_data)
         for strategy_measure_data in strategy_measures_data:
@@ -170,9 +168,8 @@ class StrategySerializer(serializers.ModelSerializer):
     def to_representation(self, value):
         representation = super().to_representation(value)
 
-        country = Country.objects.get(id=representation['country'])
-        representation['country'] = CountrySerializer(country).data
-
+        board = Board.objects.get(id=value.board.id)
+        representation['board'] = BoardSerializer(board).data
         representation['strategy_measures'] = [a['id'] for a in representation['strategy_measures']]
 
         return representation
@@ -189,19 +186,19 @@ class StrategyViewSet(
 
     queryset = Strategy.objects.all()
     serializer_class = StrategySerializer
-    filterset_fields = ['user', 'country']
+    filterset_fields = ['board']
 
     def get_permissions(self):
         if self.action in ['list', 'retrieve', 'discussion_tree']:
             permission_classes = []
         else:
-            permission_classes = [IsAuthenticated, UserIsObjectOwnerPermission]
+            permission_classes = [IsAuthenticated]
         return [permission() for permission in permission_classes]
 
-    def create(self, request, *args, **kwargs):
+    """def create(self, request, *args, **kwargs):
         if Strategy.objects.filter(country=request.data.get('country')).exists():
             raise AppException(APP_ERROR_COUNTRY_HAS_STRATEGY)
-        return super().create(request, *args, **kwargs)
+        return super().create(request, *args, **kwargs)"""
 
     """def update(self, request, *args, **kwargs):
         if Strategy.objects.filter(country=request.data.get('country')).exists():
@@ -210,7 +207,7 @@ class StrategyViewSet(
 
     @action(detail=True, methods=['get'])
     def discussion_tree(self, request, pk=None):
-        from api.resources.discussion import BuildingBlockSerializer, SituationCategorySerializer, SituationSerializer, StrategyMeasureSerializer
+        from api.resources.discussion import StrategySerializer, BuildingBlockSerializer, SituationCategorySerializer, SituationSerializer, StrategyMeasureSerializer
 
         strategy = get_object_or_404(Strategy, pk=pk)
 
@@ -222,6 +219,8 @@ class StrategyViewSet(
 
         data = {}
         building_blocks_data = BuildingBlockSerializer(building_blocks, many=True).data
+        strategy_data = StrategySerializer(strategy, many=False).data
+        data = strategy_data
         data['building_blocks'] = building_blocks_data
 
         for index_a, building_block in enumerate(building_blocks):
