@@ -7,7 +7,6 @@ from api.utils import *
 fields = AppList(
     'id',
     'name', 'flag', 'flag_circle', 'flag_rectangle', 'is_developing_country',
-    'strategy',
     'created', 'updated'
 )
 
