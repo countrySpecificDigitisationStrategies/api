@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  title: Digitisation Strategies YAML
+  title: Digitisation Strategies
   description: |
     This **API** allows the user of your app to get all necessary information they need to create country specific ***digitisation strategies***.
 
@@ -23,7 +23,8 @@ info:
     - **Data Analysis**:
         Facts to the respective country.
     - **IT Building Blocks**:
-        Based on the IT-Grundschutz Compendium they offer standardized safety and security requirements for typical business processes, applications and IT systems.
+        Based on the [IT-Grundschutz Compendium](https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Grundschutz/Kompendium/IT_Grundschutz_Kompendium_Edition2019.pdf?__blob=publicationFile&v=5)
+        they offer standardized safety and security requirements for typical business processes, applications and IT systems.
         Each digitisation strategies consists of on or more building blocks.
     - **Discussion Forum**:
         The message board offers an opportunity to discuss digitisation strategies.
@@ -46,7 +47,7 @@ info:
     url: xxx
 
 externalDocs:
-  description: GitHub repo
+  description: The projects GitHub repo
   url: http://192.168.178.180:8000/static/openapi.json
 host: 127.0.0.1:8000
 schemes:
@@ -79,6 +80,9 @@ tags:
     description: An analysis has to be carried prior to the creation of a strategy.
   - name: auth
     description: some description
+  - name: boards
+    x-displayName: IT-Board
+    description: Association of all representatives of a country who decide on the creation of a catalog of measures and the uploading of strategy plans.
   - name: building-block-comments
     x-displayName: Building Block Comment
     description: Critical comments on a specific building block.
@@ -113,7 +117,7 @@ tags:
     x-displayName: Situation
     description: Current status of the implementation of a requirement arised from the IT-Grundschutz Compendium.
   - name: strategies
-    x-displayName: Strategy
+    x-displayName: Strategy + Discussion
     description: A collection of all measures that are necessary to meet requirements arised from the IT-Grundschutz Compendium.
   - name: strategy-comments
     x-displayName: Strategy Comment
@@ -139,6 +143,10 @@ tags:
     x-displayName: The Analysis Model
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/Analysis" />
+  - name: board_model
+    x-displayName: The IT-Board Model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/Board" />
   - name: building_block_model
     x-displayName: The Building Block Model
     description: |
@@ -170,9 +178,10 @@ tags:
 x-tagGroups:
   - name: GENERAL
     tags:
-      - auth
+      - _auth
       - users
       - countries
+      - boards
       - analyses
   - name: APPLICATION
     tags:
@@ -181,36 +190,38 @@ x-tagGroups:
       - situation-categories
       - situations
       - measures
-  - name: BUILDING BLOCK DISCUSSION
+  - name: BUILDING BLOCK THREAD AND COMMENT
     tags:
       - building-block-comments
       - building-block-threads
-  - name: SITUATION CATEGORY DISCUSSION
+  - name: SITUATION CATEGORY THREAD AND COMMENT
     tags:
       - situation-category-comments
       - situation-category-threads
-  - name: SITUATION DISCUSSION
+  - name: SITUATION THREAD AND COMMENT
     tags:
       - situation-comments
       - situation-threads
-  - name: STRATEGY DISCUSSION
+  - name: STRATEGY  MEASURE THREAD AND COMMENT
     tags:
-      - strategy-comments
-      - strategy-threads
-  - name: STRATEGY MEASURE DISCUSSION
-    tags:
+      - strategy-measures
       - strategy-measure-comments
       - strategy-measure-threads
   - name: MODELS
     tags:
-      - analysis_model
-      - building_block_model
-      - country_model
-      - measure_model
-      - situation_model
-      - situation_category_model
-      - strategy_model
       - user_model
+      - country_model
+      - board_model
+      - analysis_model
+      - strategy_model
+      - building_block_model
+      - situation_category_model
+      - situation_model
+      - measure_model
+
+
+
+
 
 paths:
   "/analyses":
@@ -275,6 +286,43 @@ paths:
       tags:
       - auth
     parameters: []
+  "/boards":
+    get:
+      operationId: boards_list
+      description: 'Return an array of existing IT-Boards.'
+      summary: List all IT-Boards
+      parameters: []
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/Board"
+      tags:
+      - boards
+    parameters: []
+  "/boards/{id}":
+    get:
+      operationId: boards_read
+      description: 'Return a single IT-Board related to a country.'
+      summary: Find IT-Board by ID
+      parameters: []
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/Board"
+      tags:
+      - boards
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this board.
+      required: true
+      type: integer
+
+
   "/building-block-comments":
     get:
       operationId: building-block-comments_list
@@ -485,7 +533,7 @@ paths:
     parameters:
     - name: id
       in: path
-      description: A unique integer value identifying this building_block_thread.
+      description: A unique integer value identifying this building block thread.
       required: true
       type: integer
   "/building-blocks":
@@ -626,7 +674,7 @@ paths:
       parameters: []
       responses:
         '200':
-          description: 'No erro'
+          description: 'No error'
           schema:
             "$ref": "#/definitions/SituationCategory"
       tags:
@@ -1107,12 +1155,7 @@ paths:
       description: 'Return an array of all strategies.'
       summary: List all strategies
       parameters:
-      - name: user
-        in: query
-        description: ''
-        required: false
-        type: string
-      - name: country
+      - name: board
         in: query
         description: ''
         required: false
@@ -1622,7 +1665,7 @@ definitions:
             x-nullable: true
             format: uri
           is_developing_country:
-            title: Is_developing_country
+            title: Is developing country
             type: boolean
         readOnly: true
       title:
@@ -1635,6 +1678,151 @@ definitions:
         type: string
         readOnly: true
         minLength: 1
+      created:
+        title: Created
+        type: string
+        format: date-time
+        readOnly: true
+      updated:
+        title: Updated
+        type: string
+        format: date-time
+        readOnly: true
+  Board:
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      country:
+        required:
+        - name
+        type: object
+        properties:
+          id:
+            title: ID
+            type: integer
+            readOnly: true
+          updated:
+            title: Updated
+            type: string
+            format: date-time
+            readOnly: true
+          created:
+            title: Created
+            type: string
+            format: date-time
+            readOnly: true
+          name:
+            title: Name
+            type: string
+            maxLength: 250
+            minLength: 1
+          flag:
+            title: Flag
+            type: string
+            readOnly: true
+            x-nullable: true
+            format: uri
+          flag_circle:
+            title: Flag circle
+            type: string
+            readOnly: true
+            x-nullable: true
+            format: uri
+          flag_rectangle:
+            title: Flag rectangle
+            type: string
+            readOnly: true
+            x-nullable: true
+            format: uri
+          is_developing_country:
+            title: Is developing country
+            type: boolean
+        readOnly: true
+      users:
+        type: array
+        items:
+          required:
+          - password
+          - email
+          type: object
+          properties:
+            id:
+              title: ID
+              type: integer
+              readOnly: true
+            password:
+              title: Password
+              type: string
+              maxLength: 128
+              minLength: 1
+            last_login:
+              title: Last login
+              type: string
+              format: date-time
+              x-nullable: true
+            updated:
+              title: Updated
+              type: string
+              format: date-time
+              readOnly: true
+            created:
+              title: Created
+              type: string
+              format: date-time
+              readOnly: true
+            email:
+              title: Email
+              type: string
+              format: email
+              maxLength: 50
+              minLength: 1
+            firstname:
+              title: First name
+              type: string
+              maxLength: 50
+              x-nullable: true
+            lastname:
+              title: Last name
+              type: string
+              maxLength: 50
+              x-nullable: true
+            is_active:
+              title: Is active
+              type: boolean
+            is_staff:
+              title: Is staff
+              type: boolean
+            is_superuser:
+              title: Is superuser
+              type: boolean
+            country:
+              title: Country
+              type: integer
+              x-nullable: true
+            current_country:
+              title: Current country
+              type: integer
+              x-nullable: true
+            groups:
+              description: The groups this user belongs to. A user will get all permissions
+                granted to each of their groups.
+              type: array
+              items:
+                description: The groups this user belongs to. A user will get all
+                  permissions granted to each of their groups.
+                type: integer
+              uniqueItems: true
+            user_permissions:
+              description: Specific permissions for this user.
+              type: array
+              items:
+                description: Specific permissions for this user.
+                type: integer
+              uniqueItems: true
+        readOnly: true
       created:
         title: Created
         type: string
@@ -1666,30 +1854,23 @@ definitions:
         type: integer
         x-nullable: true
       firstname:
-        title: Firstname
+        title: First name
         type: string
         maxLength: 50
         x-nullable: true
       lastname:
-        title: Lastname
+        title: Last name
         type: string
         maxLength: 50
         x-nullable: true
       current_country:
-        title: Current_country
+        title: Current country
         type: integer
         x-nullable: true
-      is_admin:
-        title: Is_admin
-        type: boolean
-        readOnly: true
-      is_representative:
-        title: Is_representative
-        type: boolean
-        readOnly: true
-      is_moderator:
-        title: Is_moderator
-        type: boolean
+      boards:
+        type: array
+        items:
+          "$ref": "#/definitions/Board"
         readOnly: true
       created:
         title: Created
@@ -1714,10 +1895,10 @@ definitions:
       user:
         "$ref": "#/definitions/User"
       building_block_thread:
-        title: Building_block_thread
+        title: Building Block Thread
         type: integer
       parent:
-        title: Parent
+        title: References
         type: integer
         x-nullable: true
       description:
@@ -1752,7 +1933,7 @@ definitions:
         title: Strategy
         type: integer
       building_block:
-        title: Building_block
+        title: Building Block
         type: integer
       title:
         title: Title
@@ -1763,6 +1944,9 @@ definitions:
         title: Description
         type: string
         minLength: 1
+      is_closed:
+        title: Is_closed
+        type: boolean
       comment_count:
         title: Comment count
         type: string
@@ -1838,12 +2022,8 @@ definitions:
         readOnly: true
         format: uri
       is_developing_country:
-        title: Is_developing_country
+        title: Is developing country
         type: boolean
-        readOnly: true
-      strategy:
-        title: Strategy
-        type: string
         readOnly: true
       created:
         title: Created
@@ -1894,7 +2074,7 @@ definitions:
         type: integer
         readOnly: true
       building_block:
-        title: Building_block
+        title: Building Block
         type: integer
         readOnly: true
       title:
@@ -1908,12 +2088,12 @@ definitions:
         readOnly: true
         minLength: 1
       goal_title:
-        title: Goal_title
+        title: Goal title
         type: string
         readOnly: true
         minLength: 1
       goal_description:
-        title: Goal_description
+        title: Goal description
         type: string
         readOnly: true
         minLength: 1
@@ -1946,10 +2126,10 @@ definitions:
       user:
         "$ref": "#/definitions/User"
       situation_category_thread:
-        title: Situation_category_thread
+        title: Situation Category Thread
         type: integer
       parent:
-        title: Parent
+        title: References
         type: integer
         x-nullable: true
       description:
@@ -1984,7 +2164,7 @@ definitions:
         title: Strategy
         type: integer
       situation_category:
-        title: Situation_category
+        title: Situation Category
         type: integer
       title:
         title: Title
@@ -1995,6 +2175,9 @@ definitions:
         title: Description
         type: string
         minLength: 1
+      is_closed:
+        title: Is_closed
+        type: boolean
       comment_count:
         title: Comment count
         type: string
@@ -2022,10 +2205,10 @@ definitions:
       user:
         "$ref": "#/definitions/User"
       situation_thread:
-        title: Situation_thread
+        title: Situation Thread
         type: integer
       parent:
-        title: Parent
+        title: References
         type: integer
         x-nullable: true
       description:
@@ -2071,6 +2254,9 @@ definitions:
         title: Description
         type: string
         minLength: 1
+      is_closed:
+        title: Is_closed
+        type: boolean
       comment_count:
         title: Comment count
         type: string
@@ -2093,7 +2279,7 @@ definitions:
         type: integer
         readOnly: true
       situation_category:
-        title: Situation_category
+        title: Situation Category
         type: integer
         readOnly: true
       title:
@@ -2153,7 +2339,7 @@ definitions:
         readOnly: true
   Strategy:
     required:
-    - country
+    - board
     - title
     - description
     - strategy_measures
@@ -2163,10 +2349,8 @@ definitions:
         title: ID
         type: integer
         readOnly: true
-      user:
-        "$ref": "#/definitions/User"
-      country:
-        title: Country
+      board:
+        title: Board
         type: integer
       title:
         title: Title
@@ -2178,7 +2362,7 @@ definitions:
         type: string
         minLength: 1
       is_published:
-        title: Is_published
+        title: Is published
         type: boolean
       strategy_measures:
         type: array
@@ -2223,10 +2407,10 @@ definitions:
       user:
         "$ref": "#/definitions/User"
       strategy_measure_thread:
-        title: Strategy_measure_thread
+        title: Strategy Measure Thread
         type: integer
       parent:
-        title: Parent
+        title: References
         type: integer
         x-nullable: true
       description:
@@ -2257,7 +2441,7 @@ definitions:
       user:
         "$ref": "#/definitions/User"
       strategy_measure:
-        title: Strategy_measure
+        title: Strategy Measure
         type: integer
       title:
         title: Title
@@ -2268,6 +2452,9 @@ definitions:
         title: Description
         type: string
         minLength: 1
+      is_closed:
+        title: Is_closed
+        type: boolean
       comment_count:
         title: Comment count
         type: string
@@ -2312,6 +2499,7 @@ definitions:
         type: string
         format: date-time
         readOnly: true
+
   securitySchemes:
     api_key:
       description:
