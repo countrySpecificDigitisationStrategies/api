@@ -5,7 +5,7 @@ from rest_framework.exceptions import ParseError
 from rest_framework.response import Response
 
 from api.exceptions import AppException
-from api.models import User, Token, EmailConfirmation
+from api.models import User, Country, Token, EmailConfirmation
 from api.services.user import UserService
 from api.utils import *
 
@@ -28,11 +28,13 @@ class AuthViewSet(viewsets.GenericViewSet):
         if User.objects.filter(email=json['email']).exists():
             raise AppException(APP_ERROR_REGISTER_EMAIL_EXISTS)
 
+        country = Country.objects.filter(id=json.get('country')).first()
+
         user = User.objects.create(
             email=json['email'],
             firstname=json.get('firstname'),
             lastname=json.get('lastname'),
-            country=json.get('country'),
+            country=country,
             is_active=True
         )
         user.set_password(json['password'])

@@ -9,7 +9,7 @@ class AuthTestCase(AbstractTestCase):
 
     def test_register(self):
         response = self.client.post(
-            '/api/v1/auth/register',
+            '/v1/auth/register',
             {
                 'email': 'a@b.com',
                 'password': 'password'
@@ -20,7 +20,7 @@ class AuthTestCase(AbstractTestCase):
 
     def test_register_can_not_with_invalid_email(self):
         response = self.client.post(
-            '/api/v1/auth/register',
+            '/v1/auth/register',
             {
                 'email': 'a',
                 'password': 'password'
@@ -31,7 +31,7 @@ class AuthTestCase(AbstractTestCase):
 
     def test_register_can_not_with_invalid_password(self):
         response = self.client.post(
-            '/api/v1/auth/register',
+            '/v1/auth/register',
             {
                 'email': 'a@b.com',
                 'password': 'p'
@@ -44,7 +44,7 @@ class AuthTestCase(AbstractTestCase):
         self.test_register()
 
         response = self.client.post(
-            '/api/v1/auth/login',
+            '/v1/auth/login',
             {
                 'email': 'a@b.com',
                 'password': 'password'
@@ -57,7 +57,7 @@ class AuthTestCase(AbstractTestCase):
         self.test_register()
 
         response = self.client.post(
-            '/api/v1/auth/login',
+            '/v1/auth/login',
             {
                 'email': 'a@c.com',
                 'password': 'password'
@@ -70,7 +70,7 @@ class AuthTestCase(AbstractTestCase):
         self.test_register()
 
         response = self.client.post(
-            '/api/v1/auth/login',
+            '/v1/auth/login',
             {
                 'email': 'a@b.com',
                 'password': 'password_'
