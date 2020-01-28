@@ -234,15 +234,20 @@ class StrategyViewSet(
                 data['building_blocks'][index_a]['situation_categories'][index_b]['situations'] = situations_data
 
                 for index_c, situation in enumerate(situations_a):
-                    sms = None
+                    """sms = None
                     for measure in situation.measures.all():
                         if not sms:
                             sms = measure.strategy_measures.all()
                         else:
-                            sms = sms | measure.strategy_measures.all()
+                            sms = sms | measure.strategy_measures.all()"""
 
-                    strategy_measures_data = StrategyMeasureSerializer(sms, many=True).data
+                    sms = []
+                    for strategy_measure in strategy_measures:
+                        if strategy_measure.measure in situation.measures.all():
+                            sms.append(strategy_measure)
 
-                    data['building_blocks'][index_a]['situation_categories'][index_b]['situations'][index_c]['strategy_measures'] = strategy_measures_data
+                    sms = StrategyMeasureSerializer(sms, many=True).data
+
+                    data['building_blocks'][index_a]['situation_categories'][index_b]['situations'][index_c]['strategy_measures'] = sms
 
         return Response(data=data)
