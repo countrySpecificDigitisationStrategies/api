@@ -20,16 +20,16 @@ msgstr ""
 
 #: api/models/abstract_model.py:7
 msgid "updated"
-msgstr "Updated"
+msgstr ""
 
 #: api/models/abstract_model.py:8
 msgid "created"
-msgstr "Created"
+msgstr ""
 
 #: api/models/analysis.py:9 api/models/board.py:9 api/models/country.py:19
 #: api/models/user.py:17
 msgid "country"
-msgstr "Country"
+msgstr ""
 
 #: api/models/analysis.py:11 api/models/building_block.py:9
 #: api/models/measure.py:11 api/models/situation.py:11
@@ -40,7 +40,7 @@ msgstr "Country"
 #: api/models/threads/strategy_measure_thread.py:12
 #: api/models/threads/strategy_thread.py:12
 msgid "title"
-msgstr "Title"
+msgstr ""
 
 #: api/models/analysis.py:12 api/models/building_block.py:10
 #: api/models/comments/building_block_comment.py:13
@@ -56,36 +56,36 @@ msgstr "Title"
 #: api/models/threads/strategy_measure_thread.py:13
 #: api/models/threads/strategy_thread.py:13
 msgid "description"
-msgstr "Description"
+msgstr ""
 
 #: api/models/analysis.py:18
 msgid "analysis"
-msgstr "Analysis"
+msgstr ""
 
 #: api/models/analysis.py:19 core/settings.py:146
 msgid "analyses"
-msgstr "Analysis"
+msgstr ""
 
 #: api/models/board.py:10 api/models/user.py:38 core/settings.py:143
 msgid "users"
-msgstr "Users"
+msgstr ""
 
 #: api/models/board.py:16 api/models/strategy.py:9
 msgid "board"
-msgstr "Board"
+msgstr ""
 
 #: api/models/board.py:17 core/settings.py:145
 msgid "boards"
-msgstr "Boards"
+msgstr ""
 
 #: api/models/building_block.py:16 api/models/situation_category.py:9
 #: api/models/threads/building_block_thread.py:11
 msgid "building_block"
-msgstr "Building Block"
+msgstr ""
 
 #: api/models/building_block.py:17 core/settings.py:152
 msgid "building_blocks"
-msgstr "Building Blocks"
+msgstr ""
 
 #: api/models/comments/building_block_comment.py:9
 #: api/models/comments/situation_category_comment.py:9
@@ -99,12 +99,12 @@ msgstr "Building Blocks"
 #: api/models/threads/strategy_thread.py:9 api/models/user.py:37
 #: api/models/user.py:43 api/models/user.py:63 api/models/user.py:84
 msgid "user"
-msgstr "User"
+msgstr ""
 
 #: api/models/comments/building_block_comment.py:10
 #: api/models/threads/building_block_thread.py:22
 msgid "building_block_thread"
-msgstr "Building Block Thread"
+msgstr ""
 
 #: api/models/comments/building_block_comment.py:11
 #: api/models/comments/situation_category_comment.py:11
@@ -112,136 +112,136 @@ msgstr "Building Block Thread"
 #: api/models/comments/strategy_comment.py:11
 #: api/models/comments/strategy_measure_comment.py:11
 msgid "parent"
-msgstr "References"
+msgstr ""
 
 #: api/models/comments/building_block_comment.py:19
 msgid "building_block_comment"
-msgstr "Building Block Comment"
+msgstr ""
 
 #: api/models/comments/building_block_comment.py:20 core/settings.py:170
 msgid "building_block_comments"
-msgstr "Building Block Comments"
+msgstr ""
 
 #: api/models/comments/situation_category_comment.py:10
 #: api/models/threads/situation_category_thread.py:22
 msgid "situation_category_thread"
-msgstr "Situation Category Thread"
+msgstr ""
 
 #: api/models/comments/situation_category_comment.py:19
 msgid "situation_category_comment"
-msgstr "Situation Category Comment"
+msgstr ""
 
 #: api/models/comments/situation_category_comment.py:20 core/settings.py:177
 msgid "situation_category_comments"
-msgstr "Situation Category Comments"
+msgstr ""
 
 #: api/models/comments/situation_comment.py:10
 #: api/models/threads/situation_thread.py:22
 msgid "situation_thread"
-msgstr "Situation Thread"
+msgstr ""
 
 #: api/models/comments/situation_comment.py:19
 msgid "situation_comment"
-msgstr "Situation Comment"
+msgstr ""
 
 #: api/models/comments/situation_comment.py:20 core/settings.py:184
 msgid "situation_comments"
-msgstr "Situation Comments"
+msgstr ""
 
 #: api/models/comments/strategy_comment.py:10
 #: api/models/threads/strategy_thread.py:21
 msgid "strategy_thread"
-msgstr "Strategy Thread"
+msgstr ""
 
 #: api/models/comments/strategy_comment.py:19
 msgid "strategy_comment"
-msgstr "Strategy Comment"
+msgstr ""
 
 #: api/models/comments/strategy_comment.py:20 core/settings.py:163
 msgid "strategy_comments"
-msgstr "Strategy Comments"
+msgstr ""
 
 #: api/models/comments/strategy_measure_comment.py:10
 #: api/models/threads/strategy_measure_thread.py:21
 msgid "strategy_measure_thread"
-msgstr "Strategy Measure Thread"
+msgstr ""
 
 #: api/models/comments/strategy_measure_comment.py:19
 msgid "strategy_measure_comment"
-msgstr "Strategy Measure Comment"
+msgstr ""
 
 #: api/models/comments/strategy_measure_comment.py:20 core/settings.py:191
 msgid "strategy_measure_comments"
-msgstr "Strategy Measure Comments"
+msgstr ""
 
 #: api/models/country.py:9
 msgid "name"
-msgstr "Name"
+msgstr ""
 
 #: api/models/country.py:13
 msgid "is_developing_country"
-msgstr "Is developing country"
+msgstr ""
 
 #: api/models/country.py:20 core/settings.py:144
 msgid "countries"
-msgstr "Länder"
+msgstr ""
 
 #: api/models/measure.py:9 api/models/situation.py:18
 #: api/models/threads/situation_thread.py:11
 msgid "situation"
-msgstr "Situation"
+msgstr ""
 
 #: api/models/measure.py:18
 msgid "measure"
-msgstr "Measure"
+msgstr ""
 
 #: api/models/measure.py:19 api/models/strategy.py:13 core/settings.py:155
 msgid "measures"
-msgstr "Measures"
+msgstr ""
 
 #: api/models/situation.py:9 api/models/situation_category.py:21
 #: api/models/threads/situation_category_thread.py:11
 msgid "situation_category"
-msgstr "Situation Category"
+msgstr ""
 
 #: api/models/situation.py:19 core/settings.py:154
 msgid "situations"
-msgstr "Situations"
+msgstr ""
 
 #: api/models/situation_category.py:14
 msgid "goal_title"
-msgstr "Goal title"
+msgstr ""
 
 #: api/models/situation_category.py:15
 msgid "goal_description"
-msgstr "Goal description"
+msgstr ""
 
 #: api/models/situation_category.py:22 core/settings.py:153
 msgid "situation_categories"
-msgstr "Situation Categories"
+msgstr ""
 
 #: api/models/strategy.py:14
 msgid "is_published"
-msgstr "Is published"
+msgstr ""
 
 #: api/models/strategy.py:20 api/models/threads/building_block_thread.py:10
 #: api/models/threads/situation_category_thread.py:10
 #: api/models/threads/situation_thread.py:10
 #: api/models/threads/strategy_thread.py:10
 msgid "strategy"
-msgstr "Strategy"
+msgstr ""
 
 #: api/models/strategy.py:21 core/settings.py:156
 msgid "strategies"
-msgstr "Strategies"
+msgstr ""
 
 #: api/models/strategy.py:35 api/models/threads/strategy_measure_thread.py:10
 msgid "strategy_measure"
-msgstr "Strategy Measure"
+msgstr ""
 
 #: api/models/strategy.py:36
 msgid "strategy_measures"
-msgstr "Strategy Measures"
+msgstr ""
 
 #: api/models/threads/building_block_thread.py:16
 #: api/models/threads/situation_category_thread.py:16
@@ -253,79 +253,79 @@ msgstr ""
 
 #: api/models/threads/building_block_thread.py:23 core/settings.py:169
 msgid "building_block_threads"
-msgstr "Building Block Threads"
+msgstr ""
 
 #: api/models/threads/situation_category_thread.py:23 core/settings.py:176
 msgid "situation_category_threads"
-msgstr "Situation Category Threads"
+msgstr ""
 
 #: api/models/threads/situation_thread.py:23 core/settings.py:183
 msgid "situation_threads"
-msgstr "Situation Threads"
+msgstr ""
 
 #: api/models/threads/strategy_measure_thread.py:22 core/settings.py:190
 msgid "strategy_measure_threads"
-msgstr "Strategy Measure Threads"
+msgstr ""
 
 #: api/models/threads/strategy_thread.py:22 core/settings.py:162
 msgid "strategy_threads"
-msgstr "Strategy Threads"
+msgstr ""
 
 #: api/models/user.py:16
 msgid "email"
-msgstr "Email"
+msgstr ""
 
 #: api/models/user.py:18
 msgid "firstname"
-msgstr "First name"
+msgstr ""
 
 #: api/models/user.py:19
 msgid "lastname"
-msgstr "Last name"
+msgstr ""
 
 #: api/models/user.py:20
 msgid "current_country"
-msgstr "Current country"
+msgstr ""
 
 #: api/models/user.py:23
 msgid "is_active"
-msgstr "Is active"
+msgstr ""
 
 #: api/models/user.py:24
 msgid "is_staff"
-msgstr "Is staff"
+msgstr ""
 
 #: api/models/user.py:25
 msgid "is_superuser"
-msgstr "Is superuser"
+msgstr ""
 
 #: api/models/user.py:45 api/models/user.py:65 api/models/user.py:86
 msgid "code"
-msgstr "Code"
+msgstr ""
 
 #: api/models/user.py:51
 msgid "token"
-msgstr "Token"
+msgstr ""
 
 #: api/models/user.py:52
 msgid "tokens"
-msgstr "Token"
+msgstr ""
 
 #: api/models/user.py:71
 msgid "email_confirmation"
-msgstr "Email Confirmation"
+msgstr ""
 
 #: api/models/user.py:72
 msgid "email_confirmations"
-msgstr "Email Confirmations"
+msgstr ""
 
 #: api/models/user.py:92
 msgid "password_reset"
-msgstr "Password Reset"
+msgstr ""
 
 #: api/models/user.py:93
 msgid "password_resets"
-msgstr "Password Resets"
+msgstr ""
 
 #: api/templates/rest_framework/base.html:54
 msgid "navbar"
@@ -361,28 +361,28 @@ msgstr ""
 
 #: core/settings.py:141
 msgid "system"
-msgstr "System"
+msgstr ""
 
 #: core/settings.py:150
 msgid "application"
-msgstr "Application"
+msgstr ""
 
 #: core/settings.py:160
 msgid "strategy_threads_and_comments"
-msgstr "Strategy Discussion"
+msgstr ""
 
 #: core/settings.py:167
 msgid "building_block_threads_and_comments"
-msgstr "Building Block Discussion"
+msgstr ""
 
 #: core/settings.py:174
 msgid "situation_category_threads_and_comments"
-msgstr "Situation Category Discussion"
+msgstr ""
 
 #: core/settings.py:181
 msgid "situation_threads_and_comments"
-msgstr "Situation Discussion"
+msgstr ""
 
 #: core/settings.py:188
 msgid "strategy_measure_threads_and_comments"
-msgstr "Strategy Measure Discussion"
+msgstr ""
