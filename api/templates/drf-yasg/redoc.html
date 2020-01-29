@@ -29,9 +29,10 @@
 </head>
 
 <body>
-
+{##}
 <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"></script>
-<redoc spec-url='http://192.168.178.180:8000/static/openapi.json' sortPropsAlphabetically FETCH_SCHEMA_WITH_QUERY PATH_IN_MIDDLE></redoc>
+{#<redoc spec-url='http://192.168.178.180:8000/static/openapi.yaml' sortPropsAlphabetically FETCH_SCHEMA_WITH_QUERY PATH_IN_MIDDLE></redoc>#}
+<redoc spec-url='http://127.0.0.1:8000/static/openapi.yaml' sortPropsAlphabetically FETCH_SCHEMA_WITH_QUERY PATH_IN_MIDDLE></redoc>
 
 <style>
     {# TODO: add to redoc css #}
@@ -67,11 +68,7 @@
     body{
         background-color: #fafafa;
     }
-    {# left sidebar tag-groups #}
-    .bxcHYI  {
 
-
-    }
     {# left sidebar logo #}
     div .sc-feJyhm{
         background-color: #bd6d6b !important;
@@ -91,6 +88,44 @@
     .fyUykq {
         color: #fafafa;
         text-transform: capitalize;
+    }
+
+    {# side bar group names/tags #}
+    span[title~="GENERAL"] {
+        color: #fafafa;
+        font-size: larger;
+        font-weight: bold;
+        text-shadow: 2px 2px #455869;
+    }
+    span[title~="APPLICATION"] {
+        color: #fafafa;
+        font-size: larger;
+        font-weight: bold;
+        text-shadow: 2px 2px #455869;
+    }
+    span[title~="BUILDING"] {
+        color: #fafafa;
+        font-size: larger;
+        font-weight: bold;
+        text-shadow: 2px 2px #455869;
+    }
+    span[title~="SITUATION"] {
+        color: #fafafa;
+        font-size: larger;
+        font-weight: bold;
+        text-shadow: 2px 2px #455869;
+    }
+    span[title~="STRATEGY"] {
+        color: #fafafa;
+        font-size: larger;
+        font-weight: bold;
+        text-shadow: 2px 2px #455869;
+    }
+    span[title~="MODELS"] {
+            color: #fafafa;
+        font-size: larger;
+        font-weight: bold;
+        text-shadow: 2px 2px #455869;
     }
     {# side bar search-text color #}
     .sc-cmthru .search-input{

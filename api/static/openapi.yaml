@@ -1,0 +1,2509 @@
+swagger: '2.0'
+info:
+  title: Digitisation Strategies
+  description: |
+    This **API** allows the user of your app to get all necessary information they need to create country specific ***digitisation strategies***.
+
+
+    # Introduction
+    This API is documented in **OpenApi** format and is based on **RESTful** API with a JSON payload.
+    It provides several resouce types:
+
+    - **Building Blocks**: ...
+    - **Countries**: ...
+    - **Country-specific Analysis**: ...
+    - **Measures**: ...
+    - **Situation Catalog**: ...
+    - **Country-specific Strategies**: ...
+    - **User**: ..
+
+
+    # Project
+    The software platform ***Digitisation Strategies*** consists of three main components:
+    - **Data Analysis**:
+        Facts to the respective country.
+    - **IT Building Blocks**:
+        Based on the [IT-Grundschutz Compendium](https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Grundschutz/Kompendium/IT_Grundschutz_Kompendium_Edition2019.pdf?__blob=publicationFile&v=5)
+        they offer standardized safety and security requirements for typical business processes, applications and IT systems.
+        Each digitisation strategies consists of on or more building blocks.
+    - **Discussion Forum**:
+        The message board offers an opportunity to discuss digitisation strategies.
+
+    # Features
+    - Registration of new users
+    - ...
+
+
+  version: 1.0.0
+  contact:
+    name: API Support
+    email: xxx@tu-berlin.de
+    url: https://www.ziik.tu-berlin.de/
+  x-logo:
+    url: http://192.168.178.180:8000/static/image/ziik.png
+    altText: Ziik Logo
+  license:
+    name: xxx
+    url: xxx
+
+externalDocs:
+  description: The projects GitHub repo
+  url: http://192.168.178.180:8000/static/openapi.json
+host: 127.0.0.1:8000
+schemes:
+- http
+basePath: "/v1"
+consumes:
+- application/json
+produces:
+- application/json
+
+securityDefinitions:
+  Basic:
+    description: |
+      This authentication scheme uses HTTP Basic Authentication, signed against a user's **username** and **password**. Basic authentication is generally only appropriate for testing.
+    type: basic
+    in: header
+  API Key:
+    description: |
+      This authentication scheme uses a simple **token-based HTTP Authentication** scheme. Token authentication is appropriate for client-server setups, such as native desktop and mobile clients.
+    type: apiKey
+    name: api_key
+    in: header
+security:
+- Basic: []
+- API Key: []
+
+tags:
+  - name: analyses
+    x-displayName: Analysis
+    description: An analysis has to be carried prior to the creation of a strategy.
+  - name: auth
+    description: some description
+  - name: boards
+    x-displayName: IT-Board
+    description: Association of all representatives of a country who decide on the creation of a catalog of measures and the uploading of strategy plans.
+  - name: building-block-comments
+    x-displayName: Building Block Comment
+    description: Critical comments on a specific building block.
+  - name: building-block-threads
+    x-displayName: Building Block Thread
+    description: sHelp you to keep trak of conversations about building blocks and makes it easy to respond to a specific thread.
+  - name: building-blocks
+    x-displayName: Building Block
+    description: This are building blocks resulting from the IT-Grundschutz Compendium
+  - name: countries
+    x-displayName: Country
+    description: The country for which a strategy is to be maped out.
+  - name: measures
+    x-displayName: Measure
+    description: Descripes how an open requirement from the IT-Grundschutz Compendium can be implemented.
+  - name: situation-categories
+    x-displayName: Situation Category
+    description: some description
+  - name: situation-category-comments
+    x-displayName: Situation Category Comment
+    description: Critical comments on a specific situation category of a country.
+  - name: situation-category-threads
+    x-displayName: Situation Category Thread
+    description: Help you to keep trak of conversations about situation categories and makes it easy to respond to a specific thread.
+  - name: situation-comments
+    x-displayName: Situation Comment
+    description: Critical comments on a specific situation of a country.
+  - name: situation-threads
+    x-displayName: Situation Thread
+    description: Help you to keep trak of conversations about situations and makes it easy to respond to a specific thread.
+  - name: situations
+    x-displayName: Situation
+    description: Current status of the implementation of a requirement arised from the IT-Grundschutz Compendium.
+  - name: strategies
+    x-displayName: Strategy + Discussion
+    description: A collection of all measures that are necessary to meet requirements arised from the IT-Grundschutz Compendium.
+  - name: strategy-comments
+    x-displayName: Strategy Comment
+    description: Critical comments on the a proposed stratgy mapped out.
+  - name: strategy-threads
+    x-displayName: Strategy Thread
+    description: Help you to keep trak of conversations about strategy creation and makes it easy to respond to a specific thread.
+  - name: strategy-measure-comments
+    x-displayName: Strategy Measure Comment
+    description: Critical comments on the proposed measures of a stratgy mapped out.
+  - name: strategy-measure-threads
+    x-displayName: Strategy Measure Thread
+    description: Help you to keep trak of conversations about strategy measures and makes it easy to respond to a specific thread.
+  - name: strategy-measures
+    x-displayName: Strategy Measure
+    description: All measures that belong to the same strategy
+  - name: users
+    x-displayName: User
+    description: The user model lets you address the particular user needs and preferences. The following user roles are available
+      - admin / representative / moderator / active user / stuff user and superuser.
+
+  - name: analysis_model
+    x-displayName: The Analysis Model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/Analysis" />
+  - name: board_model
+    x-displayName: The IT-Board Model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/Board" />
+  - name: building_block_model
+    x-displayName: The Building Block Model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/BuildingBlock" />
+  - name: country_model
+    x-displayName: The Country Model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/Country" />
+  - name: measure_model
+    x-displayName: The Mesure Model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/Measure" />
+  - name: situation_model
+    x-displayName: The Situation Model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/Situation" />
+  - name: strategy_model
+    x-displayName: The Strategy Model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/Strategy" />
+  - name: situation_category_model
+    x-displayName: The Situation Category Model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/SituationCategory" />
+  - name: user_model
+    x-displayName: The User Model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/User"/>
+x-tagGroups:
+  - name: GENERAL
+    tags:
+      - _auth
+      - users
+      - countries
+      - boards
+      - analyses
+  - name: APPLICATION
+    tags:
+      - strategies
+      - building-blocks
+      - situation-categories
+      - situations
+      - measures
+  - name: BUILDING BLOCK THREAD AND COMMENT
+    tags:
+      - building-block-comments
+      - building-block-threads
+  - name: SITUATION CATEGORY THREAD AND COMMENT
+    tags:
+      - situation-category-comments
+      - situation-category-threads
+  - name: SITUATION THREAD AND COMMENT
+    tags:
+      - situation-comments
+      - situation-threads
+  - name: STRATEGY  MEASURE THREAD AND COMMENT
+    tags:
+      - strategy-measures
+      - strategy-measure-comments
+      - strategy-measure-threads
+  - name: MODELS
+    tags:
+      - user_model
+      - country_model
+      - board_model
+      - analysis_model
+      - strategy_model
+      - building_block_model
+      - situation_category_model
+      - situation_model
+      - measure_model
+
+
+
+
+
+paths:
+  "/analyses":
+    get:
+      operationId: analyses_list
+      summary: List of country related analyses
+      description: 'Return an array of analyses for the specified country.'
+      parameters:
+      - name: country
+        in: query
+        description: 'The country for which the analysis was carried out.'
+        required: false
+        type: string
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            type: array
+            items:
+                  "$ref": "#/definitions/Analysis"
+      tags:
+      - analyses
+    parameters: []
+  "/analyses/{id}":
+    get:
+      operationId: analyses_read
+      description: 'Return a single analyse of a country.'
+      summary: Find analyse by ID
+      parameters: []
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/Analysis"
+      tags:
+      - analyses
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this analysis.
+      required: true
+      type: integer
+  "/auth/login":
+    post:
+      operationId: auth_login
+      description: ''
+      parameters: []
+      responses:
+        '201':
+          description: 'Login Successful '
+      tags:
+      - auth
+    parameters: []
+  "/auth/register":
+    post:
+      operationId: auth_register
+      description: ''
+      parameters: []
+      responses:
+        '201':
+          description: 'Registration Successful'
+      tags:
+      - auth
+    parameters: []
+  "/boards":
+    get:
+      operationId: boards_list
+      description: 'Return an array of existing IT-Boards.'
+      summary: List all IT-Boards
+      parameters: []
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/Board"
+      tags:
+      - boards
+    parameters: []
+  "/boards/{id}":
+    get:
+      operationId: boards_read
+      description: 'Return a single IT-Board related to a country.'
+      summary: Find IT-Board by ID
+      parameters: []
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/Board"
+      tags:
+      - boards
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this board.
+      required: true
+      type: integer
+
+
+  "/building-block-comments":
+    get:
+      operationId: building-block-comments_list
+      description: 'Return an array of comments for the specified building block.'
+      summary: List all building block comments
+      parameters:
+      - name: user
+        in: query
+        description: ''
+        required: false
+        type: string
+      - name: building_block_thread
+        in: query
+        description: ''
+        required: false
+        type: string
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/BuildingBlockComment"
+      tags:
+      - building-block-comments
+    post:
+      operationId: building-block-comments_create
+      description: 'Create a comment for the specified building block.'
+      summary: Create building block comment
+      parameters:
+      - name: data
+        in: body
+        description: Created building block comment object
+        required: true
+        schema:
+          "$ref": "#/definitions/BuildingBlockComment"
+      responses:
+        '201':
+          description: 'Comment created'
+          schema:
+            "$ref": "#/definitions/BuildingBlockComment"
+      tags:
+      - building-block-comments
+    parameters: []
+  "/building-block-comments/{id}":
+    get:
+      operationId: building-block-comments_read
+      description: 'Return a single comment related to a building block.'
+      summary: Find comment by ID
+      parameters: []
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/BuildingBlockComment"
+      tags:
+      - building-block-comments
+    put:
+      operationId: building-block-comments_update
+      description: 'Update the specified building block comment object.'
+      summary: Update building block comment
+      parameters:
+      - name: data
+        in: body
+        description: Updated building block comment object
+        required: true
+        schema:
+          "$ref": "#/definitions/BuildingBlockComment"
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/BuildingBlockComment"
+      tags:
+      - building-block-comments
+    patch:
+      operationId: building-block-comments_partial_update
+      description: 'Modifies the specified building block comment object'
+      summary: Patch building block comment
+      parameters:
+      - name: data
+        in: body
+        description: Patched building block comment object
+        required: true
+        schema:
+          "$ref": "#/definitions/BuildingBlockComment"
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/BuildingBlockComment"
+      tags:
+      - building-block-comments
+    delete:
+      operationId: building-block-comments_delete
+      description: 'Immediately and permanently deletes the specified comment. This operation cannot be undone. '
+      summary: Delete building block comment
+      parameters: []
+      responses:
+        '204':
+          description: 'No content'
+      tags:
+      - building-block-comments
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this building block comment.
+      required: true
+      type: integer
+  "/building-block-threads":
+    get:
+      operationId: building-block-threads_list
+      description: 'Return an array of threads for the specified building block.'
+      summary: List all building block threads
+      parameters:
+      - name: user
+        in: query
+        description: ''
+        required: false
+        type: string
+      - name: strategy
+        in: query
+        description: ''
+        required: false
+        type: string
+      - name: building_block
+        in: query
+        description: ''
+        required: false
+        type: string
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/BuildingBlockThread"
+      tags:
+      - building-block-threads
+    post:
+      operationId: building-block-threads_create
+      description: 'Create a thread for the specified building block comment.'
+      summary: Create building block thread
+      parameters:
+      - name: data
+        in: body
+        description: Created building block thread object
+        required: true
+        schema:
+          "$ref": "#/definitions/BuildingBlockThread"
+      responses:
+        '201':
+          description: 'Thread created'
+          schema:
+            "$ref": "#/definitions/BuildingBlockThread"
+      tags:
+      - building-block-threads
+    parameters: []
+  "/building-block-threads/{id}":
+    get:
+      operationId: building-block-threads_read
+      description: 'Return a thread related to a building block.'
+      summary: Find thread by ID
+      parameters: []
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/BuildingBlockThread"
+      tags:
+      - building-block-threads
+    put:
+      operationId: building-block-threads_update
+      description: 'Update the specified building block thread object.'
+      summary: Update building block thread
+      parameters:
+      - name: data
+        in: body
+        description: Updated building block thread
+        required: true
+        schema:
+          "$ref": "#/definitions/BuildingBlockThread"
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/BuildingBlockThread"
+      tags:
+      - building-block-threads
+    patch:
+      operationId: building-block-threads_partial_update
+      description: 'Modifies the specified building block thread object'
+      summary: Patch building block thread
+      parameters:
+      - name: data
+        in: body
+        description: Patched building block thread object
+        required: true
+        schema:
+          "$ref": "#/definitions/BuildingBlockThread"
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/BuildingBlockThread"
+      tags:
+      - building-block-threads
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this building block thread.
+      required: true
+      type: integer
+  "/building-blocks":
+    get:
+      operationId: building-blocks_list
+      description: 'Return an array of all building blocks.'
+      summary: List all building blocks
+      parameters: []
+      responses:
+        '200':
+          description: 'no error'
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/BuildingBlock"
+      tags:
+      - building-blocks
+    parameters: []
+  "/building-blocks/{id}":
+    get:
+      operationId: building-blocks_read
+      description: 'Return a single building block.'
+      summary: Find building block by ID
+      parameters: []
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/BuildingBlock"
+      tags:
+      - building-blocks
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this building_block.
+      required: true
+      type: integer
+  "/countries":
+    get:
+      operationId: countries_list
+      description: 'Return an array of all countries.'
+      summary: List all countries
+      parameters: []
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/Country"
+      tags:
+      - countries
+    parameters: []
+  "/countries/{id}":
+    get:
+      operationId: countries_read
+      description: 'Return a single coundry.'
+      summary: Find country by ID
+      parameters: []
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/Country"
+      tags:
+      - countries
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this country.
+      required: true
+      type: integer
+  "/measures":
+    get:
+      operationId: measures_list
+      description: 'Return an array of all measures.'
+      parameters:
+      - name: situation
+        in: query
+        description: ''
+        required: false
+        type: string
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/Measure"
+      tags:
+      - measures
+    parameters: []
+  "/measures/{id}":
+    get:
+      operationId: measures_read
+      description: 'Return a single measure.'
+      summary: Find measure by ID
+      parameters: []
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/Measure"
+      tags:
+      - measures
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this measure.
+      required: true
+      type: integer
+  "/situation-categories":
+    get:
+      operationId: situation-categories_list
+      description: 'Return an array of all situation categories.'
+      summary: List all situation categories
+      parameters:
+      - name: building_block
+        in: query
+        description: ''
+        required: false
+        type: string
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/SituationCategory"
+      tags:
+      - situation-categories
+    parameters: []
+  "/situation-categories/{id}":
+    get:
+      operationId: situation-categories_read
+      description: 'Return a single category of a situation.'
+      summary: Find situation category by ID
+      parameters: []
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/SituationCategory"
+      tags:
+      - situation-categories
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this situation_category.
+      required: true
+      type: integer
+  "/situation-category-comments":
+    get:
+      operationId: situation-category-comments_list
+      description: 'Return an array of comments for the specified situation category.'
+      summary: List all situation category comments
+      parameters:
+      - name: user
+        in: query
+        description: ''
+        required: false
+        type: string
+      - name: situation_category_thread
+        in: query
+        description: ''
+        required: false
+        type: string
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/SituationCategoryComment"
+      tags:
+      - situation-category-comments
+    post:
+      operationId: situation-category-comments_create
+      description: 'Create a comment for the specified situation category.'
+      summary: Create situation category
+      parameters:
+      - name: data
+        in: body
+        description: Created situation category object
+        required: true
+        schema:
+          "$ref": "#/definitions/SituationCategoryComment"
+      responses:
+        '201':
+          description: 'Comment created'
+          schema:
+            "$ref": "#/definitions/SituationCategoryComment"
+      tags:
+      - situation-category-comments
+    parameters: []
+  "/situation-category-comments/{id}":
+    get:
+      operationId: situation-category-comments_read
+      description: 'Return a single comment related to a situation category.'
+      summary: Find situation category by ID
+      parameters: []
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/SituationCategoryComment"
+      tags:
+      - situation-category-comments
+    put:
+      operationId: situation-category-comments_update
+      description: 'Update the specified situation category comment object.'
+      summary: Update situation category comment
+      parameters:
+      - name: data
+        in: body
+        description: Updated situation category comment
+        required: true
+        schema:
+          "$ref": "#/definitions/SituationCategoryComment"
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/SituationCategoryComment"
+      tags:
+      - situation-category-comments
+    patch:
+      operationId: situation-category-comments_partial_update
+      description: 'Modifies the specified comment object'
+      parameters:
+      - name: data
+        in: body
+        description: Patched situation category comment object
+        required: true
+        schema:
+          "$ref": "#/definitions/SituationCategoryComment"
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/SituationCategoryComment"
+      tags:
+      - situation-category-comments
+    delete:
+      operationId: situation-category-comments_delete
+      description: ''
+      parameters: []
+      responses:
+        '204':
+          description: 'No content'
+      tags:
+      - situation-category-comments
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this situation_category_comment.
+      required: true
+      type: integer
+  "/situation-category-threads":
+    get:
+      operationId: situation-category-threads_list
+      description: 'Return an array of threads for the specified situation category.'
+      summary:
+      parameters:
+      - name: user
+        in: query
+        description: ''
+        required: false
+        type: string
+      - name: strategy
+        in: query
+        description: ''
+        required: false
+        type: string
+      - name: situation_category
+        in: query
+        description: ''
+        required: false
+        type: string
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/SituationCategoryThread"
+      tags:
+      - situation-category-threads
+    post:
+      operationId: situation-category-threads_create
+      description: 'Create a thread for the specified situation category.'
+      summary: Create situation category thread
+      parameters:
+      - name: data
+        in: body
+        description: Created situation category thread object
+        required: true
+        schema:
+          "$ref": "#/definitions/SituationCategoryThread"
+      responses:
+        '201':
+          description: 'Thread created'
+          schema:
+            "$ref": "#/definitions/SituationCategoryThread"
+      tags:
+      - situation-category-threads
+    parameters: []
+  "/situation-category-threads/{id}":
+    get:
+      operationId: situation-category-threads_read
+      description: 'Return a single thread related to a situation category comment.'
+      summary: Find situation category thread by ID
+      parameters: []
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/SituationCategoryThread"
+      tags:
+      - situation-category-threads
+    put:
+      operationId: situation-category-threads_update
+      description: 'Update the specified situation category thread object.'
+      summary: Update situation category thread
+      parameters:
+      - name: data
+        in: body
+        description: Updated situation category thread object
+        required: true
+        schema:
+          "$ref": "#/definitions/SituationCategoryThread"
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/SituationCategoryThread"
+      tags:
+      - situation-category-threads
+    patch:
+      operationId: situation-category-threads_partial_update
+      description: 'Modifies the specified situation category thread object'
+      summary: Patch situation category thread
+      parameters:
+      - name: data
+        in: body
+        description: Patched situation category thread object
+        required: true
+        schema:
+          "$ref": "#/definitions/SituationCategoryThread"
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/SituationCategoryThread"
+      tags:
+      - situation-category-threads
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this situation_category_thread.
+      required: true
+      type: integer
+  "/situation-comments":
+    get:
+      operationId: situation-comments_list
+      description: 'Return an array of comments for the specified situation.'
+      summary: List all situation comments
+      parameters:
+      - name: user
+        in: query
+        description: ''
+        required: false
+        type: string
+      - name: situation_thread
+        in: query
+        description: ''
+        required: false
+        type: string
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/SituationComment"
+      tags:
+      - situation-comments
+    post:
+      operationId: situation-comments_create
+      description: 'Create a comment for the specified situation.'
+      summary: Create situation comment
+      parameters:
+      - name: data
+        in: body
+        description: Created situation comment object
+        required: true
+        schema:
+          "$ref": "#/definitions/SituationComment"
+      responses:
+        '201':
+          description: 'Comment created'
+          schema:
+            "$ref": "#/definitions/SituationComment"
+      tags:
+      - situation-comments
+    parameters: []
+  "/situation-comments/{id}":
+    get:
+      operationId: situation-comments_read
+      description: 'Return a single comment related to a situation.'
+      summary: Find situation comment by ID
+      parameters: []
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/SituationComment"
+      tags:
+      - situation-comments
+    put:
+      operationId: situation-comments_update
+      description: 'Update the specified situation comment object.'
+      summary: Update situation comment
+      parameters:
+      - name: data
+        in: body
+        description: Updated situation comment object
+        required: true
+        schema:
+          "$ref": "#/definitions/SituationComment"
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/SituationComment"
+      tags:
+      - situation-comments
+    patch:
+      operationId: situation-comments_partial_update
+      description: 'Modifies the specified situation comment object'
+      summary: Patch situation comment
+      parameters:
+      - name: data
+        in: body
+        description: Patched situation comment object
+        required: true
+        schema:
+          "$ref": "#/definitions/SituationComment"
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/SituationComment"
+      tags:
+      - situation-comments
+    delete:
+      operationId: situation-comments_delete
+      description: 'Immediately and permanently deletes the specified comment. This operation cannot be undone. '
+      summary: Delete situation comment
+      parameters: []
+      responses:
+        '204':
+          description: 'No content'
+      tags:
+      - situation-comments
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this situation_comment.
+      required: true
+      type: integer
+  "/situation-threads":
+    get:
+      operationId: situation-threads_list
+      description: 'Return an array of threads for the specified situation.'
+      summary: List all situation threads
+      parameters:
+      - name: user
+        in: query
+        description: ''
+        required: false
+        type: string
+      - name: strategy
+        in: query
+        description: ''
+        required: false
+        type: string
+      - name: situation
+        in: query
+        description: ''
+        required: false
+        type: string
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/SituationThread"
+      tags:
+      - situation-threads
+    post:
+      operationId: situation-threads_create
+      description: 'Create a thread for the specified situation thread.'
+      summary: Create situation thread
+      parameters:
+      - name: data
+        in: body
+        description: Created situation thread object
+        required: true
+        schema:
+          "$ref": "#/definitions/SituationThread"
+      responses:
+        '201':
+          description: 'Thread created'
+          schema:
+            "$ref": "#/definitions/SituationThread"
+      tags:
+      - situation-threads
+    parameters: []
+  "/situation-threads/{id}":
+    get:
+      operationId: situation-threads_read
+      description: 'Return a single thread related to a situation.'
+      summary: Find situation thread by ID
+      parameters: []
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/SituationThread"
+      tags:
+      - situation-threads
+    put:
+      operationId: situation-threads_update
+      description: 'Update the specified situation thread object.'
+      summary: Update situation thread
+      parameters:
+      - name: data
+        in: body
+        description: Updated situation thread object
+        required: true
+        schema:
+          "$ref": "#/definitions/SituationThread"
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/SituationThread"
+      tags:
+      - situation-threads
+    patch:
+      operationId: situation-threads_partial_update
+      description: 'Modifies the specified situation thread object'
+      summary: Patch situation thread
+      parameters:
+      - name: data
+        in: body
+        description: Patched situation thread object
+        required: true
+        schema:
+          "$ref": "#/definitions/SituationThread"
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/SituationThread"
+      tags:
+      - situation-threads
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this situation_thread.
+      required: true
+      type: integer
+  "/situations":
+    get:
+      operationId: situations_list
+      description: 'Return an array of all situations.'
+      summary: List all situations
+      parameters:
+      - name: situation_category
+        in: query
+        description: ''
+        required: false
+        type: string
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/Situation"
+      tags:
+      - situations
+    parameters: []
+  "/situations/{id}":
+    get:
+      operationId: situations_read
+      description: 'Return a single situation.'
+      summary: Find situation by ID
+      parameters: []
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/Situation"
+      tags:
+      - situations
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this situation.
+      required: true
+      type: integer
+  "/strategies":
+    get:
+      operationId: strategies_list
+      description: 'Return an array of all strategies.'
+      summary: List all strategies
+      parameters:
+      - name: board
+        in: query
+        description: ''
+        required: false
+        type: string
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/Strategy"
+      tags:
+      - strategies
+    post:
+      operationId: strategies_create
+      description: 'Create a new strategy.'
+      summary: Create strategy
+      parameters:
+      - name: data
+        in: body
+        description: Created strategy object
+        required: true
+        schema:
+          "$ref": "#/definitions/Strategy"
+      responses:
+        '201':
+          description: 'Strategy created'
+          schema:
+            "$ref": "#/definitions/Strategy"
+      tags:
+      - strategies
+    parameters: []
+  "/strategies/{id}":
+    get:
+      operationId: strategies_read
+      description: 'Return a single strategy of a country.'
+      summary: Find strategy by ID
+      parameters: []
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/Strategy"
+      tags:
+      - strategies
+    put:
+      operationId: strategies_update
+      description: 'Update the specified strategy object.'
+      summary: Update strategy
+      parameters:
+      - name: data
+        in: body
+        description: Updated strategy
+        required: true
+        schema:
+          "$ref": "#/definitions/Strategy"
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/Strategy"
+      tags:
+      - strategies
+    patch:
+      operationId: strategies_partial_update
+      description: 'Modifies the specified strategy object'
+      summary: Patch strategy
+      parameters:
+      - name: data
+        in: body
+        description: Patched stratgy object
+        required: true
+        schema:
+          "$ref": "#/definitions/Strategy"
+      responses:
+        '200':
+          description: ''
+          schema:
+            "$ref": "#/definitions/Strategy"
+      tags:
+      - strategies
+    delete:
+      operationId: strategies_delete
+      description: 'Immediately and permanently deletes the specified strategy. This operation cannot be undone. '
+      summary: Delete strategy
+      parameters: []
+      responses:
+        '204':
+          description: 'No contend'
+      tags:
+      - strategies
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this strategy.
+      required: true
+      type: integer
+  "/strategies/{id}/discussion_tree":
+    get:
+      operationId: strategies_discussion_tree
+      description: 'Return a all comments related to a single strategy.'
+      summary: Find discussions by strategy ID
+      parameters: []
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/Strategy"
+      tags:
+      - strategies
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this strategy.
+      required: true
+      type: integer
+  "/strategy-measure-comments":
+    get:
+      operationId: strategy-measure-comments_list
+      description: 'Return an array of comments for the specified strategy measure.'
+      summary: List all strategy measure comments
+      parameters:
+      - name: user
+        in: query
+        description: ''
+        required: false
+        type: string
+      - name: strategy_measure_thread
+        in: query
+        description: ''
+        required: false
+        type: string
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/StrategyMeasureComment"
+      tags:
+      - strategy-measure-comments
+    post:
+      operationId: strategy-measure-comments_create
+      description: 'Create a comment for the specified strategy measure.'
+      summary:  Create strategy measure comment
+      parameters:
+      - name: data
+        in: body
+        description: Created strategy measure comment
+        required: true
+        schema:
+          "$ref": "#/definitions/StrategyMeasureComment"
+      responses:
+        '201':
+          description: 'Comment created'
+          schema:
+            "$ref": "#/definitions/StrategyMeasureComment"
+      tags:
+      - strategy-measure-comments
+    parameters: []
+  "/strategy-measure-comments/{id}":
+    get:
+      operationId: strategy-measure-comments_read
+      description: 'Return a single comment related to a strategy measure.'
+      summary: Find strategy measure comment by ID
+      parameters: []
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/StrategyMeasureComment"
+      tags:
+      - strategy-measure-comments
+    put:
+      operationId: strategy-measure-comments_update
+      description: 'Update the specified strategy measure comment object.'
+      summary: Update strategy measure comment
+      parameters:
+      - name: data
+        in: body
+        description: Updated strategy measure comment object
+        required: true
+        schema:
+          "$ref": "#/definitions/StrategyMeasureComment"
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/StrategyMeasureComment"
+      tags:
+      - strategy-measure-comments
+    patch:
+      operationId: strategy-measure-comments_partial_update
+      description: 'Modifies the specified strategy comment object'
+      summary: Patch strategy measure comment
+      parameters:
+      - name: data
+        in: body
+        description: Patched strategy measure comment object
+        required: true
+        schema:
+          "$ref": "#/definitions/StrategyMeasureComment"
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/StrategyMeasureComment"
+      tags:
+      - strategy-measure-comments
+    delete:
+      operationId: strategy-measure-comments_delete
+      description: 'Immediately and permanently deletes the specified comment. This operation cannot be undone. '
+      summary: Delete strategy measure comment
+      parameters: []
+      responses:
+        '204':
+          description: 'No content'
+      tags:
+      - strategy-measure-comments
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this strategy_measure_comment.
+      required: true
+      type: integer
+  "/strategy-measure-threads":
+    get:
+      operationId: strategy-measure-threads_list
+      description: 'Return an array of threads for the specified strategy measure.'
+      summary: List all strategy measure threads
+      parameters:
+      - name: user
+        in: query
+        description: ''
+        required: false
+        type: string
+      - name: strategy_measure
+        in: query
+        description: ''
+        required: false
+        type: string
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/StrategyMeasureThread"
+      tags:
+      - strategy-measure-threads
+    post:
+      operationId: strategy-measure-threads_create
+      description: 'Create a thread for the specified strategy measure comment.'
+      summary: Create strategy measure thread
+      parameters:
+      - name: data
+        in: body
+        description: Created strategy measure thread
+        required: true
+        schema:
+          "$ref": "#/definitions/StrategyMeasureThread"
+      responses:
+        '201':
+          description: 'Thread created'
+          schema:
+            "$ref": "#/definitions/StrategyMeasureThread"
+      tags:
+      - strategy-measure-threads
+    parameters: []
+  "/strategy-measure-threads/{id}":
+    get:
+      operationId: strategy-measure-threads_read
+      description: 'Return a single thread related to a strategy measure comment.'
+      summary: Find strategy measure thread by ID
+      parameters: []
+      responses:
+        '200':
+          description: 'No Error'
+          schema:
+            "$ref": "#/definitions/StrategyMeasureThread"
+      tags:
+      - strategy-measure-threads
+    put:
+      operationId: strategy-measure-threads_update
+      description: Update the specified strategy measure thread object.
+      summary: Update strategy measure thread
+      parameters:
+      - name: data
+        in: body
+        description: Updated strategy measure thread object
+        required: true
+        schema:
+          "$ref": "#/definitions/StrategyMeasureThread"
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/StrategyMeasureThread"
+      tags:
+      - strategy-measure-threads
+    patch:
+      operationId: strategy-measure-threads_partial_update
+      description: 'Modifies the specified strategy measure thread object'
+      summary: Patch strategy measure thread
+      parameters:
+      - name: data
+        in: body
+        description: Patched strategy measure thread object
+        required: true
+        schema:
+          "$ref": "#/definitions/StrategyMeasureThread"
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/StrategyMeasureThread"
+      tags:
+      - strategy-measure-threads
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this strategy_measure_thread.
+      required: true
+      type: integer
+  "/strategy-measures":
+    get:
+      operationId: strategy-measures_list
+      description: 'Return an array of measures for the specified strategy.'
+      summary: List all strategy measures
+      parameters:
+      - name: strategy
+        in: query
+        description: ''
+        required: false
+        type: string
+      - name: measure
+        in: query
+        description: ''
+        required: false
+        type: string
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/StrategyMeasure"
+      tags:
+      - strategy-measures
+    parameters: []
+  "/strategy-measures/{id}":
+    get:
+      operationId: strategy-measures_read
+      description: 'Return a single measure related to a strategy.'
+      summary: Find strategy measure by ID
+      parameters: []
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/StrategyMeasure"
+      tags:
+      - strategy-measures
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this strategy_measure.
+      required: true
+      type: integer
+  "/users/logout":
+    get:
+      operationId: users_logout
+      description: 'Logs out current logged in user session desc'
+      summary: User logged out
+      parameters: []
+      responses:
+        '200':
+          description: 'Successful operation'
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/User"
+        '404':
+          description: 'User not found'
+      tags:
+      - users
+    parameters: []
+  "/users/me":
+    get:
+      operationId: users_me
+      description: Returns profile information of the access token`s resource owner.
+      summary: Logged user
+      parameters: []
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/User"
+      tags:
+      - users
+    parameters: []
+  "/users/{id}":
+    put:
+      operationId: users_update
+      description: Update the specified user object.
+      summary: Update user
+      parameters:
+      - name: data
+        description: Updated user object
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/User"
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/User"
+      tags:
+      - users
+    patch:
+      operationId: users_partial_update
+      description: Modifies the specified user object.
+      summary: Patch user
+      parameters:
+      - name: data
+        description: Patched user object
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/User"
+      responses:
+        '200':
+          description: 'No error'
+          schema:
+            "$ref": "#/definitions/User"
+      tags:
+      - users
+    delete:
+      operationId: users_delete
+      description: 'Immediately and permanently deletes the specified user. This operation cannot be undone. '
+      summary: Delete user
+      parameters: []
+      responses:
+        '204':
+          description: 'No content'
+      tags:
+      - users
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this user.
+      required: true
+      type: integer
+
+
+definitions:
+  Analysis:
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      country:
+        required:
+        - name
+        type: object
+        properties:
+          id:
+            title: ID
+            type: integer
+            readOnly: true
+          updated:
+            title: Updated
+            type: string
+            format: date-time
+            readOnly: true
+          created:
+            title: Created
+            type: string
+            format: date-time
+            readOnly: true
+          name:
+            title: Name
+            type: string
+            maxLength: 250
+            minLength: 1
+          flag:
+            title: Flag
+            type: string
+            readOnly: true
+            x-nullable: true
+            format: uri
+          flag_circle:
+            title: Flag circle
+            type: string
+            readOnly: true
+            x-nullable: true
+            format: uri
+          flag_rectangle:
+            title: Flag rectangle
+            type: string
+            readOnly: true
+            x-nullable: true
+            format: uri
+          is_developing_country:
+            title: Is developing country
+            type: boolean
+        readOnly: true
+      title:
+        title: Title
+        type: string
+        readOnly: true
+        minLength: 1
+      description:
+        title: Description
+        type: string
+        readOnly: true
+        minLength: 1
+      created:
+        title: Created
+        type: string
+        format: date-time
+        readOnly: true
+      updated:
+        title: Updated
+        type: string
+        format: date-time
+        readOnly: true
+  Board:
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      country:
+        required:
+        - name
+        type: object
+        properties:
+          id:
+            title: ID
+            type: integer
+            readOnly: true
+          updated:
+            title: Updated
+            type: string
+            format: date-time
+            readOnly: true
+          created:
+            title: Created
+            type: string
+            format: date-time
+            readOnly: true
+          name:
+            title: Name
+            type: string
+            maxLength: 250
+            minLength: 1
+          flag:
+            title: Flag
+            type: string
+            readOnly: true
+            x-nullable: true
+            format: uri
+          flag_circle:
+            title: Flag circle
+            type: string
+            readOnly: true
+            x-nullable: true
+            format: uri
+          flag_rectangle:
+            title: Flag rectangle
+            type: string
+            readOnly: true
+            x-nullable: true
+            format: uri
+          is_developing_country:
+            title: Is developing country
+            type: boolean
+        readOnly: true
+      users:
+        type: array
+        items:
+          required:
+          - password
+          - email
+          type: object
+          properties:
+            id:
+              title: ID
+              type: integer
+              readOnly: true
+            password:
+              title: Password
+              type: string
+              maxLength: 128
+              minLength: 1
+            last_login:
+              title: Last login
+              type: string
+              format: date-time
+              x-nullable: true
+            updated:
+              title: Updated
+              type: string
+              format: date-time
+              readOnly: true
+            created:
+              title: Created
+              type: string
+              format: date-time
+              readOnly: true
+            email:
+              title: Email
+              type: string
+              format: email
+              maxLength: 50
+              minLength: 1
+            firstname:
+              title: First name
+              type: string
+              maxLength: 50
+              x-nullable: true
+            lastname:
+              title: Last name
+              type: string
+              maxLength: 50
+              x-nullable: true
+            is_active:
+              title: Is active
+              type: boolean
+            is_staff:
+              title: Is staff
+              type: boolean
+            is_superuser:
+              title: Is superuser
+              type: boolean
+            country:
+              title: Country
+              type: integer
+              x-nullable: true
+            current_country:
+              title: Current country
+              type: integer
+              x-nullable: true
+            groups:
+              description: The groups this user belongs to. A user will get all permissions
+                granted to each of their groups.
+              type: array
+              items:
+                description: The groups this user belongs to. A user will get all
+                  permissions granted to each of their groups.
+                type: integer
+              uniqueItems: true
+            user_permissions:
+              description: Specific permissions for this user.
+              type: array
+              items:
+                description: Specific permissions for this user.
+                type: integer
+              uniqueItems: true
+        readOnly: true
+      created:
+        title: Created
+        type: string
+        format: date-time
+        readOnly: true
+      updated:
+        title: Updated
+        type: string
+        format: date-time
+        readOnly: true
+  User:
+    title: User
+    required:
+    - email
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      email:
+        title: Email
+        type: string
+        format: email
+        maxLength: 50
+        minLength: 1
+      country:
+        title: Country
+        type: integer
+        x-nullable: true
+      firstname:
+        title: First name
+        type: string
+        maxLength: 50
+        x-nullable: true
+      lastname:
+        title: Last name
+        type: string
+        maxLength: 50
+        x-nullable: true
+      current_country:
+        title: Current country
+        type: integer
+        x-nullable: true
+      boards:
+        type: array
+        items:
+          "$ref": "#/definitions/Board"
+        readOnly: true
+      created:
+        title: Created
+        type: string
+        format: date-time
+        readOnly: true
+      updated:
+        title: Updated
+        type: string
+        format: date-time
+        readOnly: true
+  BuildingBlockComment:
+    required:
+    - building_block_thread
+    - description
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      user:
+        "$ref": "#/definitions/User"
+      building_block_thread:
+        title: Building Block Thread
+        type: integer
+      parent:
+        title: References
+        type: integer
+        x-nullable: true
+      description:
+        title: Description
+        type: string
+        minLength: 1
+      created:
+        title: Created
+        type: string
+        format: date-time
+        readOnly: true
+      updated:
+        title: Updated
+        type: string
+        format: date-time
+        readOnly: true
+  BuildingBlockThread:
+    required:
+    - strategy
+    - building_block
+    - title
+    - description
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      user:
+        "$ref": "#/definitions/User"
+      strategy:
+        title: Strategy
+        type: integer
+      building_block:
+        title: Building Block
+        type: integer
+      title:
+        title: Title
+        type: string
+        maxLength: 250
+        minLength: 1
+      description:
+        title: Description
+        type: string
+        minLength: 1
+      is_closed:
+        title: Is_closed
+        type: boolean
+      comment_count:
+        title: Comment count
+        type: string
+        readOnly: true
+      created:
+        title: Created
+        type: string
+        format: date-time
+        readOnly: true
+      updated:
+        title: Updated
+        type: string
+        format: date-time
+        readOnly: true
+  BuildingBlock:
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      title:
+        title: Title
+        type: string
+        readOnly: true
+        minLength: 1
+      description:
+        title: Description
+        type: string
+        readOnly: true
+        minLength: 1
+      situation_categories:
+        type: array
+        items:
+          type: integer
+        readOnly: true
+        uniqueItems: true
+      created:
+        title: Created
+        type: string
+        format: date-time
+        readOnly: true
+      updated:
+        title: Updated
+        type: string
+        format: date-time
+        readOnly: true
+  Country:
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      name:
+        title: Name
+        type: string
+        readOnly: true
+        minLength: 1
+      flag:
+        title: Flag
+        type: string
+        readOnly: true
+        format: uri
+      flag_circle:
+        title: Flag circle
+        type: string
+        readOnly: true
+        format: uri
+      flag_rectangle:
+        title: Flag rectangle
+        type: string
+        readOnly: true
+        format: uri
+      is_developing_country:
+        title: Is developing country
+        type: boolean
+        readOnly: true
+      created:
+        title: Created
+        type: string
+        format: date-time
+        readOnly: true
+      updated:
+        title: Updated
+        type: string
+        format: date-time
+        readOnly: true
+  Measure:
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      situation:
+        title: Situation
+        type: integer
+        readOnly: true
+      title:
+        title: Title
+        type: string
+        readOnly: true
+        minLength: 1
+      description:
+        title: Description
+        type: string
+        readOnly: true
+        minLength: 1
+      created:
+        title: Created
+        type: string
+        format: date-time
+        readOnly: true
+      updated:
+        title: Updated
+        type: string
+        format: date-time
+        readOnly: true
+  SituationCategory:
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      building_block:
+        title: Building Block
+        type: integer
+        readOnly: true
+      title:
+        title: Title
+        type: string
+        readOnly: true
+        minLength: 1
+      description:
+        title: Description
+        type: string
+        readOnly: true
+        minLength: 1
+      goal_title:
+        title: Goal title
+        type: string
+        readOnly: true
+        minLength: 1
+      goal_description:
+        title: Goal description
+        type: string
+        readOnly: true
+        minLength: 1
+      situations:
+        type: array
+        items:
+          type: integer
+        readOnly: true
+        uniqueItems: true
+      created:
+        title: Created
+        type: string
+        format: date-time
+        readOnly: true
+      updated:
+        title: Updated
+        type: string
+        format: date-time
+        readOnly: true
+  SituationCategoryComment:
+    required:
+    - situation_category_thread
+    - description
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      user:
+        "$ref": "#/definitions/User"
+      situation_category_thread:
+        title: Situation Category Thread
+        type: integer
+      parent:
+        title: References
+        type: integer
+        x-nullable: true
+      description:
+        title: Description
+        type: string
+        minLength: 1
+      created:
+        title: Created
+        type: string
+        format: date-time
+        readOnly: true
+      updated:
+        title: Updated
+        type: string
+        format: date-time
+        readOnly: true
+  SituationCategoryThread:
+    required:
+    - strategy
+    - situation_category
+    - title
+    - description
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      user:
+        "$ref": "#/definitions/User"
+      strategy:
+        title: Strategy
+        type: integer
+      situation_category:
+        title: Situation Category
+        type: integer
+      title:
+        title: Title
+        type: string
+        maxLength: 250
+        minLength: 1
+      description:
+        title: Description
+        type: string
+        minLength: 1
+      is_closed:
+        title: Is_closed
+        type: boolean
+      comment_count:
+        title: Comment count
+        type: string
+        readOnly: true
+      created:
+        title: Created
+        type: string
+        format: date-time
+        readOnly: true
+      updated:
+        title: Updated
+        type: string
+        format: date-time
+        readOnly: true
+  SituationComment:
+    required:
+    - situation_thread
+    - description
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      user:
+        "$ref": "#/definitions/User"
+      situation_thread:
+        title: Situation Thread
+        type: integer
+      parent:
+        title: References
+        type: integer
+        x-nullable: true
+      description:
+        title: Description
+        type: string
+        minLength: 1
+      created:
+        title: Created
+        type: string
+        format: date-time
+        readOnly: true
+      updated:
+        title: Updated
+        type: string
+        format: date-time
+        readOnly: true
+  SituationThread:
+    required:
+    - strategy
+    - situation
+    - title
+    - description
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      user:
+        "$ref": "#/definitions/User"
+      strategy:
+        title: Strategy
+        type: integer
+      situation:
+        title: Situation
+        type: integer
+      title:
+        title: Title
+        type: string
+        maxLength: 250
+        minLength: 1
+      description:
+        title: Description
+        type: string
+        minLength: 1
+      is_closed:
+        title: Is_closed
+        type: boolean
+      comment_count:
+        title: Comment count
+        type: string
+        readOnly: true
+      created:
+        title: Created
+        type: string
+        format: date-time
+        readOnly: true
+      updated:
+        title: Updated
+        type: string
+        format: date-time
+        readOnly: true
+  Situation:
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      situation_category:
+        title: Situation Category
+        type: integer
+        readOnly: true
+      title:
+        title: Title
+        type: string
+        readOnly: true
+        minLength: 1
+      description:
+        title: Description
+        type: string
+        readOnly: true
+        minLength: 1
+      measures:
+        type: array
+        items:
+          type: integer
+        readOnly: true
+        uniqueItems: true
+      created:
+        title: Created
+        type: string
+        format: date-time
+        readOnly: true
+      updated:
+        title: Updated
+        type: string
+        format: date-time
+        readOnly: true
+  NStrategyMeasure:
+    required:
+    - measure
+    type: object
+    properties:
+      id:
+        title: Id
+        type: integer
+      strategy:
+        title: Strategy
+        type: integer
+        readOnly: true
+      measure:
+        title: Measure
+        type: integer
+      description:
+        title: Description
+        type: string
+        x-nullable: true
+      created:
+        title: Created
+        type: string
+        format: date-time
+        readOnly: true
+      updated:
+        title: Updated
+        type: string
+        format: date-time
+        readOnly: true
+  Strategy:
+    required:
+    - board
+    - title
+    - description
+    - strategy_measures
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      board:
+        title: Board
+        type: integer
+      title:
+        title: Title
+        type: string
+        maxLength: 250
+        minLength: 1
+      description:
+        title: Description
+        type: string
+        minLength: 1
+      is_published:
+        title: Is published
+        type: boolean
+      strategy_measures:
+        type: array
+        items:
+          "$ref": "#/definitions/NStrategyMeasure"
+      building_blocks:
+        title: Building blocks
+        type: string
+        readOnly: true
+      situation_categories:
+        title: Situation categories
+        type: string
+        readOnly: true
+      situations:
+        title: Situations
+        type: string
+        readOnly: true
+      measures:
+        title: Measures
+        type: string
+        readOnly: true
+      created:
+        title: Created
+        type: string
+        format: date-time
+        readOnly: true
+      updated:
+        title: Updated
+        type: string
+        format: date-time
+        readOnly: true
+  StrategyMeasureComment:
+    required:
+    - strategy_measure_thread
+    - description
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      user:
+        "$ref": "#/definitions/User"
+      strategy_measure_thread:
+        title: Strategy Measure Thread
+        type: integer
+      parent:
+        title: References
+        type: integer
+        x-nullable: true
+      description:
+        title: Description
+        type: string
+        minLength: 1
+      created:
+        title: Created
+        type: string
+        format: date-time
+        readOnly: true
+      updated:
+        title: Updated
+        type: string
+        format: date-time
+        readOnly: true
+  StrategyMeasureThread:
+    required:
+    - strategy_measure
+    - title
+    - description
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      user:
+        "$ref": "#/definitions/User"
+      strategy_measure:
+        title: Strategy Measure
+        type: integer
+      title:
+        title: Title
+        type: string
+        maxLength: 250
+        minLength: 1
+      description:
+        title: Description
+        type: string
+        minLength: 1
+      is_closed:
+        title: Is_closed
+        type: boolean
+      comment_count:
+        title: Comment count
+        type: string
+        readOnly: true
+      created:
+        title: Created
+        type: string
+        format: date-time
+        readOnly: true
+      updated:
+        title: Updated
+        type: string
+        format: date-time
+        readOnly: true
+  StrategyMeasure:
+    required:
+    - strategy
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      strategy:
+        title: Strategy
+        type: integer
+      measure:
+        title: Measure
+        type: string
+        readOnly: true
+      description:
+        title: Description
+        type: string
+        x-nullable: true
+      created:
+        title: Created
+        type: string
+        format: date-time
+        readOnly: true
+      updated:
+        title: Updated
+        type: string
+        format: date-time
+        readOnly: true
+
+  securitySchemes:
+    api_key:
+      description:
+        To test the authorization filter, you can use the api key 'key'
+      type: apiKey
+      name: api_key
+      in: header
