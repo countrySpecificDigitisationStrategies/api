@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from api.models import StrategyThread
 from api.permissions import UserIsObjectOwnerPermission
 from api.resources.comments.strategy_comment import StrategyCommentSerializer
-from api.resources.user import UserSerializer
+from api.resources.user import UserSerializer, UserNestedSerializer
 from api.utils import *
 
 
@@ -27,7 +27,7 @@ post_fields = AppList(
 
 class StrategyThreadSerializer(serializers.ModelSerializer):
 
-    user = UserSerializer(many=False, read_only=True)
+    user = UserNestedSerializer(many=False, read_only=True)
     comment_count = serializers.SerializerMethodField('get_comment_count', read_only=True)
 
     class Meta:
@@ -47,15 +47,15 @@ fields = AppList(
     'id',
     'user', 'strategy',
     'title', 'description',
-    'strategy_comments',
+    'comments',
     'created', 'updated'
 )
 
 
 class StrategyThreadRetrieveSerializer(serializers.ModelSerializer):
 
-    user = UserSerializer(many=False, read_only=True)
-    strategy_comments = StrategyCommentSerializer(many=True, read_only=True)
+    user = UserNestedSerializer(many=False, read_only=True)
+    comments = StrategyCommentSerializer(many=True, read_only=True, source='strategy_comments')
 
     class Meta:
         model = StrategyThread

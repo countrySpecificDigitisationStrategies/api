@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from api.models import SituationThread
 from api.permissions import UserIsObjectOwnerPermission
 from api.resources.comments.situation_comment import SituationCommentSerializer
-from api.resources.user import UserSerializer
+from api.resources.user import UserSerializer, UserNestedSerializer
 from api.utils import *
 
 
@@ -27,7 +27,7 @@ post_fields = AppList(
 
 class SituationThreadSerializer(serializers.ModelSerializer):
 
-    user = UserSerializer(many=False, read_only=True)
+    user = UserNestedSerializer(many=False, read_only=True)
     comment_count = serializers.SerializerMethodField('get_comment_count', read_only=True)
 
     class Meta:
@@ -47,15 +47,15 @@ fields = AppList(
     'id',
     'user', 'strategy', 'situation',
     'title', 'description',
-    'situation_comments',
+    'comments',
     'created', 'updated'
 )
 
 
 class SituationThreadRetrieveSerializer(serializers.ModelSerializer):
 
-    user = UserSerializer(many=False, read_only=True)
-    situation_comments = SituationCommentSerializer(many=True, read_only=True)
+    user = UserNestedSerializer(many=False, read_only=True)
+    comments = SituationCommentSerializer(many=True, read_only=True, source='situation_comments')
 
     class Meta:
         model = SituationThread

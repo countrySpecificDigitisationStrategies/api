@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from api.exceptions import AppException
 from api.models import SituationCategoryComment
 from api.permissions import UserIsObjectOwnerPermission
-from api.resources.user import UserSerializer
+from api.resources.user import UserSerializer, UserNestedSerializer
 from api.utils import *
 
 
@@ -21,7 +21,7 @@ post_fields = AppList(
 
 class SituationCategoryCommentSerializer(serializers.ModelSerializer):
 
-    user = UserSerializer(many=False, read_only=True)
+    user = UserNestedSerializer(many=False, read_only=True)
 
     class Meta:
         model = SituationCategoryComment

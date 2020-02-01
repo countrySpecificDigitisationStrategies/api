@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from api.models import BuildingBlockThread
 from api.permissions import UserIsObjectOwnerPermission
 from api.resources.comments.building_block_comment import BuildingBlockCommentSerializer
-from api.resources.user import UserSerializer
+from api.resources.user import UserSerializer, UserNestedSerializer
 from api.utils import *
 
 
@@ -27,7 +27,7 @@ post_fields = AppList(
 
 class BuildingBlockThreadSerializer(serializers.ModelSerializer):
 
-    user = UserSerializer(many=False, read_only=True)
+    user = UserNestedSerializer(many=False, read_only=True)
     comment_count = serializers.SerializerMethodField('get_comment_count', read_only=True)
 
     class Meta:
@@ -47,15 +47,15 @@ fields = AppList(
     'id',
     'user', 'strategy', 'building_block',
     'title', 'description',
-    'building_block_comments',
+    'comments',
     'created', 'updated'
 )
 
 
 class BuildingBlockThreadRetrieveSerializer(serializers.ModelSerializer):
 
-    user = UserSerializer(many=False, read_only=True)
-    building_block_comments = BuildingBlockCommentSerializer(many=True, read_only=True)
+    user = UserNestedSerializer(many=False, read_only=True)
+    comments = BuildingBlockCommentSerializer(many=True, read_only=True, source='building_block_comments')
 
     class Meta:
         model = BuildingBlockThread
