@@ -19,6 +19,8 @@ class User(AbstractModel, AbstractBaseUser, PermissionsMixin):
     lastname = models.CharField(_('lastname'), max_length=50, blank=True, null=True)
     current_country = models.ForeignKey('Country', related_name='current_country_users', blank=True, null=True, on_delete=models.SET_NULL, verbose_name=_('current_country'))
 
+    is_moderator = models.BooleanField(_('is_moderator'), default=False)
+
     # internal purpose
     is_active = models.BooleanField(_('is_active'), default=True)
     is_staff = models.BooleanField(_('is_staff'), default=False)

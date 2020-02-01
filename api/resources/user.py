@@ -15,6 +15,7 @@ from api.utils import *
 fields = AppList(
     'id',
     'email', 'country', 'firstname', 'lastname', 'current_country',
+    'is_moderator',
     'boards',
     'created', 'updated'
 )
@@ -53,6 +54,16 @@ class UserSerializer(serializers.ModelSerializer):
                 representation['board'] = BoardSerializer(board).data"""
 
         return representation
+
+
+class UserNestedSerializer(UserSerializer):
+
+    boards = None
+
+    class Meta:
+        model = User
+        fields = fields
+        read_only_fields = fields - patch_fields
 
 
 class UserViewSet(

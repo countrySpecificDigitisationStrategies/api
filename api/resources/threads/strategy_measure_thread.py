@@ -3,9 +3,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from api.models import StrategyMeasureThread
-from api.permissions import UserIsObjectOwnerPermission
+from api.permissions import UserIsObjectOwnerPermission, UserIsObjectOwnerOrModeratorPermission
 from api.resources.comments.strategy_measure_comment import StrategyMeasureCommentSerializer
-from api.resources.user import UserSerializer
+from api.resources.user import UserSerializer, UserNestedSerializer
 from api.utils import *
 
 
@@ -27,7 +27,7 @@ post_fields = AppList(
 
 class StrategyMeasureThreadSerializer(serializers.ModelSerializer):
 
-    user = UserSerializer(many=False, read_only=True)
+    user = UserNestedSerializer(many=False, read_only=True)
     comment_count = serializers.SerializerMethodField('get_comment_count', read_only=True)
 
     class Meta:
@@ -47,15 +47,15 @@ fields = AppList(
     'id',
     'user', 'strategy_measure',
     'title', 'description',
-    'strategy_measure_comments',
+    'comments',
     'created', 'updated'
 )
 
 
 class StrategyMeasureThreadRetrieveSerializer(serializers.ModelSerializer):
 
-    user = UserSerializer(many=False, read_only=True)
-    strategy_measure_comments = StrategyMeasureCommentSerializer(many=True, read_only=True)
+    user = UserNestedSerializer(many=False, read_only=True)
+    comments = StrategyMeasureCommentSerializer(many=True, read_only=True, source='strategy_measure_comments')
 
     class Meta:
         model = StrategyMeasureThread
@@ -68,6 +68,7 @@ class StrategyMeasureThreadViewSet(
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,
     mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
     viewsets.GenericViewSet
 ):
 
@@ -78,6 +79,10 @@ class StrategyMeasureThreadViewSet(
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:
             permission_classes = []
+        elif self.action in ['partial_update']:
+            permission_classes = [IsAuthenticated, UserIsObjectOwnerOrModeratorPermission]
+        elif self.action in ['destroy']:
+            permission_classes = [IsAuthenticated, UserIsObjectOwnerOrModeratorPermission]
         else:
             permission_classes = [IsAuthenticated, UserIsObjectOwnerPermission]
         return [permission() for permission in permission_classes]

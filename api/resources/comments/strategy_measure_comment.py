@@ -3,8 +3,8 @@ from rest_framework.permissions import IsAuthenticated
 
 from api.exceptions import AppException
 from api.models import StrategyMeasureComment
-from api.permissions import UserIsObjectOwnerPermission
-from api.resources.user import UserSerializer
+from api.permissions import UserIsObjectOwnerPermission, UserIsObjectOwnerOrModeratorPermission
+from api.resources.user import UserSerializer, UserNestedSerializer
 from api.utils import *
 
 
@@ -21,7 +21,7 @@ post_fields = AppList(
 
 class StrategyMeasureCommentSerializer(serializers.ModelSerializer):
 
-    user = UserSerializer(many=False, read_only=True)
+    user = UserNestedSerializer(many=False, read_only=True)
 
     class Meta:
         model = StrategyMeasureComment
@@ -56,6 +56,10 @@ class StrategyMeasureCommentViewSet(
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:
             permission_classes = []
+        elif self.action in ['partial_update']:
+            permission_classes = [IsAuthenticated, UserIsObjectOwnerOrModeratorPermission]
+        elif self.action in ['destroy']:
+            permission_classes = [IsAuthenticated, UserIsObjectOwnerOrModeratorPermission]
         else:
             permission_classes = [IsAuthenticated, UserIsObjectOwnerPermission]
         return [permission() for permission in permission_classes]

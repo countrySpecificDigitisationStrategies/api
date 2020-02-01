@@ -134,6 +134,14 @@ class StrategySerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         strategy_measures_data = validated_data.pop('strategy_measures')
         strategy = super().update(instance, validated_data)
+
+        strategy_measure_ids = [s.id for s in strategy.strategy_measures.all()]
+        strategy_measure_payload_ids = [s['id'] for s in strategy_measures_data if 'id' in s]
+
+        for strategy_measure_id in strategy_measure_ids:
+            if strategy_measure_id not in strategy_measure_payload_ids:
+                StrategyMeasure.objects.filter(id=strategy_measure_id).delete()
+                
         for strategy_measure_data in strategy_measures_data:
             strategy_measure = StrategyMeasure.objects.filter(id=strategy_measure_data.get('id')).first()
             if strategy_measure:
@@ -141,10 +149,11 @@ class StrategySerializer(serializers.ModelSerializer):
                 strategy_measure.save()
             else:
                 StrategyMeasure.objects.create(
-                strategy=strategy,
-                measure=strategy_measure_data.get('measure'),
-                description=strategy_measure_data.get('description')
-            )
+                    strategy=strategy,
+                    measure=strategy_measure_data.get('measure'),
+                    description=strategy_measure_data.get('description')
+                )
+
         return strategy
 
     def get_building_blocks(self, obj):
