@@ -15,6 +15,7 @@ fields = AppList(
     'title', 'description',
     'is_closed',
     'comment_count',
+    'is_country_representative',
     'created', 'updated'
 )
 
@@ -29,6 +30,7 @@ class BuildingBlockThreadSerializer(serializers.ModelSerializer):
 
     user = UserNestedSerializer(many=False, read_only=True)
     comment_count = serializers.SerializerMethodField('get_comment_count', read_only=True)
+    is_country_representative = serializers.SerializerMethodField('get_is_country_representative', read_only=True)
 
     class Meta:
         model = BuildingBlockThread
@@ -42,19 +44,23 @@ class BuildingBlockThreadSerializer(serializers.ModelSerializer):
     def get_comment_count(self, obj):
         return obj.building_block_comments.count()
 
+    def get_is_country_representative(self, obj):
+        return obj.user in obj.strategy.board.users.all()
+
 
 fields = AppList(
     'id',
     'user', 'strategy', 'building_block',
     'title', 'description',
+    'is_closed',
     'comments',
+    'is_country_representative',
     'created', 'updated'
 )
 
 
-class BuildingBlockThreadRetrieveSerializer(serializers.ModelSerializer):
+class BuildingBlockThreadRetrieveSerializer(BuildingBlockThreadSerializer):
 
-    user = UserNestedSerializer(many=False, read_only=True)
     comments = BuildingBlockCommentSerializer(many=True, read_only=True, source='building_block_comments')
 
     class Meta:
