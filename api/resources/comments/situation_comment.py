@@ -11,6 +11,7 @@ from api.utils import *
 fields = AppList(
     'id',
     'user', 'situation_thread', 'parent', 'description',
+    'is_country_representative',
     'created', 'updated'
 )
 
@@ -22,6 +23,7 @@ post_fields = AppList(
 class SituationCommentSerializer(serializers.ModelSerializer):
 
     user = UserNestedSerializer(many=False, read_only=True)
+    is_country_representative = serializers.SerializerMethodField('get_is_country_representative', read_only=True)
 
     class Meta:
         model = SituationComment
@@ -38,6 +40,9 @@ class SituationCommentSerializer(serializers.ModelSerializer):
         validated_data['user'] = self.context['request'].user
 
         return super().create(validated_data)
+
+    def get_is_country_representative(self, obj):
+        return obj.user in obj.situation_thread.strategy.board.users.all()
 
 
 class SituationCommentViewSet(

@@ -15,6 +15,7 @@ fields = AppList(
     'title', 'description',
     'is_closed',
     'comment_count',
+    'is_country_representative',
     'created', 'updated'
 )
 
@@ -29,6 +30,7 @@ class StrategyMeasureThreadSerializer(serializers.ModelSerializer):
 
     user = UserNestedSerializer(many=False, read_only=True)
     comment_count = serializers.SerializerMethodField('get_comment_count', read_only=True)
+    is_country_representative = serializers.SerializerMethodField('get_is_country_representative', read_only=True)
 
     class Meta:
         model = StrategyMeasureThread
@@ -42,19 +44,23 @@ class StrategyMeasureThreadSerializer(serializers.ModelSerializer):
     def get_comment_count(self, obj):
         return obj.strategy_measure_comments.count()
 
+    def get_is_country_representative(self, obj):
+        return obj.user in obj.strategy_measure.strategy.board.users.all()
+
 
 fields = AppList(
     'id',
     'user', 'strategy_measure',
     'title', 'description',
+    'is_closed',
     'comments',
+    'is_country_representative',
     'created', 'updated'
 )
 
 
-class StrategyMeasureThreadRetrieveSerializer(serializers.ModelSerializer):
+class StrategyMeasureThreadRetrieveSerializer(StrategyMeasureThreadSerializer):
 
-    user = UserNestedSerializer(many=False, read_only=True)
     comments = StrategyMeasureCommentSerializer(many=True, read_only=True, source='strategy_measure_comments')
 
     class Meta:
