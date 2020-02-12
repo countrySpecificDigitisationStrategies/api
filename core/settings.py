@@ -120,7 +120,7 @@ REST_FRAMEWORK = {
         'django_filters.rest_framework.DjangoFilterBackend'
     ],
     'COERCE_DECIMAL_TO_STRING': False,
-    'DATETIME_FORMAT': "%Y-%m-%d %H:%M:%S"
+    #'DATETIME_FORMAT': "%Y-%m-%d %H:%M:%S"
 }
 
 AWS_DEFAULT_ACL = None
