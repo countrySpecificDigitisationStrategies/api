@@ -7,8 +7,8 @@ from api.models import AbstractModel
 class SituationCategoryThread(AbstractModel):
 
     user = models.ForeignKey('User', related_name='situation_category_threads', on_delete=models.CASCADE, verbose_name=_('user'))
-    strategy = models.ForeignKey('Strategy', related_name='situation_category_threads', on_delete=models.PROTECT, verbose_name=_('strategy'))
-    situation_category = models.ForeignKey('SituationCategory', related_name='situation_category_threads', on_delete=models.PROTECT, verbose_name=_('situation_category'))
+    strategy = models.ForeignKey('Strategy', related_name='situation_category_threads', on_delete=models.CASCADE, verbose_name=_('strategy'))
+    situation_category = models.ForeignKey('SituationCategory', related_name='situation_category_threads', on_delete=models.CASCADE, verbose_name=_('situation_category'))
 
     title = models.CharField(_('title'), max_length=250)
     description = models.TextField(_('description'))

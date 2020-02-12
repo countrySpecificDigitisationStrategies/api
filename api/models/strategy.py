@@ -6,7 +6,7 @@ from api.models import AbstractModel
 
 class Strategy(AbstractModel):
 
-    board = models.OneToOneField('Board', on_delete=models.PROTECT, verbose_name=_('board'))
+    board = models.OneToOneField('Board', on_delete=models.CASCADE, verbose_name=_('board'))
 
     title = models.CharField(_('title'), max_length=250)
     description = models.TextField(_('description'))
@@ -23,8 +23,8 @@ class Strategy(AbstractModel):
 
 class StrategyMeasure(AbstractModel):
 
-    strategy = models.ForeignKey('Strategy', related_name='strategy_measures', on_delete=models.PROTECT)
-    measure = models.ForeignKey('Measure', related_name='strategy_measures', on_delete=models.PROTECT)
+    strategy = models.ForeignKey('Strategy', related_name='strategy_measures', on_delete=models.CASCADE)
+    measure = models.ForeignKey('Measure', related_name='strategy_measures', on_delete=models.CASCADE)
 
     description = models.TextField(_('description'), blank=True, null=True)
 

@@ -6,7 +6,7 @@ from api.models import AbstractModel
 
 class Board(AbstractModel):
 
-    country = models.OneToOneField('Country', on_delete=models.PROTECT, verbose_name=_('country'))
+    country = models.OneToOneField('Country', on_delete=models.CASCADE, verbose_name=_('country'))
     users = models.ManyToManyField('User', related_name='boards', blank=True, verbose_name=_('users'))
 
     def __str__(self):

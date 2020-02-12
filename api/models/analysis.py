@@ -6,7 +6,7 @@ from api.models import AbstractModel
 
 class Analysis(AbstractModel):
 
-    country = models.OneToOneField('Country', on_delete=models.PROTECT, verbose_name=_('country'))
+    country = models.OneToOneField('Country', on_delete=models.CASCADE, verbose_name=_('country'))
 
     title = models.CharField(_('title'), max_length=250)
     description = models.TextField(_('description'))
